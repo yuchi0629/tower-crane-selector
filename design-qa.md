@@ -60,9 +60,12 @@ No separate crop was needed because the source and implementation use the same s
 
 ## Drag performance update — 2026-08-01
 
-- Coalesced radius and height pointer updates with `requestAnimationFrame`.
+- Coalesced radius and height pointer updates.
+- Limited expensive result recomputation to about 30 updates/second on desktop and 12 updates/second on coarse-pointer/mobile devices.
 - Skipped duplicate state updates when the snapped radius or height value did not change.
+- Flushed the final pending value immediately when diagram dragging ends.
 - Verified radius and height range controls update to new values.
+- Verified rapid mobile-width updates at a 390 × 844 viewport.
 - Verified browser console warnings and errors: none.
 - Production build: passed.
 

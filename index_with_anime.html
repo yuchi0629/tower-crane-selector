@@ -518,7 +518,7 @@ class Component extends DCLogic {
   componentDidMount(){
     if(!window.CRANES){ this._p = setInterval(()=>{ if(window.CRANES){ clearInterval(this._p); this.forceUpdate(); } }, 60); }
   }
-  componentWillUnmount(){ clearInterval(this._p); if(this._dragFrame) cancelAnimationFrame(this._dragFrame); }
+  componentWillUnmount(){ clearInterval(this._p); if(this._dragTimer) clearTimeout(this._dragTimer); }
   db(){ return window.CRANES || []; }
   t(){ return I18N[this.state.lang] || I18N.zh; }
   fmt(x){ return x==null ? '—' : (+x).toLocaleString('en-US',{maximumFractionDigits:2}); }
@@ -591,13 +591,22 @@ class Component extends DCLogic {
   setH(v){ const H=v<=0 ? null : Math.min(200, Math.round(v)); if(this.state.H===H) return; this.setState({H}); }
   queueValue(type, value){
     this._dragPending={type,value};
-    if(this._dragFrame) return;
-    this._dragFrame=requestAnimationFrame(()=>{
-      this._dragFrame=null;
+    if(this._dragTimer) return;
+    const coarse=(typeof matchMedia!=='undefined' && matchMedia('(pointer: coarse)').matches) || (typeof innerWidth!=='undefined' && innerWidth<600);
+    const interval=coarse?80:32;
+    const wait=Math.max(0, interval-(Date.now()-(this._dragLast||0)));
+    this._dragTimer=setTimeout(()=>{
+      this._dragTimer=null; this._dragLast=Date.now();
       const p=this._dragPending; this._dragPending=null;
       if(!p) return;
       if(p.type==='R') this.setR(p.value); else this.setH(p.value);
-    });
+    },wait);
+  }
+  flushQueuedValue(){
+    if(this._dragTimer){ clearTimeout(this._dragTimer); this._dragTimer=null; }
+    const p=this._dragPending; this._dragPending=null;
+    if(!p) return;
+    if(p.type==='R') this.setR(p.value); else this.setH(p.value);
   }
   setLang(l){ this.setState({lang:l}); try{ localStorage.setItem('zl.lang', l); }catch(_){} }
   open(code, jib){ this.setState({page:'detail', detail:code, detailJib:jib||null, specsOpen:false, tip:null}); window.scrollTo(0,0); }
@@ -673,7 +682,7 @@ class Component extends DCLogic {
       goData:()=>this.setState({page:'data', detail:null, tip:null}),
       back:()=>this.setState({page:'match', detail:null, tip:null}),
       navCmpTxt: S.cmp.length ? T.navCmp+' '+S.cmp.length : T.navCmp,
-      diagMove:this.render_diagMove, diagUp:()=>{this._drag=null;},
+      diagMove:this.render_diagMove, diagUp:()=>{this._drag=null;this.flushQueuedValue();},
       downR:this.dgDown('R'), downH:this.dgDown('H'),
       chartMove:this.render_chartMove, chartLeave:()=>this.setState({tip:null}),
       specsTgl:()=>this.setState({specsOpen:!S.specsOpen}), specsOpen:S.specsOpen,
