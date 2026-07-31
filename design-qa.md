@@ -58,4 +58,12 @@ No separate crop was needed because the source and implementation use the same s
 - Browser console warnings and errors: none in a fresh verification tab.
 - Production build: passed.
 
+## Drag performance update — 2026-08-01
+
+- Coalesced radius and height pointer updates with `requestAnimationFrame`.
+- Skipped duplicate state updates when the snapped radius or height value did not change.
+- Verified radius and height range controls update to new values.
+- Verified browser console warnings and errors: none.
+- Production build: passed.
+
 final result: passed
