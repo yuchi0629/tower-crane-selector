@@ -47,4 +47,15 @@ No separate crop was needed because the source and implementation use the same s
 
 - The original site uses a fixed minimum width on mobile and is horizontally clipped at 390 px. This is intentionally retained for source fidelity.
 
+## Brand update — 2026-08-01
+
+- Visual source: `C:\Users\13973\Documents\中联塔机报价单程序\参考文件\zoomlion.png`
+- Implementation screenshot: `C:\Users\13973\AppData\Local\Temp\tower-crane-selector-brand-update.png`
+- Viewport: 1280 × 720 CSS px; device scale factor 1.
+- Verified the supplied 108 × 31 px logo renders at 110 × 31 CSS px in the header.
+- Replaced the primary and dark green accent tokens in the main and animated pages with `#AADB1E`.
+- Opened the selector and performance-curve states successfully.
+- Browser console warnings and errors: none in a fresh verification tab.
+- Production build: passed.
+
 final result: passed

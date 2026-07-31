@@ -14,12 +14,12 @@
 
 <style>
 body{margin:0;background:#F4F6F5;color:#16211A;font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;-webkit-font-smoothing:antialiased}
-a{color:#00854A}a:hover{color:#00693A}
+a{color:#AADB1E}a:hover{color:#AADB1E}
 input[type=range]{-webkit-appearance:none;appearance:none;background:transparent}
 input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:#E2E8E3}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:#00854A;border:3px solid #FFFFFF;box-shadow:0 1px 4px rgba(16,24,20,.25);margin-top:-9px;cursor:grab}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:#AADB1E;border:3px solid #FFFFFF;box-shadow:0 1px 4px rgba(16,24,20,.25);margin-top:-9px;cursor:grab}
 input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:#E2E8E3}
-input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#00854A;border:3px solid #FFFFFF;box-shadow:0 1px 4px rgba(16,24,20,.25);cursor:grab}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#AADB1E;border:3px solid #FFFFFF;box-shadow:0 1px 4px rgba(16,24,20,.25);cursor:grab}
 @keyframes zlPulse{0%,100%{transform:scale(1);opacity:.45}50%{transform:scale(1.5);opacity:.08}}
 </style>
 
@@ -27,7 +27,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 <div style="max-width:1180px;margin:0 auto;padding:14px 16px 110px;min-height:100vh;box-sizing:border-box">
 
   <header style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:6px 2px 16px">
-    <span style="font-family:'Barlow',sans-serif;font-weight:800;font-size:19px;letter-spacing:.05em;color:#00854A">ZOOMLION</span>
+    <img src="assets/zoomlion.png" alt="ZOOMLION" style="display:block;width:110px;height:31px;object-fit:contain">
     <span style="width:1px;height:16px;background:#D5DDD7"></span>
     <span style="font-size:16px;font-weight:700;letter-spacing:.02em">{{t.title}}</span>
     <span style="margin-left:auto;font-size:12px;color:#8A968E">{{t.sub}}</span>
@@ -68,18 +68,18 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
           <line x1="63" y1="{{dgApexY}}" x2="{{dgTieX}}" y2="{{dgTieY}}" stroke="#B9C4BC" stroke-width="1.2"></line>
         </sc-if>
         <line x1="{{dgTrolX}}" y1="{{dgHookTop}}" x2="{{dgTrolX}}" y2="213" stroke="#5F6D64" stroke-width="1.5"></line>
-        <rect x="{{dgLoadX}}" y="213" width="30" height="19" rx="4" fill="#00854A"></rect>
+        <rect x="{{dgLoadX}}" y="213" width="30" height="19" rx="4" fill="#AADB1E"></rect>
         <text x="{{dgTrolX}}" y="226.5" text-anchor="middle" font-size="10.5" font-weight="700" fill="#FFFFFF" font-family="Barlow">{{qTxt}} t</text>
         <line x1="63" y1="282" x2="{{dgTrolX}}" y2="282" stroke="#16211A" stroke-width="1.5"></line>
         <line x1="63" y1="276" x2="63" y2="288" stroke="#16211A" stroke-width="1.5"></line>
         <line x1="{{dgTrolX}}" y1="276" x2="{{dgTrolX}}" y2="288" stroke="#16211A" stroke-width="1.5"></line>
-        <text x="{{dgRLabX}}" y="297" text-anchor="middle" font-size="11" font-weight="700" fill="#00693A" font-family="Barlow">R {{rTxt}} m</text>
+        <text x="{{dgRLabX}}" y="297" text-anchor="middle" font-size="11" font-weight="700" fill="#AADB1E" font-family="Barlow">R {{rTxt}} m</text>
         <text x="63" y="{{dgHLabY}}" text-anchor="middle" font-size="11" font-weight="700" fill="{{dgHLabFg}}" font-family="Barlow">{{dgHLabel}}</text>
-        <circle cx="63" cy="{{dgTopY}}" r="9" fill="#00854A" opacity=".45" style="animation:zlPulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center;pointer-events:none"></circle>
-        <circle cx="63" cy="{{dgTopY}}" r="8" fill="#FFFFFF" stroke="#00854A" stroke-width="2.5" style="pointer-events:none"></circle>
+        <circle cx="63" cy="{{dgTopY}}" r="9" fill="#AADB1E" opacity=".45" style="animation:zlPulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center;pointer-events:none"></circle>
+        <circle cx="63" cy="{{dgTopY}}" r="8" fill="#FFFFFF" stroke="#AADB1E" stroke-width="2.5" style="pointer-events:none"></circle>
         <circle cx="63" cy="{{dgTopY}}" r="20" fill="transparent" style="cursor:grab;touch-action:none" onPointerDown="{{downH}}"></circle>
-        <circle cx="{{dgTrolX}}" cy="{{dgHandY}}" r="9" fill="#00854A" opacity=".45" style="animation:zlPulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center;pointer-events:none"></circle>
-        <circle cx="{{dgTrolX}}" cy="{{dgHandY}}" r="8" fill="#00854A" stroke="#FFFFFF" stroke-width="2.5" style="pointer-events:none"></circle>
+        <circle cx="{{dgTrolX}}" cy="{{dgHandY}}" r="9" fill="#AADB1E" opacity=".45" style="animation:zlPulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center;pointer-events:none"></circle>
+        <circle cx="{{dgTrolX}}" cy="{{dgHandY}}" r="8" fill="#AADB1E" stroke="#FFFFFF" stroke-width="2.5" style="pointer-events:none"></circle>
         <circle cx="{{dgTrolX}}" cy="{{dgHandY}}" r="20" fill="transparent" style="cursor:grab;touch-action:none" onPointerDown="{{downR}}"></circle>
       </svg>
       </sc-if>
@@ -118,7 +118,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
             <button onClick="{{hInc}}" style="width:44px;height:44px;border:1px solid #E2E8E3;background:#FFFFFF;border-radius:12px;font-size:22px;color:#5F6D64;cursor:pointer;line-height:1;flex:none">+</button>
           </div>
           <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#5F6D64;font-weight:500;margin-top:8px;cursor:pointer;user-select:none;min-height:44px">
-            <input type="checkbox" checked="{{anchor}}" onChange="{{anchorTgl}}" style="accent-color:#00854A;width:20px;height:20px;margin:0;flex:none"></input>
+            <input type="checkbox" checked="{{anchor}}" onChange="{{anchorTgl}}" style="accent-color:#AADB1E;width:20px;height:20px;margin:0;flex:none"></input>
             {{t.allowAnchor}}
           </label>
         </div>
@@ -141,8 +141,8 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       <sc-if value="{{hasTop}}" hint-placeholder-val="{{true}}">
       <section style="background:#FFFFFF;border:1.5px solid #9CC9B0;border-radius:16px;padding:20px 20px 18px;box-shadow:0 2px 8px rgba(0,133,74,.08)">
         <div style="display:flex;align-items:center;gap:10px">
-          <span style="font-size:12px;font-weight:800;letter-spacing:.14em;color:#00854A">{{t.topBadge}}</span>
-          <span style="margin-left:auto;font-size:13px;font-weight:800;color:#00693A;background:#E6F3EC;border-radius:999px;padding:4px 12px;font-family:'Barlow',sans-serif">{{topMarginTxt}}</span>
+          <span style="font-size:12px;font-weight:800;letter-spacing:.14em;color:#AADB1E">{{t.topBadge}}</span>
+          <span style="margin-left:auto;font-size:13px;font-weight:800;color:#AADB1E;background:#E6F3EC;border-radius:999px;padding:4px 12px;font-family:'Barlow',sans-serif">{{topMarginTxt}}</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px">
           <span style="font-family:'Barlow',sans-serif;font-weight:800;font-size:38px;letter-spacing:-.01em;line-height:1.1">{{topCode}}</span>
@@ -150,8 +150,8 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
         </div>
         <div style="margin-top:10px;line-height:1.15">
           <span style="font-size:15px;color:#5F6D64">{{t.canLift}} </span>
-          <span style="font-family:'Barlow',sans-serif;font-weight:800;font-size:52px;color:#00693A;font-variant-numeric:tabular-nums">{{topCapTxt}}</span>
-          <span style="font-size:17px;font-weight:700;color:#00693A"> t</span>
+          <span style="font-family:'Barlow',sans-serif;font-weight:800;font-size:52px;color:#AADB1E;font-variant-numeric:tabular-nums">{{topCapTxt}}</span>
+          <span style="font-size:17px;font-weight:700;color:#AADB1E"> t</span>
           <span style="font-size:14px;color:#8A968E">　{{demandNote}}</span>
         </div>
         <div style="font-size:13.5px;color:#5F6D64;margin-top:8px">{{topCfg}}</div>
@@ -160,7 +160,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
           <span style="font-size:12.5px;font-weight:500;border-radius:999px;padding:4px 11px;background:#F1F4F2;color:#5F6D64">{{topTipTxt}}</span>
         </div>
         <div style="display:flex;gap:10px;margin-top:16px">
-          <button onClick="{{topOpen}}" style="flex:1.4;min-height:48px;padding:13px 10px;background:#00854A;color:#FFFFFF;border:0;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">{{t.viewCurve}}</button>
+          <button onClick="{{topOpen}}" style="flex:1.4;min-height:48px;padding:13px 10px;background:#AADB1E;color:#FFFFFF;border:0;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">{{t.viewCurve}}</button>
           <button onClick="{{topCmp}}" style="flex:1;min-height:48px;padding:13px 10px;background:#FFFFFF;color:{{topCmpFg}};border:1.5px solid #CBD6CE;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">{{topCmpTxt}}</button>
           
         </div>
@@ -184,7 +184,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
               </div>
               <div style="text-align:right">
                 <span style="font-family:'Barlow',sans-serif;font-weight:700;font-size:16px;font-variant-numeric:tabular-nums">{{row.capTxt}} t</span>
-                <span style="font-size:12px;font-weight:700;color:#00854A;font-family:'Barlow',sans-serif"> {{row.marginTxt}}</span>
+                <span style="font-size:12px;font-weight:700;color:#AADB1E;font-family:'Barlow',sans-serif"> {{row.marginTxt}}</span>
               </div>
             </div>
           </sc-for>
@@ -235,9 +235,9 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       <sc-if value="{{dOk}}" hint-placeholder-val="{{true}}">
       <div style="margin-top:8px;line-height:1.15">
         <span style="font-size:14px;color:#5F6D64">{{dCapLead}} </span>
-        <span style="font-family:'Barlow',sans-serif;font-weight:800;font-size:44px;color:#00693A;font-variant-numeric:tabular-nums">{{dCapTxt}}</span>
-        <span style="font-size:16px;font-weight:700;color:#00693A"> t</span>
-        <span style="font-size:13.5px;font-weight:700;color:#00854A;font-family:'Barlow',sans-serif">　{{dMarginTxt}}</span>
+        <span style="font-family:'Barlow',sans-serif;font-weight:800;font-size:44px;color:#AADB1E;font-variant-numeric:tabular-nums">{{dCapTxt}}</span>
+        <span style="font-size:16px;font-weight:700;color:#AADB1E"> t</span>
+        <span style="font-size:13.5px;font-weight:700;color:#AADB1E;font-family:'Barlow',sans-serif">　{{dMarginTxt}}</span>
       </div>
       <div style="font-size:13.5px;color:#5F6D64;margin-top:6px">{{dCfg}}</div>
       </sc-if>
@@ -383,7 +383,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       <sc-if value="{{cmpEmpty}}" hint-placeholder-val="{{false}}">
       <div style="text-align:center;padding:34px 10px">
         <div style="font-size:14px;color:#8A968E">{{t.cmpEmpty}}</div>
-        <button onClick="{{goMatch}}" style="margin-top:14px;min-height:48px;padding:11px 22px;background:#00854A;color:#FFFFFF;border:0;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">{{t.goPick}}</button>
+        <button onClick="{{goMatch}}" style="margin-top:14px;min-height:48px;padding:11px 22px;background:#AADB1E;color:#FFFFFF;border:0;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">{{t.goPick}}</button>
       </div>
       </sc-if>
       <sc-if value="{{cmpHas}}" hint-placeholder-val="{{true}}">
@@ -709,7 +709,7 @@ class Component extends DCLogic {
   hChip(h){
     const f=this.fmt, T=this.t();
     if(!h || h.mode==='na') return {t:T.hNAchip, bg:'#EFF2F0', fg:'#5F6D64'};
-    if(h.mode==='free') return {t:T.hFree(f(h.fs)), bg:'#E6F3EC', fg:'#00693A'};
+    if(h.mode==='free') return {t:T.hFree(f(h.fs)), bg:'#E6F3EC', fg:'#AADB1E'};
     if(h.mode==='anchor') return {t:T.hAnchor(h.ties, f(h.upto)), bg:'#E9F0F9', fg:'#2F5FA3'};
     return {t:T.hUnknown, bg:'#F7F0DC', fg:'#9A6B00'};
   }
@@ -753,7 +753,7 @@ class Component extends DCLogic {
     const maxY=Math.max(...rows.map(r=>r.maxLoad))*1.08;
     const maxX=jib.reach*1.02;
     const X=x=>Pl+x/maxX*(W-Pl-Pr), Y=y=>H-Pb-y/maxY*(H-Pt-Pb);
-    const colors=['#00854A','#2F5FA3'];
+    const colors=['#AADB1E','#2F5FA3'];
     const series=[], dots=[];
     rows.forEach((r,i)=>{
       const pts=[[r.minR,r.maxLoad],[r.maxLoadR,r.maxLoad],...r.pts.filter(p=>p[0]>r.maxLoadR)];
@@ -766,7 +766,7 @@ class Component extends DCLogic {
     const dmShow=S.R<=jib.reach;
     const okAny=rows.some(r=>{const c=this.capAt(r,S.R); return c!=null&&c>=S.Q;});
     this._chart={maxX, minX:Math.min(...rows.map(r=>r.minR)), reach:jib.reach, rows, colors};
-    return {series, dots, yTicks, xTicks, dmShow, dmX:X(S.R).toFixed(1), dmY:Y(Math.min(S.Q,maxY)).toFixed(1), dmFill: okAny?'#00854A':'#B4423A'};
+    return {series, dots, yTicks, xTicks, dmShow, dmX:X(S.R).toFixed(1), dmY:Y(Math.min(S.Q,maxY)).toFixed(1), dmFill: okAny?'#AADB1E':'#B4423A'};
   }
   render_chartMove = (e)=>{
     const c=this._chart; if(!c) return;
@@ -789,7 +789,7 @@ class Component extends DCLogic {
     const showDiag=this.props.showDiagram ?? true;
     const kindTag=k=>k==='luffing'?T.luffing:T.flat;
     const kindBg=k=>k==='luffing'?'#E9F0F9':'#E6F3EC';
-    const kindFg=k=>k==='luffing'?'#2F5FA3':'#00693A';
+    const kindFg=k=>k==='luffing'?'#2F5FA3':'#AADB1E';
     const v={
       t:T,
       isMatch:S.page==='match', isDetail:S.page==='detail', isCompare:S.page==='compare', isData:S.page==='data', isGuide:S.page==='guide',
@@ -811,8 +811,8 @@ class Component extends DCLogic {
       specsTgl:()=>this.setState({specsOpen:!S.specsOpen}), specsOpen:S.specsOpen,
       specsBtnTxt:S.specsOpen?T.collapse:T.expand,
       langZh:()=>this.setLang('zh'), langTr:()=>this.setLang('tr'),
-      langZhBg:S.lang==='zh'?'#00854A':'#FFFFFF', langZhFg:S.lang==='zh'?'#FFFFFF':'#5F6D64',
-      langTrBg:S.lang==='tr'?'#00854A':'#FFFFFF', langTrFg:S.lang==='tr'?'#FFFFFF':'#5F6D64',
+      langZhBg:S.lang==='zh'?'#AADB1E':'#FFFFFF', langZhFg:S.lang==='zh'?'#FFFFFF':'#5F6D64',
+      langTrBg:S.lang==='tr'?'#AADB1E':'#FFFFFF', langTrFg:S.lang==='tr'?'#FFFFFF':'#5F6D64',
       demandNote:T.demand(f(S.Q), f(S.R)),
       legendDemand:T.legendDemand(f(S.R), f(S.Q)),
       cmpSub:T.cmpSub(f(S.R)),
@@ -824,18 +824,18 @@ class Component extends DCLogic {
     };
     for(const [key,id] of [['kAll','all'],['kFlat','flat'],['kLuf','luffing']]){
       const on=S.kind===id;
-      v[key+'Bg']=on?'#E6F3EC':'#FFFFFF'; v[key+'Fg']=on?'#00693A':'#5F6D64'; v[key+'Bd']=on?'#00854A':'#E2E8E3';
+      v[key+'Bg']=on?'#E6F3EC':'#FFFFFF'; v[key+'Fg']=on?'#AADB1E':'#5F6D64'; v[key+'Bd']=on?'#AADB1E':'#E2E8E3';
     }
     for(const [key,id] of [['navMatch','match'],['navCmp','compare'],['navGuide','guide'],['navData','data']]){
       const on=S.page===id||(id==='match'&&S.page==='detail');
-      v[key+'Bg']=on?'#00854A':'transparent'; v[key+'Fg']=on?'#FFFFFF':'#5F6D64';
+      v[key+'Bg']=on?'#AADB1E':'transparent'; v[key+'Fg']=on?'#FFFFFF':'#5F6D64';
     }
     for(const [key,id] of [['bfAll','all'],['bfCross','crossBase'],['bfTrav','travelling']]){
       const on=S.baseFilter===id;
       v[key]=()=>this.setState({baseFilter:id});
-      v[key+'Bg']=on?'#E6F3EC':'#FFFFFF'; v[key+'Fg']=on?'#00693A':'#5F6D64'; v[key+'Bd']=on?'#00854A':'#E2E8E3';
+      v[key+'Bg']=on?'#E6F3EC':'#FFFFFF'; v[key+'Fg']=on?'#AADB1E':'#5F6D64'; v[key+'Bd']=on?'#AADB1E':'#E2E8E3';
     }
-    const tierPdf={tier:T.srcTierPdf,tierBg:'#E6F3EC',tierFg:'#00693A'};
+    const tierPdf={tier:T.srcTierPdf,tierBg:'#E6F3EC',tierFg:'#AADB1E'};
     const tierInd={tier:T.srcTierInd,tierBg:'#F7F0DC',tierFg:'#9A6B00'};
     const tierWeb={tier:T.srcTierWeb,tierBg:'#E9F0F9',tierFg:'#2F5FA3'};
     v.guideCards=[
@@ -890,7 +890,7 @@ class Component extends DCLogic {
         topOpen:()=>this.open(top.m.code, top.best.jib.len),
         topCmp:()=>this.addCmp(top.m.code),
         topCmpTxt:S.cmp.includes(top.m.code)?T.inCmp:T.addCmp,
-        topCmpFg:S.cmp.includes(top.m.code)?'#8A968E':'#00693A',
+        topCmpFg:S.cmp.includes(top.m.code)?'#8A968E':'#AADB1E',
       });
       const topCap=top.best.cap;
       v.demandPct=Math.min(100, S.Q/topCap*100).toFixed(1)+'%';
@@ -899,7 +899,7 @@ class Component extends DCLogic {
         cfg:T.rowCfg(f(e.best.jib.len), f(e.best.row.maxLoad), kindTag(e.m.kind)),
         capTxt:f(e.best.cap), marginTxt:'+'+Math.round(e.margin*100)+'%',
         w:Math.max(4, e.best.cap/topCap*100).toFixed(1)+'%',
-        fill:i===0?'#00854A':'#7FBFA0',
+        fill:i===0?'#AADB1E':'#7FBFA0',
         onOpen:()=>this.open(e.m.code, e.best.jib.len),
       }));
     } else {
@@ -928,11 +928,11 @@ class Component extends DCLogic {
           dMarginTxt: capJ!=null ? (capJ>=S.Q?T.dMargin(Math.round((capJ/S.Q-1)*100)):T.dGap(f(S.Q-capJ))) : '',
           dCfg: rowJ ? T.dCfg(f(rowJ.maxLoad), f(rowJ.maxLoadR), f(this.nextCol(rowJ,S.R))) : '',
           cmpBtnTxt:inCmp?T.inCmp:T.addCmp2, cmpBtnBg:inCmp?'#FFFFFF':'#E6F3EC',
-          cmpBtnFg:inCmp?'#8A968E':'#00693A', cmpBtnBd:inCmp?'#E2E8E3':'#9CC9B0',
+          cmpBtnFg:inCmp?'#8A968E':'#AADB1E', cmpBtnBd:inCmp?'#E2E8E3':'#9CC9B0',
           dAddCmp:()=>this.addCmp(m.code),
           jibChips:[...m.jibs].sort((a,b)=>a.len-b.len).map(j=>({
             txt:f(j.len)+' m', onSel:()=>this.setState({detailJib:j.len, tip:null}),
-            bg:j.len===jib.len?'#E6F3EC':'#FFFFFF', fg:j.len===jib.len?'#00693A':'#5F6D64', bd:j.len===jib.len?'#00854A':'#E2E8E3',
+            bg:j.len===jib.len?'#E6F3EC':'#FFFFFF', fg:j.len===jib.len?'#AADB1E':'#5F6D64', bd:j.len===jib.len?'#AADB1E':'#E2E8E3',
           })),
         });
         Object.assign(v, this.chartVals(m, jib));
@@ -955,7 +955,7 @@ class Component extends DCLogic {
         v.ladders=Object.entries(asbm).map(([mast,steps])=>{
           const hitS=S.H?steps.find(x=>x>=S.H):null;
           return {mast, chips:steps.map(s=>({
-            txt:f(s)+' m', bg:s===hitS?'#E6F3EC':'#F7F9F8', fg:s===hitS?'#00693A':'#8A968E', bd:s===hitS?'#00854A':'#EEF2EF', fw:s===hitS?800:500,
+            txt:f(s)+' m', bg:s===hitS?'#E6F3EC':'#F7F9F8', fg:s===hitS?'#AADB1E':'#8A968E', bd:s===hitS?'#AADB1E':'#EEF2EF', fw:s===hitS?800:500,
           }))};
         });
         const bases=m.bases||[];
@@ -966,7 +966,7 @@ class Component extends DCLogic {
           const on=i===pick;
           return {form:fl, sub:((b.anchor||b.base||'')+' · '+(b.mastSize||'')),
             onSel:()=>this.setState({basePick:i}),
-            bd:on?'#00854A':'#E2E8E3', bg:on?'#E6F3EC':'#FFFFFF', fg:on?'#00693A':'#5F6D64'};
+            bd:on?'#AADB1E':'#E2E8E3', bg:on?'#E6F3EC':'#FFFFFF', fg:on?'#AADB1E':'#5F6D64'};
         });
         const bp=bases[pick];
         if(bp){
@@ -1021,7 +1021,7 @@ class Component extends DCLogic {
           const ok=nums.filter(x=>!isNaN(x));
           if(ok.length){ const tv=mode==='max'?Math.max(...ok):Math.min(...ok); bi=nums.findIndex(x=>x===tv); if(nums.filter(x=>x===tv).length>1) bi=-1; }
         }
-        return {label, cells:vals.map((val,i)=>({v:val, fg:i===bi?'#00693A':'#16211A', fw:i===bi?800:500}))};
+        return {label, cells:vals.map((val,i)=>({v:val, fg:i===bi?'#AADB1E':'#16211A', fw:i===bi?800:500}))};
       });
     } else v.cmpRows=[];
     v.catRows=this.db().map(m=>({file:m.srcFile, page:m.srcPage, jibs:m.jibs.length, rows:m.jibs.reduce((a,j)=>a+j.rows.length,0)}));
