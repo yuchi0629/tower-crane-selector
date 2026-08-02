@@ -6,9 +6,20 @@
     <meta name="description" content="基于已确认中联塔机样本数据的塔机选型工具">
     <meta name="theme-color" content="#AADB1E">
     <title>中联塔机智能选型</title>
+    <style>
+      .boot-state{min-height:100vh;display:grid;place-items:center;background:#f3f5f2;color:#292931;font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif}
+      .boot-state div{display:grid;justify-items:center;gap:14px}
+      .boot-state i{width:44px;height:44px;border:5px solid #dfe5de;border-top-color:#aadb1e;border-radius:50%;animation:boot-spin .8s linear infinite}
+      .boot-state strong{font-size:18px}.boot-state span{color:#69716d;font-size:12px}
+      @keyframes boot-spin{to{transform:rotate(360deg)}}
+    </style>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div class="boot-state">
+        <div><i></i><strong>正在加载塔机选型数据</strong><span>首次打开通常只需片刻</span></div>
+      </div>
+    </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -58,6 +58,12 @@ test("catalog only contains seven confirmed Zoomlion models", () => {
   assert.ok(catalog.models.every((model) => model.brand === "Zoomlion"));
 });
 
+test("browser loader uses the build-time data bundle instead of runtime JSON requests", () => {
+  const loaderSource = fs.readFileSync(path.join(repoRoot, "src/data-loader.js"), "utf8");
+  assert.match(loaderSource, /virtual:tower-data/);
+  assert.doesNotMatch(loaderSource, /\bfetch\s*\(/);
+});
+
 test("all split model files have valid performance and configuration links", () => {
   const catalog = readJson("public/data/catalog.json");
   for (const entry of catalog.models) {

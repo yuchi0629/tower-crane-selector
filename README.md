@@ -29,7 +29,7 @@ public/data/
       wind/C25.json
 src/
   selector.js      # 独立、可测试的选型算法
-  data-loader.js   # 分层JSON加载
+  data-loader.js   # 读取构建时生成的数据包
   main.js          # 页面交互
   styles.css
 test/
@@ -37,6 +37,8 @@ test/
 ```
 
 选型时保持“型号＋风压＋塔身＋基础＋臂长＋倍率＋工况”为一个完整配置。普通工况优先，未指定臂长时选择最长可确认满足的臂长；非表格幅度按相邻档位规则判断，不进行线性插值。
+
+分层JSON是可维护的数据源；Vite构建时将这些文件打进单个本地JavaScript资源，线上页面不会逐个请求几十个JSON文件。
 
 ## 本地运行
 
