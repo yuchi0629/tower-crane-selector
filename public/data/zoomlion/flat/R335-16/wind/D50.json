@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "model": "R335-16",
+  "windCondition": "D50",
+  "assumedDefault": false,
+  "heightTerm": "HUH",
+  "source": {
+    "file": "R335-16_EN14439_C25-D50_2026_R_英德法意西葡波.pdf",
+    "pages": [
+      2,
+      3
+    ],
+    "status": "confirmed"
+  },
+  "configurations": [
+    {
+      "id": "R335-16-D50-1",
+      "mastSystem": "2.3 m-RB",
+      "baseType": "fixed",
+      "baseLabel": "支腿基础",
+      "freeStandingHeight": 58.5,
+      "heightByJib": null,
+      "heightStatus": "confirmed",
+      "note": null
+    },
+    {
+      "id": "R335-16-D50-2",
+      "mastSystem": "2.3 m-RB",
+      "baseType": "crossBase",
+      "baseLabel": "6.0 m底架",
+      "freeStandingHeight": 49,
+      "heightByJib": null,
+      "heightStatus": "confirmed",
+      "note": null
+    },
+    {
+      "id": "R335-16-D50-3",
+      "mastSystem": "2.3 m-RB",
+      "baseType": "crossBase",
+      "baseLabel": "8.0 m底架",
+      "freeStandingHeight": 60,
+      "heightByJib": null,
+      "heightStatus": "confirmed",
+      "note": null
+    }
+  ]
+}

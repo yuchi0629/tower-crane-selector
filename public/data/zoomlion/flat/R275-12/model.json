@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "code": "R275-12",
+  "type": "flat",
+  "maxLoad": 12,
+  "maxJibLength": 70,
+  "jibStep": 2.5,
+  "jibLengths": [
+    70,
+    67.5,
+    65,
+    62.5,
+    60,
+    57.5,
+    55,
+    52.5,
+    50,
+    47.5,
+    45,
+    42.5,
+    40,
+    37.5,
+    35,
+    32.5,
+    30
+  ],
+  "heightTerm": "HUH",
+  "mastSystems": [
+    "2.3 m-RB"
+  ],
+  "windConditions": [
+    "C25",
+    "C50",
+    "D25",
+    "D50"
+  ],
+  "defaultWindCondition": null,
+  "operatingConditions": [
+    "ordinary",
+    "superlift"
+  ],
+  "source": {
+    "file": "R275-12_EN14439_C25-D50_2026_R_英德法意西葡波_20260718.pdf",
+    "edition": "2026-07-18",
+    "standard": "EN 14439",
+    "pages": {
+      "performance": [
+        4,
+        5
+      ],
+      "height": [
+        2,
+        3
+      ]
+    },
+    "status": "confirmed"
+  },
+  "notes": [],
+  "files": {
+    "ordinaryPerformance": "./performance/ordinary.json",
+    "superliftPerformance": "./performance/superlift.json",
+    "windDirectory": "./wind/"
+  }
+}

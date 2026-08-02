@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "code": "R370-20",
+  "type": "flat",
+  "maxLoad": 20,
+  "maxJibLength": 80,
+  "jibStep": 5,
+  "jibLengths": [
+    80,
+    75,
+    70,
+    65,
+    60,
+    55,
+    50,
+    45,
+    40,
+    35,
+    30
+  ],
+  "heightTerm": "HUH",
+  "mastSystems": [
+    "2.3 m-RB"
+  ],
+  "windConditions": [
+    "C25",
+    "C50",
+    "D25",
+    "D50"
+  ],
+  "defaultWindCondition": null,
+  "operatingConditions": [
+    "ordinary",
+    "superlift"
+  ],
+  "source": {
+    "file": "R370-20_EN14439_C25_2026_R_英德法意西葡波_20260418.pdf",
+    "edition": "2026-04-18",
+    "standard": "EN 14439",
+    "pages": {
+      "performance": [
+        4,
+        5
+      ],
+      "height": [
+        2,
+        3
+      ]
+    },
+    "status": "confirmed"
+  },
+  "notes": [
+    "部分最大高度仅适用于样本脚注规定的臂长范围，正式工程应按原样本复核。"
+  ],
+  "files": {
+    "ordinaryPerformance": "./performance/ordinary.json",
+    "superliftPerformance": "./performance/superlift.json",
+    "windDirectory": "./wind/"
+  }
+}

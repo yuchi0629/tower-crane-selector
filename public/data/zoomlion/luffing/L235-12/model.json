@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "code": "L235-12",
+  "type": "luffing",
+  "maxLoad": 12,
+  "maxJibLength": 60,
+  "jibStep": 5,
+  "jibLengths": [
+    60,
+    55,
+    50,
+    45,
+    40,
+    35,
+    30
+  ],
+  "heightTerm": "H",
+  "mastSystems": [
+    "2.0 m-L68A",
+    "2.0 m-L69"
+  ],
+  "windConditions": [
+    "C25"
+  ],
+  "defaultWindCondition": "C25",
+  "operatingConditions": [
+    "ordinary"
+  ],
+  "source": {
+    "file": "06-L235-12 海外通用.pdf",
+    "edition": "海外通用",
+    "standard": null,
+    "pages": {
+      "performance": [
+        5
+      ],
+      "height": [
+        2
+      ]
+    },
+    "status": "confirmed"
+  },
+  "notes": [],
+  "files": {
+    "ordinaryPerformance": "./performance/ordinary.json",
+    "superliftPerformance": null,
+    "windDirectory": "./wind/"
+  }
+}

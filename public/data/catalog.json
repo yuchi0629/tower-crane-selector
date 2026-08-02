@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "generatedFrom": "tower-crane-expert confirmed knowledge base",
+  "models": [
+    {
+      "brand": "Zoomlion",
+      "code": "R90-5",
+      "type": "flat",
+      "path": "./zoomlion/flat/R90-5/model.json"
+    },
+    {
+      "brand": "Zoomlion",
+      "code": "R135-8",
+      "type": "flat",
+      "path": "./zoomlion/flat/R135-8/model.json"
+    },
+    {
+      "brand": "Zoomlion",
+      "code": "R220-10",
+      "type": "flat",
+      "path": "./zoomlion/flat/R220-10/model.json"
+    },
+    {
+      "brand": "Zoomlion",
+      "code": "R275-12",
+      "type": "flat",
+      "path": "./zoomlion/flat/R275-12/model.json"
+    },
+    {
+      "brand": "Zoomlion",
+      "code": "R335-16",
+      "type": "flat",
+      "path": "./zoomlion/flat/R335-16/model.json"
+    },
+    {
+      "brand": "Zoomlion",
+      "code": "R370-20",
+      "type": "flat",
+      "path": "./zoomlion/flat/R370-20/model.json"
+    },
+    {
+      "brand": "Zoomlion",
+      "code": "L235-12",
+      "type": "luffing",
+      "path": "./zoomlion/luffing/L235-12/model.json"
+    }
+  ]
+}

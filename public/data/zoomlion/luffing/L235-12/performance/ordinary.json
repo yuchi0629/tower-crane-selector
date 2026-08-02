@@ -1,0 +1,1149 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "model": "L235-12",
+  "condition": "ordinary",
+  "source": {
+    "file": "06-L235-12 海外通用.pdf",
+    "pages": [
+      5
+    ],
+    "status": "confirmed"
+  },
+  "rows": [
+    {
+      "jibLength": 60,
+      "trolleyMode": null,
+      "reeving": 1,
+      "minRadius": 6.6,
+      "maxLoadRadius": 54.5,
+      "maxLoad": 3,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 3
+        },
+        {
+          "radius": 22.5,
+          "capacity": 3
+        },
+        {
+          "radius": 25,
+          "capacity": 3
+        },
+        {
+          "radius": 27.5,
+          "capacity": 3
+        },
+        {
+          "radius": 30,
+          "capacity": 3
+        },
+        {
+          "radius": 32.5,
+          "capacity": 3
+        },
+        {
+          "radius": 35,
+          "capacity": 3
+        },
+        {
+          "radius": 37.5,
+          "capacity": 3
+        },
+        {
+          "radius": 40,
+          "capacity": 3
+        },
+        {
+          "radius": 42.5,
+          "capacity": 3
+        },
+        {
+          "radius": 45,
+          "capacity": 3
+        },
+        {
+          "radius": 47.5,
+          "capacity": 3
+        },
+        {
+          "radius": 50,
+          "capacity": 3
+        },
+        {
+          "radius": 52.5,
+          "capacity": 3
+        },
+        {
+          "radius": 55,
+          "capacity": 2.92
+        },
+        {
+          "radius": 57.5,
+          "capacity": 2.59
+        },
+        {
+          "radius": 60,
+          "capacity": 2.3
+        }
+      ]
+    },
+    {
+      "jibLength": 60,
+      "trolleyMode": null,
+      "reeving": 2,
+      "minRadius": 6.6,
+      "maxLoadRadius": 39.2,
+      "maxLoad": 6,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 6
+        },
+        {
+          "radius": 22.5,
+          "capacity": 6
+        },
+        {
+          "radius": 25,
+          "capacity": 6
+        },
+        {
+          "radius": 27.5,
+          "capacity": 6
+        },
+        {
+          "radius": 30,
+          "capacity": 6
+        },
+        {
+          "radius": 32.5,
+          "capacity": 6
+        },
+        {
+          "radius": 35,
+          "capacity": 6
+        },
+        {
+          "radius": 37.5,
+          "capacity": 6
+        },
+        {
+          "radius": 40,
+          "capacity": 5.83
+        },
+        {
+          "radius": 42.5,
+          "capacity": 5.19
+        },
+        {
+          "radius": 45,
+          "capacity": 4.63
+        },
+        {
+          "radius": 47.5,
+          "capacity": 4.13
+        },
+        {
+          "radius": 50,
+          "capacity": 3.68
+        },
+        {
+          "radius": 52.5,
+          "capacity": 3.28
+        },
+        {
+          "radius": 55,
+          "capacity": 2.92
+        },
+        {
+          "radius": 57.5,
+          "capacity": 2.59
+        },
+        {
+          "radius": 60,
+          "capacity": 2.3
+        }
+      ]
+    },
+    {
+      "jibLength": 60,
+      "trolleyMode": null,
+      "reeving": 4,
+      "minRadius": 6.6,
+      "maxLoadRadius": 24.1,
+      "maxLoad": 12,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 12
+        },
+        {
+          "radius": 22.5,
+          "capacity": 12
+        },
+        {
+          "radius": 25,
+          "capacity": 11.64
+        },
+        {
+          "radius": 27.5,
+          "capacity": 10.11
+        },
+        {
+          "radius": 30,
+          "capacity": 8.85
+        },
+        {
+          "radius": 32.5,
+          "capacity": 7.79
+        },
+        {
+          "radius": 35,
+          "capacity": 6.89
+        },
+        {
+          "radius": 37.5,
+          "capacity": 6.11
+        },
+        {
+          "radius": 40,
+          "capacity": 5.43
+        },
+        {
+          "radius": 42.5,
+          "capacity": 4.84
+        },
+        {
+          "radius": 45,
+          "capacity": 4.32
+        },
+        {
+          "radius": 47.5,
+          "capacity": 3.85
+        },
+        {
+          "radius": 50,
+          "capacity": 3.44
+        },
+        {
+          "radius": 52.5,
+          "capacity": 3.07
+        },
+        {
+          "radius": 55,
+          "capacity": 2.74
+        },
+        {
+          "radius": 57.5,
+          "capacity": 2.44
+        },
+        {
+          "radius": 60,
+          "capacity": 2.19
+        }
+      ]
+    },
+    {
+      "jibLength": 55,
+      "trolleyMode": null,
+      "reeving": 1,
+      "minRadius": 6.2,
+      "maxLoadRadius": 55,
+      "maxLoad": 3,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 3
+        },
+        {
+          "radius": 22.5,
+          "capacity": 3
+        },
+        {
+          "radius": 25,
+          "capacity": 3
+        },
+        {
+          "radius": 27.5,
+          "capacity": 3
+        },
+        {
+          "radius": 30,
+          "capacity": 3
+        },
+        {
+          "radius": 32.5,
+          "capacity": 3
+        },
+        {
+          "radius": 35,
+          "capacity": 3
+        },
+        {
+          "radius": 37.5,
+          "capacity": 3
+        },
+        {
+          "radius": 40,
+          "capacity": 3
+        },
+        {
+          "radius": 42.5,
+          "capacity": 3
+        },
+        {
+          "radius": 45,
+          "capacity": 3
+        },
+        {
+          "radius": 47.5,
+          "capacity": 3
+        },
+        {
+          "radius": 50,
+          "capacity": 3
+        },
+        {
+          "radius": 52.5,
+          "capacity": 3
+        },
+        {
+          "radius": 55,
+          "capacity": 3
+        }
+      ]
+    },
+    {
+      "jibLength": 55,
+      "trolleyMode": null,
+      "reeving": 2,
+      "minRadius": 6.2,
+      "maxLoadRadius": 39.8,
+      "maxLoad": 6,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 6
+        },
+        {
+          "radius": 22.5,
+          "capacity": 6
+        },
+        {
+          "radius": 25,
+          "capacity": 6
+        },
+        {
+          "radius": 27.5,
+          "capacity": 6
+        },
+        {
+          "radius": 30,
+          "capacity": 6
+        },
+        {
+          "radius": 32.5,
+          "capacity": 6
+        },
+        {
+          "radius": 35,
+          "capacity": 6
+        },
+        {
+          "radius": 37.5,
+          "capacity": 6
+        },
+        {
+          "radius": 40,
+          "capacity": 5.95
+        },
+        {
+          "radius": 42.5,
+          "capacity": 5.33
+        },
+        {
+          "radius": 45,
+          "capacity": 4.78
+        },
+        {
+          "radius": 47.5,
+          "capacity": 4.29
+        },
+        {
+          "radius": 50,
+          "capacity": 3.85
+        },
+        {
+          "radius": 52.5,
+          "capacity": 3.46
+        },
+        {
+          "radius": 55,
+          "capacity": 3.1
+        }
+      ]
+    },
+    {
+      "jibLength": 55,
+      "trolleyMode": null,
+      "reeving": 4,
+      "minRadius": 6.2,
+      "maxLoadRadius": 25.4,
+      "maxLoad": 12,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 12
+        },
+        {
+          "radius": 22.5,
+          "capacity": 12
+        },
+        {
+          "radius": 25,
+          "capacity": 12
+        },
+        {
+          "radius": 27.5,
+          "capacity": 10.69
+        },
+        {
+          "radius": 30,
+          "capacity": 9.37
+        },
+        {
+          "radius": 32.5,
+          "capacity": 8.26
+        },
+        {
+          "radius": 35,
+          "capacity": 7.32
+        },
+        {
+          "radius": 37.5,
+          "capacity": 6.51
+        },
+        {
+          "radius": 40,
+          "capacity": 5.8
+        },
+        {
+          "radius": 42.5,
+          "capacity": 5.18
+        },
+        {
+          "radius": 45,
+          "capacity": 4.63
+        },
+        {
+          "radius": 47.5,
+          "capacity": 4.15
+        },
+        {
+          "radius": 50,
+          "capacity": 3.72
+        },
+        {
+          "radius": 52.5,
+          "capacity": 3.34
+        },
+        {
+          "radius": 55,
+          "capacity": 2.99
+        }
+      ]
+    },
+    {
+      "jibLength": 50,
+      "trolleyMode": null,
+      "reeving": 1,
+      "minRadius": 5.7,
+      "maxLoadRadius": 50,
+      "maxLoad": 3,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 3
+        },
+        {
+          "radius": 22.5,
+          "capacity": 3
+        },
+        {
+          "radius": 25,
+          "capacity": 3
+        },
+        {
+          "radius": 27.5,
+          "capacity": 3
+        },
+        {
+          "radius": 30,
+          "capacity": 3
+        },
+        {
+          "radius": 32.5,
+          "capacity": 3
+        },
+        {
+          "radius": 35,
+          "capacity": 3
+        },
+        {
+          "radius": 37.5,
+          "capacity": 3
+        },
+        {
+          "radius": 40,
+          "capacity": 3
+        },
+        {
+          "radius": 42.5,
+          "capacity": 3
+        },
+        {
+          "radius": 45,
+          "capacity": 3
+        },
+        {
+          "radius": 47.5,
+          "capacity": 3
+        },
+        {
+          "radius": 50,
+          "capacity": 3
+        }
+      ]
+    },
+    {
+      "jibLength": 50,
+      "trolleyMode": null,
+      "reeving": 2,
+      "minRadius": 5.7,
+      "maxLoadRadius": 41.6,
+      "maxLoad": 6,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 6
+        },
+        {
+          "radius": 22.5,
+          "capacity": 6
+        },
+        {
+          "radius": 25,
+          "capacity": 6
+        },
+        {
+          "radius": 27.5,
+          "capacity": 6
+        },
+        {
+          "radius": 30,
+          "capacity": 6
+        },
+        {
+          "radius": 32.5,
+          "capacity": 6
+        },
+        {
+          "radius": 35,
+          "capacity": 6
+        },
+        {
+          "radius": 37.5,
+          "capacity": 6
+        },
+        {
+          "radius": 40,
+          "capacity": 6
+        },
+        {
+          "radius": 42.5,
+          "capacity": 5.83
+        },
+        {
+          "radius": 45,
+          "capacity": 5.27
+        },
+        {
+          "radius": 47.5,
+          "capacity": 4.78
+        },
+        {
+          "radius": 50,
+          "capacity": 4.3
+        }
+      ]
+    },
+    {
+      "jibLength": 50,
+      "trolleyMode": null,
+      "reeving": 4,
+      "minRadius": 5.7,
+      "maxLoadRadius": 26,
+      "maxLoad": 12,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 12
+        },
+        {
+          "radius": 22.5,
+          "capacity": 12
+        },
+        {
+          "radius": 25,
+          "capacity": 12
+        },
+        {
+          "radius": 27.5,
+          "capacity": 11.28
+        },
+        {
+          "radius": 30,
+          "capacity": 9.94
+        },
+        {
+          "radius": 32.5,
+          "capacity": 8.81
+        },
+        {
+          "radius": 35,
+          "capacity": 7.85
+        },
+        {
+          "radius": 37.5,
+          "capacity": 7.03
+        },
+        {
+          "radius": 40,
+          "capacity": 6.31
+        },
+        {
+          "radius": 42.5,
+          "capacity": 5.69
+        },
+        {
+          "radius": 45,
+          "capacity": 5.14
+        },
+        {
+          "radius": 47.5,
+          "capacity": 4.66
+        },
+        {
+          "radius": 50,
+          "capacity": 4.19
+        }
+      ]
+    },
+    {
+      "jibLength": 45,
+      "trolleyMode": null,
+      "reeving": 1,
+      "minRadius": 5.3,
+      "maxLoadRadius": 45,
+      "maxLoad": 3,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 3
+        },
+        {
+          "radius": 22.5,
+          "capacity": 3
+        },
+        {
+          "radius": 25,
+          "capacity": 3
+        },
+        {
+          "radius": 27.5,
+          "capacity": 3
+        },
+        {
+          "radius": 30,
+          "capacity": 3
+        },
+        {
+          "radius": 32.5,
+          "capacity": 3
+        },
+        {
+          "radius": 35,
+          "capacity": 3
+        },
+        {
+          "radius": 37.5,
+          "capacity": 3
+        },
+        {
+          "radius": 40,
+          "capacity": 3
+        },
+        {
+          "radius": 42.5,
+          "capacity": 3
+        },
+        {
+          "radius": 45,
+          "capacity": 3
+        }
+      ]
+    },
+    {
+      "jibLength": 45,
+      "trolleyMode": null,
+      "reeving": 2,
+      "minRadius": 5.3,
+      "maxLoadRadius": 42.1,
+      "maxLoad": 6,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 6
+        },
+        {
+          "radius": 22.5,
+          "capacity": 6
+        },
+        {
+          "radius": 25,
+          "capacity": 6
+        },
+        {
+          "radius": 27.5,
+          "capacity": 6
+        },
+        {
+          "radius": 30,
+          "capacity": 6
+        },
+        {
+          "radius": 32.5,
+          "capacity": 6
+        },
+        {
+          "radius": 35,
+          "capacity": 6
+        },
+        {
+          "radius": 37.5,
+          "capacity": 6
+        },
+        {
+          "radius": 40,
+          "capacity": 6
+        },
+        {
+          "radius": 42.5,
+          "capacity": 5.93
+        },
+        {
+          "radius": 45,
+          "capacity": 5.3
+        }
+      ]
+    },
+    {
+      "jibLength": 45,
+      "trolleyMode": null,
+      "reeving": 4,
+      "minRadius": 5.3,
+      "maxLoadRadius": 26,
+      "maxLoad": 12,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 12
+        },
+        {
+          "radius": 22.5,
+          "capacity": 12
+        },
+        {
+          "radius": 25,
+          "capacity": 12
+        },
+        {
+          "radius": 27.5,
+          "capacity": 11.26
+        },
+        {
+          "radius": 30,
+          "capacity": 9.95
+        },
+        {
+          "radius": 32.5,
+          "capacity": 8.84
+        },
+        {
+          "radius": 35,
+          "capacity": 7.9
+        },
+        {
+          "radius": 37.5,
+          "capacity": 7.1
+        },
+        {
+          "radius": 40,
+          "capacity": 6.4
+        },
+        {
+          "radius": 42.5,
+          "capacity": 5.8
+        },
+        {
+          "radius": 45,
+          "capacity": 5.19
+        }
+      ]
+    },
+    {
+      "jibLength": 40,
+      "trolleyMode": null,
+      "reeving": 1,
+      "minRadius": 4.8,
+      "maxLoadRadius": 40,
+      "maxLoad": 3,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 3
+        },
+        {
+          "radius": 22.5,
+          "capacity": 3
+        },
+        {
+          "radius": 25,
+          "capacity": 3
+        },
+        {
+          "radius": 27.5,
+          "capacity": 3
+        },
+        {
+          "radius": 30,
+          "capacity": 3
+        },
+        {
+          "radius": 32.5,
+          "capacity": 3
+        },
+        {
+          "radius": 35,
+          "capacity": 3
+        },
+        {
+          "radius": 37.5,
+          "capacity": 3
+        },
+        {
+          "radius": 40,
+          "capacity": 3
+        }
+      ]
+    },
+    {
+      "jibLength": 40,
+      "trolleyMode": null,
+      "reeving": 2,
+      "minRadius": 4.8,
+      "maxLoadRadius": 40.7,
+      "maxLoad": 6,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 6
+        },
+        {
+          "radius": 22.5,
+          "capacity": 6
+        },
+        {
+          "radius": 25,
+          "capacity": 6
+        },
+        {
+          "radius": 27.5,
+          "capacity": 6
+        },
+        {
+          "radius": 30,
+          "capacity": 6
+        },
+        {
+          "radius": 32.5,
+          "capacity": 6
+        },
+        {
+          "radius": 35,
+          "capacity": 6
+        },
+        {
+          "radius": 37.5,
+          "capacity": 6
+        },
+        {
+          "radius": 40,
+          "capacity": 6
+        }
+      ]
+    },
+    {
+      "jibLength": 40,
+      "trolleyMode": null,
+      "reeving": 4,
+      "minRadius": 4.8,
+      "maxLoadRadius": 26.8,
+      "maxLoad": 12,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 12
+        },
+        {
+          "radius": 22.5,
+          "capacity": 12
+        },
+        {
+          "radius": 25,
+          "capacity": 12
+        },
+        {
+          "radius": 27.5,
+          "capacity": 11.62
+        },
+        {
+          "radius": 30,
+          "capacity": 10.36
+        },
+        {
+          "radius": 32.5,
+          "capacity": 9.31
+        },
+        {
+          "radius": 35,
+          "capacity": 8.42
+        },
+        {
+          "radius": 37.5,
+          "capacity": 7.66
+        },
+        {
+          "radius": 40,
+          "capacity": 6.87
+        }
+      ]
+    },
+    {
+      "jibLength": 35,
+      "trolleyMode": null,
+      "reeving": 1,
+      "minRadius": 4.4,
+      "maxLoadRadius": 35,
+      "maxLoad": 3,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 3
+        },
+        {
+          "radius": 22.5,
+          "capacity": 3
+        },
+        {
+          "radius": 25,
+          "capacity": 3
+        },
+        {
+          "radius": 27.5,
+          "capacity": 3
+        },
+        {
+          "radius": 30,
+          "capacity": 3
+        },
+        {
+          "radius": 32.5,
+          "capacity": 3
+        },
+        {
+          "radius": 35,
+          "capacity": 3
+        }
+      ]
+    },
+    {
+      "jibLength": 35,
+      "trolleyMode": null,
+      "reeving": 2,
+      "minRadius": 4.4,
+      "maxLoadRadius": 35.9,
+      "maxLoad": 6,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 6
+        },
+        {
+          "radius": 22.5,
+          "capacity": 6
+        },
+        {
+          "radius": 25,
+          "capacity": 6
+        },
+        {
+          "radius": 27.5,
+          "capacity": 6
+        },
+        {
+          "radius": 30,
+          "capacity": 6
+        },
+        {
+          "radius": 32.5,
+          "capacity": 6
+        },
+        {
+          "radius": 35,
+          "capacity": 6
+        }
+      ]
+    },
+    {
+      "jibLength": 35,
+      "trolleyMode": null,
+      "reeving": 4,
+      "minRadius": 4.4,
+      "maxLoadRadius": 26,
+      "maxLoad": 12,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 12
+        },
+        {
+          "radius": 22.5,
+          "capacity": 12
+        },
+        {
+          "radius": 25,
+          "capacity": 12
+        },
+        {
+          "radius": 27.5,
+          "capacity": 11.19
+        },
+        {
+          "radius": 30,
+          "capacity": 9.95
+        },
+        {
+          "radius": 32.5,
+          "capacity": 8.92
+        },
+        {
+          "radius": 35,
+          "capacity": 7.82
+        }
+      ]
+    },
+    {
+      "jibLength": 30,
+      "trolleyMode": null,
+      "reeving": 1,
+      "minRadius": 4,
+      "maxLoadRadius": 30,
+      "maxLoad": 3,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 3
+        },
+        {
+          "radius": 22.5,
+          "capacity": 3
+        },
+        {
+          "radius": 25,
+          "capacity": 3
+        },
+        {
+          "radius": 27.5,
+          "capacity": 3
+        },
+        {
+          "radius": 30,
+          "capacity": 3
+        }
+      ]
+    },
+    {
+      "jibLength": 30,
+      "trolleyMode": null,
+      "reeving": 2,
+      "minRadius": 4,
+      "maxLoadRadius": 31,
+      "maxLoad": 6,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 6
+        },
+        {
+          "radius": 22.5,
+          "capacity": 6
+        },
+        {
+          "radius": 25,
+          "capacity": 6
+        },
+        {
+          "radius": 27.5,
+          "capacity": 6
+        },
+        {
+          "radius": 30,
+          "capacity": 6
+        }
+      ]
+    },
+    {
+      "jibLength": 30,
+      "trolleyMode": null,
+      "reeving": 4,
+      "minRadius": 4,
+      "maxLoadRadius": 28.1,
+      "maxLoad": 12,
+      "points": [
+        {
+          "radius": 20,
+          "capacity": 12
+        },
+        {
+          "radius": 22.5,
+          "capacity": 12
+        },
+        {
+          "radius": 25,
+          "capacity": 12
+        },
+        {
+          "radius": 27.5,
+          "capacity": 12
+        },
+        {
+          "radius": 30,
+          "capacity": 11.13
+        }
+      ]
+    }
+  ]
+}

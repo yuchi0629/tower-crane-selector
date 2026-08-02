@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "code": "R220-10",
+  "type": "flat",
+  "maxLoad": 10,
+  "maxJibLength": 65,
+  "jibStep": 2.5,
+  "jibLengths": [
+    65,
+    62.5,
+    60,
+    57.5,
+    55,
+    52.5,
+    50,
+    47.5,
+    45,
+    42.5,
+    40,
+    37.5,
+    35,
+    32.5,
+    30
+  ],
+  "heightTerm": "HUH",
+  "mastSystems": [
+    "1.65 m-RA"
+  ],
+  "windConditions": [
+    "C25",
+    "C50",
+    "D25",
+    "D50"
+  ],
+  "defaultWindCondition": null,
+  "operatingConditions": [
+    "ordinary",
+    "superlift"
+  ],
+  "source": {
+    "file": "R220-10_EN14439_C25_2026_R_英德法意西葡波_20260709.pdf",
+    "edition": "2026-07-09",
+    "standard": "EN 14439",
+    "pages": {
+      "performance": [
+        4,
+        5
+      ],
+      "height": [
+        2,
+        3
+      ]
+    },
+    "status": "confirmed"
+  },
+  "notes": [
+    "部分最大高度仅适用于样本脚注规定的臂长，正式工程应按原样本复核。"
+  ],
+  "files": {
+    "ordinaryPerformance": "./performance/ordinary.json",
+    "superliftPerformance": "./performance/superlift.json",
+    "windDirectory": "./wind/"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "code": "R135-8",
+  "type": "flat",
+  "maxLoad": 8,
+  "maxJibLength": 60,
+  "jibStep": 5,
+  "jibLengths": [
+    60,
+    55,
+    50,
+    45,
+    40,
+    35,
+    30
+  ],
+  "heightTerm": "HUH",
+  "mastSystems": [
+    "1.65 m-RA"
+  ],
+  "windConditions": [
+    "C25",
+    "C50",
+    "D25",
+    "D50"
+  ],
+  "defaultWindCondition": null,
+  "operatingConditions": [
+    "ordinary",
+    "superlift"
+  ],
+  "source": {
+    "file": "R135-8_EN14439_C25-D50_2026_R_英德法意西葡波0710.pdf",
+    "edition": "2026-0710",
+    "standard": "EN 14439",
+    "pages": {
+      "performance": [
+        4
+      ],
+      "height": [
+        2,
+        3
+      ]
+    },
+    "status": "confirmed"
+  },
+  "notes": [],
+  "files": {
+    "ordinaryPerformance": "./performance/ordinary.json",
+    "superliftPerformance": "./performance/superlift.json",
+    "windDirectory": "./wind/"
+  }
+}

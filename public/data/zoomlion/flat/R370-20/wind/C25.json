@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "model": "R370-20",
+  "windCondition": "C25",
+  "assumedDefault": false,
+  "heightTerm": "HUH",
+  "source": {
+    "file": "R370-20_EN14439_C25_2026_R_英德法意西葡波_20260418.pdf",
+    "pages": [
+      2,
+      3
+    ],
+    "status": "confirmed"
+  },
+  "configurations": [
+    {
+      "id": "R370-20-C25-1",
+      "mastSystem": "2.3 m-RB",
+      "baseType": "fixed",
+      "baseLabel": "支腿基础",
+      "freeStandingHeight": 64.3,
+      "heightByJib": null,
+      "heightStatus": "sample-footnote-review-required",
+      "note": "部分最大高度仅适用于样本脚注规定的臂长范围，正式工程应按原样本复核。"
+    },
+    {
+      "id": "R370-20-C25-2",
+      "mastSystem": "2.3 m-RB",
+      "baseType": "crossBase",
+      "baseLabel": "6.0 m底架",
+      "freeStandingHeight": 63.1,
+      "heightByJib": null,
+      "heightStatus": "sample-footnote-review-required",
+      "note": "部分最大高度仅适用于样本脚注规定的臂长范围，正式工程应按原样本复核。"
+    },
+    {
+      "id": "R370-20-C25-3",
+      "mastSystem": "2.3 m-RB",
+      "baseType": "crossBase",
+      "baseLabel": "8.0 m底架",
+      "freeStandingHeight": 65.7,
+      "heightByJib": null,
+      "heightStatus": "sample-footnote-review-required",
+      "note": "部分最大高度仅适用于样本脚注规定的臂长范围，正式工程应按原样本复核。"
+    }
+  ]
+}

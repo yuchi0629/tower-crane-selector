@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "model": "R135-8",
+  "windCondition": "D50",
+  "assumedDefault": false,
+  "heightTerm": "HUH",
+  "source": {
+    "file": "R135-8_EN14439_C25-D50_2026_R_英德法意西葡波0710.pdf",
+    "pages": [
+      2,
+      3
+    ],
+    "status": "confirmed"
+  },
+  "configurations": [
+    {
+      "id": "R135-8-D50-1",
+      "mastSystem": "1.65 m-RA",
+      "baseType": "fixed",
+      "baseLabel": "支腿基础",
+      "freeStandingHeight": 44.3,
+      "heightByJib": null,
+      "heightStatus": "confirmed",
+      "note": null
+    },
+    {
+      "id": "R135-8-D50-2",
+      "mastSystem": "1.65 m-RA",
+      "baseType": "crossBase",
+      "baseLabel": "4.5 m底架",
+      "freeStandingHeight": 40.4,
+      "heightByJib": null,
+      "heightStatus": "confirmed",
+      "note": null
+    }
+  ]
+}

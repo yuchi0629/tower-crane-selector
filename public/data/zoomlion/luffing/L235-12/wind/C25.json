@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "model": "L235-12",
+  "windCondition": "C25",
+  "assumedDefault": true,
+  "heightTerm": "H",
+  "source": {
+    "file": "06-L235-12 海外通用.pdf",
+    "pages": [
+      2
+    ],
+    "status": "confirmed"
+  },
+  "configurations": [
+    {
+      "id": "L235-12-C25-1",
+      "mastSystem": "2.0 m-L68A",
+      "baseType": "fixed",
+      "baseLabel": "F20P65A",
+      "freeStandingHeight": null,
+      "heightByJib": {
+        "30": 48.15,
+        "35": 48.15,
+        "40": 45.15,
+        "45": 42.15,
+        "50": 42.15,
+        "55": 39.15,
+        "60": 39.15
+      },
+      "heightStatus": "confirmed",
+      "note": null
+    },
+    {
+      "id": "L235-12-C25-2",
+      "mastSystem": "2.0 m-L69",
+      "baseType": "fixed",
+      "baseLabel": "F20P65A",
+      "freeStandingHeight": null,
+      "heightByJib": {
+        "30": 46.65,
+        "35": 46.65,
+        "40": 43.65,
+        "45": 43.65,
+        "50": 40.65,
+        "55": 37.65,
+        "60": 37.65
+      },
+      "heightStatus": "confirmed",
+      "note": null
+    }
+  ]
+}

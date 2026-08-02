@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "model": "R220-10",
+  "windCondition": "D50",
+  "assumedDefault": false,
+  "heightTerm": "HUH",
+  "source": {
+    "file": "R220-10_EN14439_C25_2026_R_英德法意西葡波_20260709.pdf",
+    "pages": [
+      2,
+      3
+    ],
+    "status": "confirmed"
+  },
+  "configurations": [
+    {
+      "id": "R220-10-D50-1",
+      "mastSystem": "1.65 m-RA",
+      "baseType": "fixed",
+      "baseLabel": "支腿基础",
+      "freeStandingHeight": 44.3,
+      "heightByJib": null,
+      "heightStatus": "sample-footnote-review-required",
+      "note": "部分最大高度仅适用于样本脚注规定的臂长，正式工程应按原样本复核。"
+    },
+    {
+      "id": "R220-10-D50-2",
+      "mastSystem": "1.65 m-RA",
+      "baseType": "crossBase",
+      "baseLabel": "4.5 m底架 DJ-45D",
+      "freeStandingHeight": 40.4,
+      "heightByJib": null,
+      "heightStatus": "sample-footnote-review-required",
+      "note": "部分最大高度仅适用于样本脚注规定的臂长，正式工程应按原样本复核。"
+    },
+    {
+      "id": "R220-10-D50-3",
+      "mastSystem": "1.65 m-RA",
+      "baseType": "crossBase",
+      "baseLabel": "6.0 m底架 DJ-60",
+      "freeStandingHeight": 46.1,
+      "heightByJib": null,
+      "heightStatus": "sample-footnote-review-required",
+      "note": "部分最大高度仅适用于样本脚注规定的臂长，正式工程应按原样本复核。"
+    }
+  ]
+}

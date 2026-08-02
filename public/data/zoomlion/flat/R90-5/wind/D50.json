@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "model": "R90-5",
+  "windCondition": "D50",
+  "assumedDefault": false,
+  "heightTerm": "HUH",
+  "source": {
+    "file": "R90-5_EN14439_C25_2025_R_英德法意西葡波0708.pdf",
+    "pages": [
+      2,
+      3
+    ],
+    "status": "confirmed"
+  },
+  "configurations": [
+    {
+      "id": "R90-5-D50-1",
+      "mastSystem": "1.15 m-RE",
+      "baseType": "fixed",
+      "baseLabel": "支腿基础",
+      "freeStandingHeight": 36.3,
+      "heightByJib": null,
+      "heightStatus": "confirmed",
+      "note": null
+    },
+    {
+      "id": "R90-5-D50-2",
+      "mastSystem": "1.15 m-RE",
+      "baseType": "crossBase",
+      "baseLabel": "3.8 m底架",
+      "freeStandingHeight": 38.2,
+      "heightByJib": null,
+      "heightStatus": "confirmed",
+      "note": null
+    }
+  ]
+}

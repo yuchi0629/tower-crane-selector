@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "model": "R275-12",
+  "windCondition": "C50",
+  "assumedDefault": false,
+  "heightTerm": "HUH",
+  "source": {
+    "file": "R275-12_EN14439_C25-D50_2026_R_英德法意西葡波_20260718.pdf",
+    "pages": [
+      2,
+      3
+    ],
+    "status": "confirmed"
+  },
+  "configurations": [
+    {
+      "id": "R275-12-C50-1",
+      "mastSystem": "2.3 m-RB",
+      "baseType": "fixed",
+      "baseLabel": "支腿基础",
+      "freeStandingHeight": 67.15,
+      "heightByJib": null,
+      "heightStatus": "confirmed",
+      "note": null
+    },
+    {
+      "id": "R275-12-C50-2",
+      "mastSystem": "2.3 m-RB",
+      "baseType": "crossBase",
+      "baseLabel": "6.0 m底架",
+      "freeStandingHeight": 57.55,
+      "heightByJib": null,
+      "heightStatus": "confirmed",
+      "note": null
+    }
+  ]
+}

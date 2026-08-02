@@ -1,0 +1,976 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "model": "R335-16",
+  "condition": "superlift",
+  "source": {
+    "file": "R335-16_EN14439_C25-D50_2026_R_英德法意西葡波.pdf",
+    "pages": [
+      4,
+      5
+    ],
+    "status": "confirmed"
+  },
+  "rows": [
+    {
+      "jibLength": 75,
+      "trolleyMode": "单小车",
+      "reeving": 2,
+      "minRadius": 5.2,
+      "maxLoadRadius": 37.3,
+      "maxLoad": 8,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 8
+        },
+        {
+          "radius": 15,
+          "capacity": 8
+        },
+        {
+          "radius": 20,
+          "capacity": 8
+        },
+        {
+          "radius": 25,
+          "capacity": 8
+        },
+        {
+          "radius": 30,
+          "capacity": 8
+        },
+        {
+          "radius": 35,
+          "capacity": 8
+        },
+        {
+          "radius": 40,
+          "capacity": 7.36
+        },
+        {
+          "radius": 45,
+          "capacity": 6.41
+        },
+        {
+          "radius": 50,
+          "capacity": 5.65
+        },
+        {
+          "radius": 55,
+          "capacity": 5.03
+        },
+        {
+          "radius": 60,
+          "capacity": 4.52
+        },
+        {
+          "radius": 65,
+          "capacity": 4.09
+        },
+        {
+          "radius": 70,
+          "capacity": 3.72
+        },
+        {
+          "radius": 75,
+          "capacity": 3.4
+        }
+      ]
+    },
+    {
+      "jibLength": 75,
+      "trolleyMode": "双小车",
+      "reeving": 4,
+      "minRadius": 4.2,
+      "maxLoadRadius": 19.5,
+      "maxLoad": 16,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 16
+        },
+        {
+          "radius": 15,
+          "capacity": 16
+        },
+        {
+          "radius": 20,
+          "capacity": 15.56
+        },
+        {
+          "radius": 25,
+          "capacity": 11.91
+        },
+        {
+          "radius": 30,
+          "capacity": 9.54
+        },
+        {
+          "radius": 35,
+          "capacity": 7.87
+        },
+        {
+          "radius": 40,
+          "capacity": 6.63
+        },
+        {
+          "radius": 45,
+          "capacity": 5.67
+        },
+        {
+          "radius": 50,
+          "capacity": 4.92
+        },
+        {
+          "radius": 55,
+          "capacity": 4.3
+        },
+        {
+          "radius": 60,
+          "capacity": 3.79
+        },
+        {
+          "radius": 65,
+          "capacity": 3.35
+        },
+        {
+          "radius": 70,
+          "capacity": 2.98
+        },
+        {
+          "radius": 75,
+          "capacity": 2.66
+        }
+      ]
+    },
+    {
+      "jibLength": 70,
+      "trolleyMode": "单小车",
+      "reeving": 2,
+      "minRadius": 5.2,
+      "maxLoadRadius": 39.9,
+      "maxLoad": 8,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 8
+        },
+        {
+          "radius": 15,
+          "capacity": 8
+        },
+        {
+          "radius": 20,
+          "capacity": 8
+        },
+        {
+          "radius": 25,
+          "capacity": 8
+        },
+        {
+          "radius": 30,
+          "capacity": 8
+        },
+        {
+          "radius": 35,
+          "capacity": 8
+        },
+        {
+          "radius": 40,
+          "capacity": 7.97
+        },
+        {
+          "radius": 45,
+          "capacity": 6.94
+        },
+        {
+          "radius": 50,
+          "capacity": 6.13
+        },
+        {
+          "radius": 55,
+          "capacity": 5.47
+        },
+        {
+          "radius": 60,
+          "capacity": 4.92
+        },
+        {
+          "radius": 65,
+          "capacity": 4.45
+        },
+        {
+          "radius": 70,
+          "capacity": 4.06
+        }
+      ]
+    },
+    {
+      "jibLength": 70,
+      "trolleyMode": "双小车",
+      "reeving": 4,
+      "minRadius": 4.2,
+      "maxLoadRadius": 20.9,
+      "maxLoad": 16,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 16
+        },
+        {
+          "radius": 15,
+          "capacity": 16
+        },
+        {
+          "radius": 20,
+          "capacity": 16
+        },
+        {
+          "radius": 25,
+          "capacity": 12.9
+        },
+        {
+          "radius": 30,
+          "capacity": 10.36
+        },
+        {
+          "radius": 35,
+          "capacity": 8.56
+        },
+        {
+          "radius": 40,
+          "capacity": 7.24
+        },
+        {
+          "radius": 45,
+          "capacity": 6.21
+        },
+        {
+          "radius": 50,
+          "capacity": 5.4
+        },
+        {
+          "radius": 55,
+          "capacity": 4.73
+        },
+        {
+          "radius": 60,
+          "capacity": 4.18
+        },
+        {
+          "radius": 65,
+          "capacity": 3.72
+        },
+        {
+          "radius": 70,
+          "capacity": 3.32
+        }
+      ]
+    },
+    {
+      "jibLength": 65,
+      "trolleyMode": "单小车",
+      "reeving": 2,
+      "minRadius": 5.2,
+      "maxLoadRadius": 41.7,
+      "maxLoad": 8,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 8
+        },
+        {
+          "radius": 15,
+          "capacity": 8
+        },
+        {
+          "radius": 20,
+          "capacity": 8
+        },
+        {
+          "radius": 25,
+          "capacity": 8
+        },
+        {
+          "radius": 30,
+          "capacity": 8
+        },
+        {
+          "radius": 35,
+          "capacity": 8
+        },
+        {
+          "radius": 40,
+          "capacity": 8
+        },
+        {
+          "radius": 45,
+          "capacity": 7.33
+        },
+        {
+          "radius": 50,
+          "capacity": 6.48
+        },
+        {
+          "radius": 55,
+          "capacity": 5.78
+        },
+        {
+          "radius": 60,
+          "capacity": 5.2
+        },
+        {
+          "radius": 65,
+          "capacity": 4.72
+        }
+      ]
+    },
+    {
+      "jibLength": 65,
+      "trolleyMode": "双小车",
+      "reeving": 4,
+      "minRadius": 4.2,
+      "maxLoadRadius": 21.8,
+      "maxLoad": 16,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 16
+        },
+        {
+          "radius": 15,
+          "capacity": 16
+        },
+        {
+          "radius": 20,
+          "capacity": 16
+        },
+        {
+          "radius": 25,
+          "capacity": 13.61
+        },
+        {
+          "radius": 30,
+          "capacity": 10.94
+        },
+        {
+          "radius": 35,
+          "capacity": 9.06
+        },
+        {
+          "radius": 40,
+          "capacity": 7.67
+        },
+        {
+          "radius": 45,
+          "capacity": 6.6
+        },
+        {
+          "radius": 50,
+          "capacity": 5.74
+        },
+        {
+          "radius": 55,
+          "capacity": 5.05
+        },
+        {
+          "radius": 60,
+          "capacity": 4.47
+        },
+        {
+          "radius": 65,
+          "capacity": 3.98
+        }
+      ]
+    },
+    {
+      "jibLength": 60,
+      "trolleyMode": "单小车",
+      "reeving": 2,
+      "minRadius": 5.2,
+      "maxLoadRadius": 43.6,
+      "maxLoad": 8,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 8
+        },
+        {
+          "radius": 15,
+          "capacity": 8
+        },
+        {
+          "radius": 20,
+          "capacity": 8
+        },
+        {
+          "radius": 25,
+          "capacity": 8
+        },
+        {
+          "radius": 30,
+          "capacity": 8
+        },
+        {
+          "radius": 35,
+          "capacity": 8
+        },
+        {
+          "radius": 40,
+          "capacity": 8
+        },
+        {
+          "radius": 45,
+          "capacity": 7.71
+        },
+        {
+          "radius": 50,
+          "capacity": 6.82
+        },
+        {
+          "radius": 55,
+          "capacity": 6.09
+        },
+        {
+          "radius": 60,
+          "capacity": 5.49
+        }
+      ]
+    },
+    {
+      "jibLength": 60,
+      "trolleyMode": "双小车",
+      "reeving": 4,
+      "minRadius": 4.2,
+      "maxLoadRadius": 22.7,
+      "maxLoad": 16,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 16
+        },
+        {
+          "radius": 15,
+          "capacity": 16
+        },
+        {
+          "radius": 20,
+          "capacity": 16
+        },
+        {
+          "radius": 25,
+          "capacity": 14.32
+        },
+        {
+          "radius": 30,
+          "capacity": 11.52
+        },
+        {
+          "radius": 35,
+          "capacity": 9.56
+        },
+        {
+          "radius": 40,
+          "capacity": 8.1
+        },
+        {
+          "radius": 45,
+          "capacity": 6.98
+        },
+        {
+          "radius": 50,
+          "capacity": 6.08
+        },
+        {
+          "radius": 55,
+          "capacity": 5.36
+        },
+        {
+          "radius": 60,
+          "capacity": 4.75
+        }
+      ]
+    },
+    {
+      "jibLength": 55,
+      "trolleyMode": "单小车",
+      "reeving": 2,
+      "minRadius": 5.2,
+      "maxLoadRadius": 43.9,
+      "maxLoad": 8,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 8
+        },
+        {
+          "radius": 15,
+          "capacity": 8
+        },
+        {
+          "radius": 20,
+          "capacity": 8
+        },
+        {
+          "radius": 25,
+          "capacity": 8
+        },
+        {
+          "radius": 30,
+          "capacity": 8
+        },
+        {
+          "radius": 35,
+          "capacity": 8
+        },
+        {
+          "radius": 40,
+          "capacity": 8
+        },
+        {
+          "radius": 45,
+          "capacity": 7.78
+        },
+        {
+          "radius": 50,
+          "capacity": 6.88
+        },
+        {
+          "radius": 55,
+          "capacity": 6.15
+        }
+      ]
+    },
+    {
+      "jibLength": 55,
+      "trolleyMode": "双小车",
+      "reeving": 4,
+      "minRadius": 4.2,
+      "maxLoadRadius": 22.9,
+      "maxLoad": 16,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 16
+        },
+        {
+          "radius": 15,
+          "capacity": 16
+        },
+        {
+          "radius": 20,
+          "capacity": 16
+        },
+        {
+          "radius": 25,
+          "capacity": 14.45
+        },
+        {
+          "radius": 30,
+          "capacity": 11.63
+        },
+        {
+          "radius": 35,
+          "capacity": 9.65
+        },
+        {
+          "radius": 40,
+          "capacity": 8.18
+        },
+        {
+          "radius": 45,
+          "capacity": 7.05
+        },
+        {
+          "radius": 50,
+          "capacity": 6.15
+        },
+        {
+          "radius": 55,
+          "capacity": 5.41
+        }
+      ]
+    },
+    {
+      "jibLength": 50,
+      "trolleyMode": "单小车",
+      "reeving": 2,
+      "minRadius": 5.2,
+      "maxLoadRadius": 47.1,
+      "maxLoad": 8,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 8
+        },
+        {
+          "radius": 15,
+          "capacity": 8
+        },
+        {
+          "radius": 20,
+          "capacity": 8
+        },
+        {
+          "radius": 25,
+          "capacity": 8
+        },
+        {
+          "radius": 30,
+          "capacity": 8
+        },
+        {
+          "radius": 35,
+          "capacity": 8
+        },
+        {
+          "radius": 40,
+          "capacity": 8
+        },
+        {
+          "radius": 45,
+          "capacity": 8
+        },
+        {
+          "radius": 50,
+          "capacity": 7.47
+        }
+      ]
+    },
+    {
+      "jibLength": 50,
+      "trolleyMode": "双小车",
+      "reeving": 4,
+      "minRadius": 4.2,
+      "maxLoadRadius": 24.5,
+      "maxLoad": 16,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 16
+        },
+        {
+          "radius": 15,
+          "capacity": 16
+        },
+        {
+          "radius": 20,
+          "capacity": 16
+        },
+        {
+          "radius": 25,
+          "capacity": 15.65
+        },
+        {
+          "radius": 30,
+          "capacity": 12.63
+        },
+        {
+          "radius": 35,
+          "capacity": 10.5
+        },
+        {
+          "radius": 40,
+          "capacity": 8.92
+        },
+        {
+          "radius": 45,
+          "capacity": 7.7
+        },
+        {
+          "radius": 50,
+          "capacity": 6.73
+        }
+      ]
+    },
+    {
+      "jibLength": 45,
+      "trolleyMode": "单小车",
+      "reeving": 2,
+      "minRadius": 5.2,
+      "maxLoadRadius": 45,
+      "maxLoad": 8,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 8
+        },
+        {
+          "radius": 15,
+          "capacity": 8
+        },
+        {
+          "radius": 20,
+          "capacity": 8
+        },
+        {
+          "radius": 25,
+          "capacity": 8
+        },
+        {
+          "radius": 30,
+          "capacity": 8
+        },
+        {
+          "radius": 35,
+          "capacity": 8
+        },
+        {
+          "radius": 40,
+          "capacity": 8
+        },
+        {
+          "radius": 45,
+          "capacity": 8
+        }
+      ]
+    },
+    {
+      "jibLength": 45,
+      "trolleyMode": "双小车",
+      "reeving": 4,
+      "minRadius": 4.2,
+      "maxLoadRadius": 25.1,
+      "maxLoad": 16,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 16
+        },
+        {
+          "radius": 15,
+          "capacity": 16
+        },
+        {
+          "radius": 20,
+          "capacity": 16
+        },
+        {
+          "radius": 25,
+          "capacity": 16
+        },
+        {
+          "radius": 30,
+          "capacity": 13
+        },
+        {
+          "radius": 35,
+          "capacity": 10.81
+        },
+        {
+          "radius": 40,
+          "capacity": 9.19
+        },
+        {
+          "radius": 45,
+          "capacity": 7.94
+        }
+      ]
+    },
+    {
+      "jibLength": 40,
+      "trolleyMode": "单小车",
+      "reeving": 2,
+      "minRadius": 5.2,
+      "maxLoadRadius": 40,
+      "maxLoad": 8,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 8
+        },
+        {
+          "radius": 15,
+          "capacity": 8
+        },
+        {
+          "radius": 20,
+          "capacity": 8
+        },
+        {
+          "radius": 25,
+          "capacity": 8
+        },
+        {
+          "radius": 30,
+          "capacity": 8
+        },
+        {
+          "radius": 35,
+          "capacity": 8
+        },
+        {
+          "radius": 40,
+          "capacity": 8
+        }
+      ]
+    },
+    {
+      "jibLength": 40,
+      "trolleyMode": "双小车",
+      "reeving": 4,
+      "minRadius": 4.2,
+      "maxLoadRadius": 26,
+      "maxLoad": 16,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 16
+        },
+        {
+          "radius": 15,
+          "capacity": 16
+        },
+        {
+          "radius": 20,
+          "capacity": 16
+        },
+        {
+          "radius": 25,
+          "capacity": 16
+        },
+        {
+          "radius": 30,
+          "capacity": 13.54
+        },
+        {
+          "radius": 35,
+          "capacity": 11.27
+        },
+        {
+          "radius": 40,
+          "capacity": 9.59
+        }
+      ]
+    },
+    {
+      "jibLength": 35,
+      "trolleyMode": "单小车",
+      "reeving": 2,
+      "minRadius": 5.2,
+      "maxLoadRadius": 35,
+      "maxLoad": 8,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 8
+        },
+        {
+          "radius": 15,
+          "capacity": 8
+        },
+        {
+          "radius": 20,
+          "capacity": 8
+        },
+        {
+          "radius": 25,
+          "capacity": 8
+        },
+        {
+          "radius": 30,
+          "capacity": 8
+        },
+        {
+          "radius": 35,
+          "capacity": 8
+        }
+      ]
+    },
+    {
+      "jibLength": 35,
+      "trolleyMode": "双小车",
+      "reeving": 4,
+      "minRadius": 4.2,
+      "maxLoadRadius": 26,
+      "maxLoad": 16,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 16
+        },
+        {
+          "radius": 15,
+          "capacity": 16
+        },
+        {
+          "radius": 20,
+          "capacity": 16
+        },
+        {
+          "radius": 25,
+          "capacity": 16
+        },
+        {
+          "radius": 30,
+          "capacity": 13.5
+        },
+        {
+          "radius": 35,
+          "capacity": 11.24
+        }
+      ]
+    },
+    {
+      "jibLength": 30,
+      "trolleyMode": "单小车",
+      "reeving": 2,
+      "minRadius": 5.2,
+      "maxLoadRadius": 30,
+      "maxLoad": 8,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 8
+        },
+        {
+          "radius": 15,
+          "capacity": 8
+        },
+        {
+          "radius": 20,
+          "capacity": 8
+        },
+        {
+          "radius": 25,
+          "capacity": 8
+        },
+        {
+          "radius": 30,
+          "capacity": 8
+        }
+      ]
+    },
+    {
+      "jibLength": 30,
+      "trolleyMode": "双小车",
+      "reeving": 4,
+      "minRadius": 4.2,
+      "maxLoadRadius": 25.3,
+      "maxLoad": 16,
+      "points": [
+        {
+          "radius": 10,
+          "capacity": 16
+        },
+        {
+          "radius": 15,
+          "capacity": 16
+        },
+        {
+          "radius": 20,
+          "capacity": 16
+        },
+        {
+          "radius": 25,
+          "capacity": 16
+        },
+        {
+          "radius": 30,
+          "capacity": 13.11
+        }
+      ]
+    }
+  ]
+}

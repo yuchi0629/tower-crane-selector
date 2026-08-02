@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "brand": "Zoomlion",
+  "code": "R335-16",
+  "type": "flat",
+  "maxLoad": 16,
+  "maxJibLength": 75,
+  "jibStep": 5,
+  "jibLengths": [
+    75,
+    70,
+    65,
+    60,
+    55,
+    50,
+    45,
+    40,
+    35,
+    30
+  ],
+  "heightTerm": "HUH",
+  "mastSystems": [
+    "2.3 m-RB"
+  ],
+  "windConditions": [
+    "C25",
+    "C50",
+    "D25",
+    "D50"
+  ],
+  "defaultWindCondition": null,
+  "operatingConditions": [
+    "ordinary",
+    "superlift"
+  ],
+  "source": {
+    "file": "R335-16_EN14439_C25-D50_2026_R_英德法意西葡波.pdf",
+    "edition": "2026",
+    "standard": "EN 14439",
+    "pages": {
+      "performance": [
+        4,
+        5
+      ],
+      "height": [
+        2,
+        3
+      ]
+    },
+    "status": "confirmed"
+  },
+  "notes": [],
+  "files": {
+    "ordinaryPerformance": "./performance/ordinary.json",
+    "superliftPerformance": "./performance/superlift.json",
+    "windDirectory": "./wind/"
+  }
+}
