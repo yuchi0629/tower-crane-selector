@@ -1,24 +1,72 @@
 # Design QA
 
-## 2026-08-03知识库重构验收
+## Evidence
 
-- 数据：仅包含塔机专家知识库中7个已确认中联型号。
-- 数据结构：按塔机类型、型号、性能工况和风压版本拆分为独立JSON。
-- 选型逻辑：算法与页面分离，普通工况优先，最长可满足臂长优先。
-- 配置完整性：风压、塔身、基础、臂长、倍率和工况不跨配置拼接。
-- 非表格幅度：较大幅度档满足则确认满足；较小幅度档不满足则确认不满足；临界区返回不能确定。
-- 动臂高度：L235-12使用塔身高度H和所选动臂长度，不套用平臂HUH。
-- 动态输入：幅度、起重量和高度上限均由当前型号筛选结果计算。
-- 运行依赖：Vite打包本地源码，不再从unpkg加载React、ReactDOM或Babel。
+- Source visual truth: `C:\Users\13973\AppData\Local\Temp\tower-crane-selector-qa-20260801-evidence\source-desktop.png`
+- Implementation screenshot: `C:\Users\13973\AppData\Local\Temp\tower-crane-selector-qa-20260801-evidence\implementation-desktop.png`
+- Mobile source: `C:\Users\13973\AppData\Local\Temp\tower-crane-selector-qa-20260801-evidence\source-mobile.png`
+- Mobile implementation: `C:\Users\13973\AppData\Local\Temp\tower-crane-selector-qa-20260801-evidence\implementation-mobile.png`
+- Desktop viewport: 1280 × 720 CSS px; full-page captures: 1264 × 1173 px; device scale factor 1.
+- Mobile viewport: 390 × 844 CSS px; full-page captures: 374 × 1697 px; device scale factor 1.
+- State: default Chinese selector state at 50 m, 6 t, height unchecked, attachment allowed, all crane types, all foundations.
 
-## 自动验证
+## Full-view comparison
 
-- `npm test`：11项通过。
-- `npm run build`：通过。
-- 桌面检查：1280 px宽度，7个型号加载正常，无控制台警告或错误。
-- 交互检查：动臂筛选后仅显示L235-12，输入上限自动变为60 m、12 t、49 m。
-- 性能检查：R220-10在48 m、3 t时选择65 m臂普通工况，并按50 m右侧档位保守取值。
-- 工况检查：R220-10在65 m、2.3 t时普通工况不能满足，超起工况满足。
-- 手机检查：390 × 844视口无横向溢出，`scrollWidth=375 < innerWidth=390`。
-- 首屏检查：HTML立即显示加载状态；分层JSON在构建时打包，线上不再等待46个运行时JSON请求。
-- 最终结果：通过。
+The source and implementation were captured at matching desktop and mobile viewports and reviewed together. The cloned source, layout, typography, colors, borders, radii, SVG crane illustration, controls, result cards, copy, and fixed mobile-width behavior match the reference. No actionable P0/P1/P2 difference was found.
+
+## Focused comparison
+
+No separate crop was needed because the source and implementation use the same self-contained `index.html`, and all important control labels and primary panels were readable in the matching full-page captures. The performance-curve and comparison states were also captured from the source and exercised in the implementation.
+
+## Required fidelity surfaces
+
+- Fonts and typography: matching `Noto Sans SC`, `PingFang SC`, `Microsoft YaHei`, sans-serif stack, weights, sizes, wrapping, and hierarchy.
+- Spacing and layout rhythm: matching desktop grid, card spacing, control sizing, radii, shadows, fixed navigation, and original mobile clipping behavior.
+- Colors and visual tokens: matching green, neutral backgrounds, borders, active states, and semantic emphasis.
+- Image quality and asset fidelity: all visible crane, curve, and comparison graphics use the original embedded SVG implementation; no placeholder or approximate replacement assets.
+- Copy and content: matching Chinese labels, engineering notes, model data, result text, and exclusion guidance.
+
+## Interaction verification
+
+- Opened “查看性能曲线” and confirmed the curve page rendered.
+- Added the recommended crane to comparison.
+- Opened “对比 1” and confirmed the model comparison page rendered.
+- Returned to “选型”.
+- Checked browser console warnings and errors: none.
+- Ran the production build successfully.
+
+## Comparison history
+
+- First pass: no P0/P1/P2 mismatch; no visual fixes required.
+
+## Findings
+
+- No actionable P0/P1/P2 findings.
+
+## Follow-up polish
+
+- The original site uses a fixed minimum width on mobile and is horizontally clipped at 390 px. This is intentionally retained for source fidelity.
+
+## Brand update — 2026-08-01
+
+- Visual source: `C:\Users\13973\Documents\中联塔机报价单程序\参考文件\zoomlion.png`
+- Implementation screenshot: `C:\Users\13973\AppData\Local\Temp\tower-crane-selector-brand-update.png`
+- Viewport: 1280 × 720 CSS px; device scale factor 1.
+- Verified the supplied 108 × 31 px logo renders at 110 × 31 CSS px in the header.
+- Replaced the primary and dark green accent tokens in the main and animated pages with `#AADB1E`.
+- Opened the selector and performance-curve states successfully.
+- Browser console warnings and errors: none in a fresh verification tab.
+- Production build: passed.
+
+## Drag performance update — 2026-08-01
+
+- Coalesced radius and height pointer updates.
+- Limited expensive result recomputation to about 30 updates/second on desktop and 12 updates/second on coarse-pointer/mobile devices.
+- Skipped duplicate state updates when the snapped radius or height value did not change.
+- Flushed the final pending value immediately when diagram dragging ends.
+- Verified radius and height range controls update to new values.
+- Verified rapid mobile-width updates at a 390 × 844 viewport.
+- Verified browser console warnings and errors: none.
+- Production build: passed.
+
+final result: passed

@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>塔机智能选型 · Tower Crane Selector</title>
+</head>
+<body>
+<style>
+:root{
+  --bg:#F5F6F2; --surface:#FFFFFF; --ink:#20261D; --muted:#67705F; --line:#E1E5DA;
+  --accent:#4E8A1D; --accent-soft:#EAF3DD; --accent-ink:#33610F;
+  --s2:#2F6FB3; --s2-soft:#E3EEF8;
+  --bad:#B4423A; --bad-soft:#F7E7E5; --warn:#9A7B00; --warn-soft:#F6EFD8;
+  --radius:10px; --shadow:0 1px 3px rgba(32,38,29,.08);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#171A14; --surface:#20251C; --ink:#E9EDE3; --muted:#99A28D; --line:#333A2C;
+  --accent:#6FA337; --accent-soft:#2A3520; --accent-ink:#A9D06E;
+  --s2:#5896CF; --s2-soft:#1F2C3A;
+  --bad:#D97A72; --bad-soft:#3A2422; --warn:#CBAA3C; --warn-soft:#35301C;
+  --shadow:0 1px 3px rgba(0,0,0,.35);
+}}
+:root[data-theme="dark"]{
+  --bg:#171A14; --surface:#20251C; --ink:#E9EDE3; --muted:#99A28D; --line:#333A2C;
+  --accent:#6FA337; --accent-soft:#2A3520; --accent-ink:#A9D06E;
+  --s2:#5896CF; --s2-soft:#1F2C3A;
+  --bad:#D97A72; --bad-soft:#3A2422; --warn:#CBAA3C; --warn-soft:#35301C;
+  --shadow:0 1px 3px rgba(0,0,0,.35);
+}
+:root[data-theme="light"]{
+  --bg:#F5F6F2; --surface:#FFFFFF; --ink:#20261D; --muted:#67705F; --line:#E1E5DA;
+  --accent:#4E8A1D; --accent-soft:#EAF3DD; --accent-ink:#33610F;
+  --s2:#2F6FB3; --s2-soft:#E3EEF8;
+  --bad:#B4423A; --bad-soft:#F7E7E5; --warn:#9A7B00; --warn-soft:#F6EFD8;
+  --shadow:0 1px 3px rgba(32,38,29,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+  font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;}
+.wrap{max-width:1100px;margin:0 auto;padding:0 14px 90px}
+header{position:sticky;top:0;z-index:30;background:var(--bg);border-bottom:1px solid var(--line);
+  padding:10px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+header .brand{font-weight:800;font-size:17px;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+header .brand .mark{width:22px;height:22px;border-radius:5px;background:var(--accent);position:relative;flex:none}
+header .brand .mark::after{content:"";position:absolute;left:5px;top:5px;right:5px;height:3px;background:var(--surface);border-radius:2px}
+header .brand .mark::before{content:"";position:absolute;left:9px;top:8px;width:4px;bottom:4px;background:var(--surface);border-radius:1px}
+header .sub{color:var(--muted);font-size:12px;flex:1 1 auto;min-width:120px}
+.langs{display:flex;gap:4px}
+.langs button{border:1px solid var(--line);background:var(--surface);color:var(--muted);
+  border-radius:7px;padding:4px 9px;font-size:12.5px;cursor:pointer;font-weight:600}
+.langs button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .langs button.on{color:#10150A}
+nav.tabs{display:flex;gap:6px;margin:14px 0 16px}
+nav.tabs button{flex:1;border:1px solid var(--line);background:var(--surface);color:var(--muted);
+  padding:9px 6px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer}
+nav.tabs button.on{border-color:var(--accent);color:var(--accent-ink);background:var(--accent-soft)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 16px;margin-bottom:14px}
+h2{font-size:15px;margin:0 0 10px;letter-spacing:.01em}
+h2 .hint{color:var(--muted);font-weight:400;font-size:12.5px;margin-left:6px}
+.grid2{display:grid;grid-template-columns:1fr;gap:0 22px}
+@media(min-width:840px){
+  .grid2{grid-template-columns:400px 1fr;align-items:start}
+  .grid2 .colL{position:sticky;top:64px}
+}
+.field{margin-bottom:14px}
+.field label{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--muted);font-weight:600;margin-bottom:4px}
+.field label output{color:var(--ink);font-size:16px;font-weight:800;font-variant-numeric:tabular-nums}
+.field input[type=range]{width:100%;accent-color:var(--accent);height:28px;margin:0}
+.rowline{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.rowline .num{width:86px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;
+  background:var(--bg);color:var(--ink);font-size:15px;font-variant-numeric:tabular-nums}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:var(--surface);color:var(--muted);padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.seg button.on{background:var(--accent-soft);color:var(--accent-ink)}
+.switch{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);font-weight:600;cursor:pointer;user-select:none}
+.switch input{accent-color:var(--accent);width:18px;height:18px}
+.count{font-size:13px;color:var(--muted);margin:2px 0 10px}
+.mcard{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);
+  border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 14px;margin-bottom:10px;cursor:pointer}
+.mcard:hover{border-color:var(--accent)}
+.mcard .top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.mcard .code{font-size:17px;font-weight:800;letter-spacing:-.01em}
+.chip{font-size:11.5px;font-weight:700;border-radius:20px;padding:2px 9px;background:var(--accent-soft);color:var(--accent-ink)}
+.chip.blue{background:var(--s2-soft);color:var(--s2)}
+.chip.gray{background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.chip.bad{background:var(--bad-soft);color:var(--bad)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.mcard .margin{margin-left:auto;text-align:right}
+.mcard .margin b{font-size:18px;color:var(--accent-ink);font-variant-numeric:tabular-nums}
+.mcard .lines{margin-top:6px;font-size:13.5px;color:var(--muted);display:grid;gap:2px}
+.mcard .lines b{color:var(--ink);font-variant-numeric:tabular-nums}
+.excl{opacity:.85}
+.excl .mcard{border-left-color:var(--bad);cursor:default}
+details.exclbox summary{cursor:pointer;color:var(--muted);font-size:13.5px;font-weight:600;margin:12px 0}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 13px;
+  border-radius:8px;font-size:13.5px;font-weight:700;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#10150A}
+.btn.small{padding:4px 10px;font-size:12.5px}
+.btn[disabled]{opacity:.45;cursor:default}
+/* detail */
+.detail-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.detail-head .code{font-size:22px;font-weight:800}
+.jibchips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.jibchips button{border:1px solid var(--line);background:var(--surface);color:var(--muted);
+  border-radius:8px;padding:5px 11px;font-size:13.5px;font-weight:700;cursor:pointer;font-variant-numeric:tabular-nums}
+.jibchips button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink)}
+.chartbox{position:relative;border:1px solid var(--line);border-radius:9px;background:var(--surface);
+  padding:6px 4px 2px;margin:8px 0 4px;overflow:hidden}
+.chartbox svg{display:block;width:100%;height:auto}
+.legend{display:flex;gap:14px;font-size:12.5px;color:var(--muted);margin:2px 4px 8px;flex-wrap:wrap}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+.tooltip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--line);
+  border-radius:8px;box-shadow:var(--shadow);padding:6px 10px;font-size:12.5px;display:none;z-index:5;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:10px}
+.kv .cell{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:8px 10px}
+.kv .cell .k{font-size:11.5px;color:var(--muted);font-weight:700;letter-spacing:.03em}
+.kv .cell .v{font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;margin-top:2px}
+.kv .cell .v small{font-weight:400;color:var(--muted)}
+.anchorsteps{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.anchorsteps span{font-size:12px;border:1px solid var(--line);background:var(--bg);border-radius:6px;
+  padding:2px 7px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.anchorsteps span.hit{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink);font-weight:700}
+.note{font-size:12.5px;color:var(--muted);margin-top:10px;padding-top:8px;border-top:1px dashed var(--line)}
+/* compare */
+.cmp-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
+.cmp-table th,.cmp-table td{border-bottom:1px solid var(--line);padding:7px 9px;text-align:left;font-variant-numeric:tabular-nums}
+.cmp-table th{color:var(--muted);font-size:12px;font-weight:700;white-space:nowrap}
+.cmp-table td.best{color:var(--accent-ink);font-weight:800}
+.cmp-table td .del{color:var(--bad);cursor:pointer;font-weight:700}
+.scrollx{overflow-x:auto}
+.empty{color:var(--muted);font-size:14px;padding:26px 10px;text-align:center}
+footer{color:var(--muted);font-size:12px;margin-top:26px;line-height:1.6}
+.backbtn{margin-bottom:10px}
+.datalist td,.datalist th{font-size:13px;border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+.datalist th{color:var(--muted)}
+.datalist{border-collapse:collapse;width:100%;min-width:520px}
+@media (prefers-reduced-motion: no-preference){
+  .mcard{transition:border-color .15s}
+}
+</style>
+<header>
+  <div class="brand"><span class="mark" aria-hidden="true"></span><span id="b-title">塔机智能选型</span></div>
+  <div class="sub" id="b-sub"></div>
+  <div class="langs" id="langs"></div>
+</header>
+<div class="wrap">
+  <nav class="tabs" id="tabs"></nav>
+  <main id="main">
+    <div class="card">
+      <h2>请用浏览器打开 / Open in a browser / Tarayıcıda açın</h2>
+      <p style="font-size:13.5px;color:var(--muted);line-height:1.7;margin:0">
+        如果你看到这段文字，说明当前预览器不运行网页脚本（iPhone 的文件/微信预览就是这种情况），工具无法启动。<br>
+        请把本文件保存后用真正的浏览器打开：电脑上双击即可；手机上建议使用托管网址访问（联系发送者获取链接）。<br>
+        If you can read this, the current viewer does not run JavaScript (e.g. iOS file preview). Open this file in a real browser, or use the hosted URL instead.<br>
+        Bu metni görüyorsanız, önizleyici JavaScript çalıştırmıyor. Dosyayı gerçek bir tarayıcıda açın veya barındırılan bağlantıyı kullanın.
+      </p>
+    </div>
+  </main>
+  <footer id="foot"></footer>
+</div>
+<script>
+// 数据来源：仓库内产品样本 PDF 自动提取 + 人工核对。以出厂样本为准。
+// Auto-extracted from catalog PDFs; verified against an independent extraction (181/181 rows).
+const CRANES = [{"code":"WA7527-20","series":"WA","kind":"flat","market":"cn+overseas","docLangs":"CN/EN/DE","tail":19.1,"tailAlt":16.5,"srcFile":"WA7527-20x.pdf","srcPage":3,"masts":[{"size":"2.0 m","huh":40.0}],"anchorSteps":null,"powerKw":"97.5 + 4×5.2","hoist":{"model":"H75FC50-880","kw":75,"rope":880},"luffing":null,"ballast":null,"maxLoad":20.0,"jibs":[{"len":75.0,"rows":[{"maxLoad":20.0,"maxLoadR":13.7,"minR":4.2,"pts":[[12.5,20.0],[15.0,18.0],[17.5,14.9],[20.0,12.7],[22.5,11.0],[25.0,9.7],[27.5,8.6],[30.0,7.7],[35.0,6.3],[40.0,5.3],[45.0,4.5],[50.0,3.9],[55.0,3.4],[60.0,2.9],[65.0,2.6],[70.0,2.3],[75.0,2.0]]},{"maxLoad":10.0,"maxLoadR":25.8,"minR":5.2,"pts":[[12.5,10.0],[15.0,10.0],[17.5,10.0],[20.0,10.0],[22.5,10.0],[25.0,10.0],[27.5,9.3],[30.0,8.4],[35.0,7.0],[40.0,6.0],[45.0,5.2],[50.0,4.6],[55.0,4.1],[60.0,3.6],[65.0,3.3],[70.0,3.0],[75.0,2.7]]}],"tip":2.7,"reach":75.0},{"len":70.0,"rows":[{"maxLoad":20.0,"maxLoadR":14.8,"minR":4.2,"pts":[[12.5,20.0],[15.0,19.6],[17.5,16.4],[20.0,14.0],[22.5,12.1],[25.0,10.7],[27.5,9.5],[30.0,8.5],[35.0,7.0],[40.0,5.9],[45.0,5.0],[50.0,4.3],[55.0,3.8],[60.0,3.3],[65.0,2.9],[70.0,2.6]]},{"maxLoad":10.0,"maxLoadR":27.9,"minR":5.2,"pts":[[12.5,10.0],[15.0,10.0],[17.5,10.0],[20.0,10.0],[22.5,10.0],[25.0,10.0],[27.5,10.0],[30.0,9.2],[35.0,7.7],[40.0,6.6],[45.0,5.7],[50.0,5.0],[55.0,4.5],[60.0,4.0],[65.0,3.6],[70.0,3.3]]}],"tip":3.3,"reach":70.0},{"len":65.0,"rows":[{"maxLoad":20.0,"maxLoadR":15.6,"minR":4.2,"pts":[[12.5,20.0],[15.0,20.0],[17.5,17.4],[20.0,14.9],[22.5,12.9],[25.0,11.4],[27.5,10.1],[30.0,9.1],[35.0,7.5],[40.0,6.3],[45.0,5.4],[50.0,4.7],[55.0,4.1],[60.0,3.6],[65.0,3.2]]},{"maxLoad":10.0,"maxLoadR":29.5,"minR":5.2,"pts":[[12.5,10.0],[15.0,10.0],[17.5,10.0],[20.0,10.0],[22.5,10.0],[25.0,10.0],[27.5,10.0],[30.0,9.8],[35.0,8.2],[40.0,7.0],[45.0,6.1],[50.0,5.4],[55.0,4.8],[60.0,4.3],[65.0,3.9]]}],"tip":3.9,"reach":65.0},{"len":60.0,"rows":[{"maxLoad":20.0,"maxLoadR":16.1,"minR":4.2,"pts":[[12.5,20.0],[15.0,20.0],[17.5,18.1],[20.0,15.4],[22.5,13.4],[25.0,11.8],[27.5,10.6],[30.0,9.5],[35.0,7.8],[40.0,6.6],[45.0,5.7],[50.0,4.9],[55.0,4.3],[60.0,3.8]]},{"maxLoad":10.0,"maxLoadR":30.5,"minR":5.2,"pts":[[12.5,10.0],[15.0,10.0],[17.5,10.0],[20.0,10.0],[22.5,10.0],[25.0,10.0],[27.5,10.0],[30.0,10.0],[35.0,8.5],[40.0,7.3],[45.0,6.4],[50.0,5.6],[55.0,5.0],[60.0,4.5]]}],"tip":4.5,"reach":60.0},{"len":55.0,"rows":[{"maxLoad":20.0,"maxLoadR":16.5,"minR":4.2,"pts":[[12.5,20.0],[15.0,20.0],[17.5,18.7],[20.0,16.0],[22.5,13.9],[25.0,12.3],[27.5,10.9],[30.0,9.9],[35.0,8.1],[40.0,6.9],[45.0,5.9],[50.0,5.1],[55.0,4.5]]},{"maxLoad":10.0,"maxLoadR":31.5,"minR":5.2,"pts":[[12.5,10.0],[15.0,10.0],[17.5,10.0],[20.0,10.0],[22.5,10.0],[25.0,10.0],[27.5,10.0],[30.0,10.0],[35.0,8.8],[40.0,7.6],[45.0,6.6],[50.0,5.8],[55.0,5.2]]}],"tip":5.2,"reach":55.0},{"len":50.0,"rows":[{"maxLoad":20.0,"maxLoadR":17.6,"minR":4.2,"pts":[[12.5,20.0],[15.0,20.0],[17.5,20.0],[20.0,17.2],[22.5,15.0],[25.0,13.2],[27.5,11.8],[30.0,10.6],[35.0,8.8],[40.0,7.5],[45.0,6.4],[50.0,5.6]]},{"maxLoad":10.0,"maxLoadR":33.5,"minR":5.2,"pts":[[12.5,10.0],[15.0,10.0],[17.5,10.0],[20.0,10.0],[22.5,10.0],[25.0,10.0],[27.5,10.0],[30.0,10.0],[35.0,9.5],[40.0,8.2],[45.0,7.1],[50.0,6.3]]}],"tip":6.3,"reach":50.0},{"len":45.0,"rows":[{"maxLoad":20.0,"maxLoadR":17.5,"minR":4.2,"pts":[[12.5,20.0],[15.0,20.0],[17.5,20.0],[20.0,17.2],[22.5,14.9],[25.0,13.2],[27.5,11.8],[30.0,10.6],[35.0,8.8],[40.0,7.4],[45.0,6.4]]},{"maxLoad":10.0,"maxLoadR":33.4,"minR":5.2,"pts":[[12.5,10.0],[15.0,10.0],[17.5,10.0],[20.0,10.0],[22.5,10.0],[25.0,10.0],[27.5,10.0],[30.0,10.0],[35.0,9.5],[40.0,8.1],[45.0,7.1]]}],"tip":7.1,"reach":45.0},{"len":40.0,"rows":[{"maxLoad":20.0,"maxLoadR":17.8,"minR":4.2,"pts":[[12.5,20.0],[15.0,20.0],[17.5,20.0],[20.0,17.5],[22.5,15.2],[25.0,13.5],[27.5,12.0],[30.0,10.8],[35.0,9.0],[40.0,7.6]]},{"maxLoad":10.0,"maxLoadR":34.0,"minR":5.2,"pts":[[12.5,10.0],[15.0,10.0],[17.5,10.0],[20.0,10.0],[22.5,10.0],[25.0,10.0],[27.5,10.0],[30.0,10.0],[35.0,9.7],[40.0,8.3]]}],"tip":8.3,"reach":40.0},{"len":35.0,"rows":[{"maxLoad":20.0,"maxLoadR":18.0,"minR":4.2,"pts":[[12.5,20.0],[15.0,20.0],[17.5,20.0],[20.0,17.7],[22.5,15.4],[25.0,13.6],[27.5,12.2],[30.0,11.0],[35.0,9.1]]},{"maxLoad":10.0,"maxLoadR":34.4,"minR":5.2,"pts":[[12.5,10.0],[15.0,10.0],[17.5,10.0],[20.0,10.0],[22.5,10.0],[25.0,10.0],[27.5,10.0],[30.0,10.0],[35.0,9.8]]}],"tip":9.8,"reach":35.0},{"len":30.0,"rows":[{"maxLoad":20.0,"maxLoadR":18.1,"minR":4.2,"pts":[[12.5,20.0],[15.0,20.0],[17.5,20.0],[20.0,17.8],[22.5,15.5],[25.0,13.7],[27.5,12.2],[30.0,11.0]]},{"maxLoad":10.0,"maxLoadR":30.0,"minR":5.2,"pts":[[12.5,10.0],[15.0,10.0],[17.5,10.0],[20.0,10.0],[22.5,10.0],[25.0,10.0],[27.5,10.0],[30.0,10.0]]}],"tip":11.0,"reach":30.0}]},{"code":"WA7527-16","series":"WA","kind":"flat","market":"overseas","docLangs":"CN/EN/DE","tail":19.1,"tailAlt":16.6,"srcFile":"WA7527-16(R+海外)-20251201.pdf","srcPage":3,"masts":[{"size":"2.0 m","huh":60.0}],"anchorSteps":null,"powerKw":"77.5 + 4×5.2","hoist":{"model":"H55FC40-880-b","kw":55,"rope":880},"luffing":null,"ballast":null,"maxLoad":16.0,"jibs":[{"len":75.0,"rows":[{"maxLoad":16.0,"maxLoadR":16.5,"minR":4.2,"pts":[[12.5,16.0],[15.0,16.0],[17.5,14.9],[20.0,12.7],[22.5,11.0],[25.0,9.7],[27.5,8.6],[30.0,7.7],[35.0,6.3],[40.0,5.3],[45.0,4.5],[50.0,3.9],[55.0,3.4],[60.0,2.9],[65.0,2.6],[70.0,2.3],[75.0,2.0]]},{"maxLoad":8.0,"maxLoadR":31.3,"minR":5.2,"pts":[[12.5,8.0],[15.0,8.0],[17.5,8.0],[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[35.0,7.0],[40.0,6.0],[45.0,5.2],[50.0,4.6],[55.0,4.1],[60.0,3.6],[65.0,3.3],[70.0,3.0],[75.0,2.7]]}],"tip":2.7,"reach":75.0},{"len":70.0,"rows":[{"maxLoad":16.0,"maxLoadR":17.8,"minR":4.2,"pts":[[12.5,16.0],[15.0,16.0],[17.5,16.0],[20.0,14.0],[22.5,12.1],[25.0,10.7],[27.5,9.5],[30.0,8.5],[35.0,7.0],[40.0,5.9],[45.0,5.0],[50.0,4.3],[55.0,3.8],[60.0,3.3],[65.0,2.9],[70.0,2.6]]},{"maxLoad":8.0,"maxLoadR":33.9,"minR":5.2,"pts":[[12.5,8.0],[15.0,8.0],[17.5,8.0],[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[35.0,7.7],[40.0,6.6],[45.0,5.7],[50.0,5.0],[55.0,4.5],[60.0,4.0],[65.0,3.6],[70.0,3.3]]}],"tip":3.3,"reach":70.0},{"len":65.0,"rows":[{"maxLoad":16.0,"maxLoadR":18.8,"minR":4.2,"pts":[[12.5,16.0],[15.0,16.0],[17.5,16.0],[20.0,14.9],[22.5,12.9],[25.0,11.4],[27.5,10.1],[30.0,9.1],[35.0,7.5],[40.0,6.3],[45.0,5.4],[50.0,4.7],[55.0,4.1],[60.0,3.6],[65.0,3.2]]},{"maxLoad":8.0,"maxLoadR":35.8,"minR":5.2,"pts":[[12.5,8.0],[15.0,8.0],[17.5,8.0],[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[35.0,8.0],[40.0,7.0],[45.0,6.1],[50.0,5.4],[55.0,4.8],[60.0,4.3],[65.0,3.9]]}],"tip":3.9,"reach":65.0},{"len":60.0,"rows":[{"maxLoad":16.0,"maxLoadR":19.4,"minR":4.2,"pts":[[12.5,16.0],[15.0,16.0],[17.5,16.0],[20.0,15.4],[22.5,13.4],[25.0,11.8],[27.5,10.6],[30.0,9.5],[35.0,7.8],[40.0,6.6],[45.0,5.7],[50.0,4.9],[55.0,4.3],[60.0,3.8]]},{"maxLoad":8.0,"maxLoadR":37.4,"minR":5.2,"pts":[[12.5,8.0],[15.0,8.0],[17.5,8.0],[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[35.0,8.0],[40.0,7.3],[45.0,6.4],[50.0,5.6],[55.0,5.0],[60.0,4.5]]}],"tip":4.5,"reach":60.0},{"len":55.0,"rows":[{"maxLoad":16.0,"maxLoadR":20.0,"minR":4.2,"pts":[[12.5,16.0],[15.0,16.0],[17.5,16.0],[20.0,16.0],[22.5,13.9],[25.0,12.3],[27.5,10.9],[30.0,9.9],[35.0,8.1],[40.0,6.9],[45.0,5.9],[50.0,5.1],[55.0,4.5]]},{"maxLoad":8.0,"maxLoadR":38.2,"minR":5.2,"pts":[[12.5,8.0],[15.0,8.0],[17.5,8.0],[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[35.0,8.0],[40.0,7.6],[45.0,6.6],[50.0,5.8],[55.0,5.2]]}],"tip":5.2,"reach":55.0},{"len":50.0,"rows":[{"maxLoad":16.0,"maxLoadR":21.3,"minR":4.2,"pts":[[12.5,16.0],[15.0,16.0],[17.5,16.0],[20.0,16.0],[22.5,15.0],[25.0,13.2],[27.5,11.8],[30.0,10.6],[35.0,8.8],[40.0,7.5],[45.0,6.4],[50.0,5.6]]},{"maxLoad":8.0,"maxLoadR":40.7,"minR":5.2,"pts":[[12.5,8.0],[15.0,8.0],[17.5,8.0],[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[35.0,8.0],[40.0,8.0],[45.0,7.1],[50.0,6.3]]}],"tip":6.3,"reach":50.0},{"len":45.0,"rows":[{"maxLoad":16.0,"maxLoadR":21.2,"minR":4.2,"pts":[[12.5,16.0],[15.0,16.0],[17.5,16.0],[20.0,16.0],[22.5,14.9],[25.0,13.2],[27.5,11.8],[30.0,10.6],[35.0,8.8],[40.0,7.4],[45.0,6.4]]},{"maxLoad":8.0,"maxLoadR":40.6,"minR":5.2,"pts":[[12.5,8.0],[15.0,8.0],[17.5,8.0],[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[35.0,8.0],[40.0,8.0],[45.0,7.1]]}],"tip":7.1,"reach":45.0},{"len":40.0,"rows":[{"maxLoad":16.0,"maxLoadR":21.6,"minR":4.2,"pts":[[12.5,16.0],[15.0,16.0],[17.5,16.0],[20.0,16.0],[22.5,15.2],[25.0,13.5],[27.5,12.0],[30.0,10.8],[35.0,9.0],[40.0,7.6]]},{"maxLoad":8.0,"maxLoadR":40.0,"minR":5.2,"pts":[[12.5,8.0],[15.0,8.0],[17.5,8.0],[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[35.0,8.0],[40.0,8.0]]}],"tip":8.0,"reach":40.0},{"len":35.0,"rows":[{"maxLoad":16.0,"maxLoadR":21.8,"minR":4.2,"pts":[[12.5,16.0],[15.0,16.0],[17.5,16.0],[20.0,16.0],[22.5,15.4],[25.0,13.6],[27.5,12.2],[30.0,11.0],[35.0,9.1]]},{"maxLoad":8.0,"maxLoadR":35.0,"minR":5.2,"pts":[[12.5,8.0],[15.0,8.0],[17.5,8.0],[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[35.0,8.0]]}],"tip":9.1,"reach":35.0},{"len":30.0,"rows":[{"maxLoad":16.0,"maxLoadR":21.9,"minR":4.2,"pts":[[12.5,16.0],[15.0,16.0],[17.5,16.0],[20.0,16.0],[22.5,15.5],[25.0,13.7],[27.5,12.2],[30.0,11.0]]},{"maxLoad":8.0,"maxLoadR":30.0,"minR":5.2,"pts":[[12.5,8.0],[15.0,8.0],[17.5,8.0],[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0]]}],"tip":11.0,"reach":30.0}]},{"code":"R275-12","series":"R","kind":"flat","market":"cn+overseas","docLangs":"CN/EN/DE","tail":17.6,"tailAlt":null,"srcFile":"R275-12x.pdf","srcPage":4,"masts":[{"size":"2.3 m","huh":70.0},{"size":"2.25 m","huh":70.0}],"anchorSteps":null,"powerKw":"65.5","hoist":{"model":"H45FC30-600A","kw":45,"rope":600},"luffing":null,"ballast":{"70":22.6,"65":21.3,"60":21.3,"55":21.3,"50":18.8,"45":18.8,"40":17.5,"35":14.5,"30":12.8},"maxLoad":12.0,"jibs":[{"len":70.0,"rows":[{"maxLoad":12.0,"maxLoadR":20.8,"minR":2.8,"pts":[[20.0,12.0],[25.0,9.66],[30.0,7.78],[35.0,6.46],[40.0,5.47],[45.0,4.71],[50.0,4.11],[55.0,3.61],[60.0,3.21],[65.0,2.86],[70.0,2.57]]},{"maxLoad":6.0,"maxLoadR":37.8,"minR":2.8,"pts":[[20.0,6.0],[25.0,6.0],[30.0,6.0],[35.0,6.0],[40.0,5.61],[45.0,4.85],[50.0,4.24],[55.0,3.71],[60.0,3.32],[65.0,2.98],[70.0,2.7]]}],"tip":2.7,"reach":70.0},{"len":65.0,"rows":[{"maxLoad":12.0,"maxLoadR":21.8,"minR":2.8,"pts":[[20.0,12.0],[25.0,10.21],[30.0,8.24],[35.0,6.84],[40.0,5.81],[45.0,5.01],[50.0,4.38],[55.0,3.86],[60.0,3.43],[65.0,3.07]]},{"maxLoad":6.0,"maxLoadR":39.7,"minR":2.8,"pts":[[20.0,6.0],[25.0,6.0],[30.0,6.0],[35.0,6.0],[40.0,5.94],[45.0,5.14],[50.0,4.51],[55.0,3.99],[60.0,3.56],[65.0,3.2]]}],"tip":3.2,"reach":65.0},{"len":60.0,"rows":[{"maxLoad":12.0,"maxLoadR":22.8,"minR":2.8,"pts":[[20.0,12.0],[25.0,10.8],[30.0,8.72],[35.0,7.26],[40.0,6.17],[45.0,5.33],[50.0,4.66],[55.0,4.12],[60.0,3.67]]},{"maxLoad":6.0,"maxLoadR":41.7,"minR":2.8,"pts":[[20.0,6.0],[25.0,6.0],[30.0,6.0],[35.0,6.0],[40.0,6.0],[45.0,5.46],[50.0,4.8],[55.0,4.25],[60.0,3.8]]}],"tip":3.8,"reach":60.0},{"len":55.0,"rows":[{"maxLoad":12.0,"maxLoadR":23.8,"minR":2.8,"pts":[[20.0,12.0],[25.0,11.36],[30.0,9.19],[35.0,7.65],[40.0,6.51],[45.0,5.63],[50.0,4.94],[55.0,4.37]]},{"maxLoad":6.0,"maxLoadR":43.6,"minR":2.8,"pts":[[20.0,6.0],[25.0,6.0],[30.0,6.0],[35.0,6.0],[40.0,6.0],[45.0,5.77],[50.0,5.07],[55.0,4.5]]}],"tip":4.5,"reach":55.0},{"len":50.0,"rows":[{"maxLoad":12.0,"maxLoadR":24.7,"minR":2.8,"pts":[[20.0,12.0],[25.0,11.83],[30.0,9.58],[35.0,7.99],[40.0,6.8],[45.0,5.89],[50.0,5.17]]},{"maxLoad":6.0,"maxLoadR":45.2,"minR":2.8,"pts":[[20.0,6.0],[25.0,6.0],[30.0,6.0],[35.0,6.0],[40.0,6.0],[45.0,6.0],[50.0,5.3]]}],"tip":5.3,"reach":50.0},{"len":45.0,"rows":[{"maxLoad":12.0,"maxLoadR":25.3,"minR":2.8,"pts":[[20.0,12.0],[25.0,12.0],[30.0,9.84],[35.0,8.21],[40.0,7.0],[45.0,6.07]]},{"maxLoad":6.0,"maxLoadR":45.0,"minR":2.8,"pts":[[20.0,6.0],[25.0,6.0],[30.0,6.0],[35.0,6.0],[40.0,6.0],[45.0,6.0]]}],"tip":6.07,"reach":45.0},{"len":40.0,"rows":[{"maxLoad":12.0,"maxLoadR":24.9,"minR":2.8,"pts":[[20.0,12.0],[25.0,11.94],[30.0,9.66],[35.0,8.06],[40.0,6.87]]},{"maxLoad":6.0,"maxLoadR":40.0,"minR":2.8,"pts":[[20.0,6.0],[25.0,6.0],[30.0,6.0],[35.0,6.0],[40.0,6.0]]}],"tip":6.87,"reach":40.0},{"len":35.0,"rows":[{"maxLoad":12.0,"maxLoadR":24.4,"minR":2.8,"pts":[[20.0,12.0],[25.0,11.66],[30.0,9.44],[35.0,7.87]]},{"maxLoad":6.0,"maxLoadR":35.0,"minR":2.8,"pts":[[20.0,6.0],[25.0,6.0],[30.0,6.0],[35.0,6.0]]}],"tip":7.87,"reach":35.0},{"len":30.0,"rows":[{"maxLoad":12.0,"maxLoadR":24.0,"minR":2.8,"pts":[[20.0,12.0],[25.0,11.46],[30.0,9.27]]},{"maxLoad":6.0,"maxLoadR":30.0,"minR":2.8,"pts":[[20.0,6.0],[25.0,6.0],[30.0,6.0]]}],"tip":9.27,"reach":30.0}]},{"code":"WA7025-12","series":"WA","kind":"flat","market":"cn+overseas","docLangs":"CN/EN/DE","tail":17.5,"tailAlt":null,"srcFile":"WA7025-12样本_20251201.pdf","srcPage":3,"masts":[{"size":"2.0 m","huh":60.0}],"anchorSteps":null,"powerKw":"65.5 + 2×5.2","hoist":{"model":"H45FC30-600C","kw":45,"rope":600},"luffing":null,"ballast":{"70":20.8,"65":19.5,"60":19.5,"55":19.5,"50":18.3,"45":17.8,"40":15.8,"35":14.0,"30":12.8},"maxLoad":12.0,"jibs":[{"len":70.0,"rows":[{"maxLoad":12.0,"maxLoadR":19.7,"minR":2.8,"pts":[[10.0,12.0],[12.5,12.0],[15.0,12.0],[17.5,12.0],[20.0,11.5],[22.5,10.0],[25.0,8.8],[27.5,7.9],[30.0,7.1],[35.0,5.9],[40.0,5.0],[45.0,4.4],[50.0,3.8],[55.0,3.4],[60.0,3.0],[65.0,2.7],[70.0,2.4]]},{"maxLoad":6.0,"maxLoadR":35.8,"minR":2.8,"pts":[[10.0,6.0],[12.5,6.0],[15.0,6.0],[17.5,6.0],[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0],[35.0,6.0],[40.0,5.1],[45.0,4.4],[50.0,3.9],[55.0,3.5],[60.0,3.1],[65.0,2.8],[70.0,2.5]]}],"tip":2.5,"reach":70.0},{"len":65.0,"rows":[{"maxLoad":12.0,"maxLoadR":21.3,"minR":2.8,"pts":[[10.0,12.0],[12.5,12.0],[15.0,12.0],[17.5,12.0],[20.0,12.0],[22.5,11.0],[25.0,9.7],[27.5,8.7],[30.0,7.9],[35.0,6.6],[40.0,5.6],[45.0,4.8],[50.0,4.2],[55.0,3.8],[60.0,3.3],[65.0,3.0]]},{"maxLoad":6.0,"maxLoadR":38.7,"minR":2.8,"pts":[[10.0,6.0],[12.5,6.0],[15.0,6.0],[17.5,6.0],[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0],[35.0,6.0],[40.0,5.7],[45.0,4.9],[50.0,4.3],[55.0,3.8],[60.0,3.4],[65.0,3.1]]}],"tip":3.1,"reach":65.0},{"len":60.0,"rows":[{"maxLoad":12.0,"maxLoadR":22.4,"minR":2.8,"pts":[[10.0,12.0],[12.5,12.0],[15.0,12.0],[17.5,12.0],[20.0,12.0],[22.5,11.7],[25.0,10.4],[27.5,9.3],[30.0,8.4],[35.0,7.0],[40.0,6.0],[45.0,5.2],[50.0,4.6],[55.0,4.0],[60.0,3.6]]},{"maxLoad":6.0,"maxLoadR":40.8,"minR":2.8,"pts":[[10.0,6.0],[12.5,6.0],[15.0,6.0],[17.5,6.0],[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0],[35.0,6.0],[40.0,6.0],[45.0,5.3],[50.0,4.6],[55.0,4.1],[60.0,3.7]]}],"tip":3.7,"reach":60.0},{"len":55.0,"rows":[{"maxLoad":12.0,"maxLoadR":23.4,"minR":2.8,"pts":[[10.0,12.0],[12.5,12.0],[15.0,12.0],[17.5,12.0],[20.0,12.0],[22.5,12.0],[25.0,11.0],[27.5,9.8],[30.0,8.9],[35.0,7.4],[40.0,6.4],[45.0,5.5],[50.0,4.9],[55.0,4.3]]},{"maxLoad":6.0,"maxLoadR":42.8,"minR":2.8,"pts":[[10.0,6.0],[12.5,6.0],[15.0,6.0],[17.5,6.0],[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0],[35.0,6.0],[40.0,6.0],[45.0,5.6],[50.0,4.9],[55.0,4.4]]}],"tip":4.4,"reach":55.0},{"len":50.0,"rows":[{"maxLoad":12.0,"maxLoadR":24.3,"minR":2.8,"pts":[[10.0,12.0],[12.5,12.0],[15.0,12.0],[17.5,12.0],[20.0,12.0],[22.5,12.0],[25.0,11.5],[27.5,10.3],[30.0,9.3],[35.0,7.8],[40.0,6.7],[45.0,5.8],[50.0,5.1]]},{"maxLoad":6.0,"maxLoadR":44.5,"minR":2.8,"pts":[[10.0,6.0],[12.5,6.0],[15.0,6.0],[17.5,6.0],[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0],[35.0,6.0],[40.0,6.0],[45.0,5.9],[50.0,5.2]]}],"tip":5.2,"reach":50.0},{"len":45.0,"rows":[{"maxLoad":12.0,"maxLoadR":25.0,"minR":2.8,"pts":[[10.0,12.0],[12.5,12.0],[15.0,12.0],[17.5,12.0],[20.0,12.0],[22.5,12.0],[25.0,11.9],[27.5,10.7],[30.0,9.7],[35.0,8.1],[40.0,6.9],[45.0,6.0]]},{"maxLoad":6.0,"maxLoadR":45.0,"minR":2.8,"pts":[[10.0,6.0],[12.5,6.0],[15.0,6.0],[17.5,6.0],[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0],[35.0,6.0],[40.0,6.0],[45.0,6.0]]}],"tip":6.0,"reach":45.0},{"len":40.0,"rows":[{"maxLoad":12.0,"maxLoadR":24.6,"minR":2.8,"pts":[[10.0,12.0],[12.5,12.0],[15.0,12.0],[17.5,12.0],[20.0,12.0],[22.5,12.0],[25.0,11.7],[27.5,10.5],[30.0,9.5],[35.0,8.0],[40.0,6.8]]},{"maxLoad":6.0,"maxLoadR":40.0,"minR":2.8,"pts":[[10.0,6.0],[12.5,6.0],[15.0,6.0],[17.5,6.0],[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0],[35.0,6.0],[40.0,6.0]]}],"tip":6.8,"reach":40.0},{"len":35.0,"rows":[{"maxLoad":12.0,"maxLoadR":24.2,"minR":2.8,"pts":[[10.0,12.0],[12.5,12.0],[15.0,12.0],[17.5,12.0],[20.0,12.0],[22.5,12.0],[25.0,11.5],[27.5,10.3],[30.0,9.3],[35.0,7.8]]},{"maxLoad":6.0,"maxLoadR":35.0,"minR":2.8,"pts":[[10.0,6.0],[12.5,6.0],[15.0,6.0],[17.5,6.0],[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0],[35.0,6.0]]}],"tip":7.8,"reach":35.0},{"len":30.0,"rows":[{"maxLoad":12.0,"maxLoadR":23.6,"minR":2.8,"pts":[[10.0,12.0],[12.5,12.0],[15.0,12.0],[17.5,12.0],[20.0,12.0],[22.5,12.0],[25.0,11.2],[27.5,10.1],[30.0,9.1]]},{"maxLoad":6.0,"maxLoadR":30.0,"minR":2.8,"pts":[[10.0,6.0],[12.5,6.0],[15.0,6.0],[17.5,6.0],[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0]]}],"tip":9.1,"reach":30.0}]},{"code":"WA6017-10","series":"WA","kind":"flat","market":"cn+overseas","docLangs":"CN/EN/DE","tail":12.6,"tailAlt":null,"srcFile":"06-WA6017-10 国内海外通用版(R+) -2025.pdf","srcPage":5,"masts":[{"size":"1.8 m","huh":51.0},{"size":"1.6 m","huh":45.0},{"size":"2.0 m","huh":60.0}],"anchorSteps":null,"powerKw":"51.5 + 2×5.2","hoist":{"model":"H37FC25-530C","kw":37,"rope":530},"luffing":null,"ballast":{"60":17.8,"55":16.5,"50":15.8,"45":14.5,"40":13.2,"35":12.4,"30":10.9},"maxLoad":10.0,"jibs":[{"len":60.0,"rows":[{"maxLoad":10.0,"maxLoadR":13.8,"minR":2.5,"pts":[[12.5,10.0],[15.0,9.13],[17.5,7.67],[20.0,6.58],[22.5,5.74],[25.0,5.08],[27.5,4.53],[30.0,4.08],[32.5,3.7],[35.0,3.37],[37.5,3.09],[40.0,2.85],[42.5,2.63],[45.0,2.44],[47.5,2.26],[50.0,2.11],[52.5,1.97],[55.0,1.84],[57.5,1.73],[60.0,1.62]]},{"maxLoad":5.0,"maxLoadR":25.7,"minR":2.5,"pts":[[12.5,5.0],[15.0,5.0],[17.5,5.0],[20.0,5.0],[22.5,5.0],[25.0,5.0],[27.5,4.61],[30.0,4.16],[32.5,3.78],[35.0,3.45],[37.5,3.17],[40.0,2.92],[42.5,2.71],[45.0,2.52],[47.5,2.34],[50.0,2.19],[52.5,2.05],[55.0,1.92],[57.5,1.81],[60.0,1.7]]}],"tip":1.7,"reach":60.0},{"len":55.0,"rows":[{"maxLoad":10.0,"maxLoadR":14.7,"minR":2.5,"pts":[[12.5,10.0],[15.0,9.8],[17.5,8.24],[20.0,7.08],[22.5,6.19],[25.0,5.47],[27.5,4.89],[30.0,4.41],[32.5,4.0],[35.0,3.66],[37.5,3.35],[40.0,3.09],[42.5,2.86],[45.0,2.65],[47.5,2.47],[50.0,2.31],[52.5,2.16],[55.0,2.02]]},{"maxLoad":5.0,"maxLoadR":27.4,"minR":2.5,"pts":[[12.5,5.0],[15.0,5.0],[17.5,5.0],[20.0,5.0],[22.5,5.0],[25.0,5.0],[27.5,4.97],[30.0,4.49],[32.5,4.08],[35.0,3.73],[37.5,3.43],[40.0,3.17],[42.5,2.94],[45.0,2.73],[47.5,2.55],[50.0,2.38],[52.5,2.24],[55.0,2.1]]}],"tip":2.1,"reach":55.0},{"len":50.0,"rows":[{"maxLoad":10.0,"maxLoadR":15.3,"minR":2.5,"pts":[[12.5,10.0],[15.0,10.0],[17.5,8.57],[20.0,7.37],[22.5,6.44],[25.0,5.71],[27.5,5.1],[30.0,4.6],[32.5,4.18],[35.0,3.82],[37.5,3.51],[40.0,3.24],[42.5,3.0],[45.0,2.78],[47.5,2.59],[50.0,2.42]]},{"maxLoad":5.0,"maxLoadR":28.4,"minR":2.5,"pts":[[12.5,5.0],[15.0,5.0],[17.5,5.0],[20.0,5.0],[22.5,5.0],[25.0,5.0],[27.5,5.0],[30.0,4.68],[32.5,4.26],[35.0,3.9],[37.5,3.59],[40.0,3.31],[42.5,3.07],[45.0,2.86],[47.5,2.67],[50.0,2.5]]}],"tip":2.5,"reach":50.0},{"len":45.0,"rows":[{"maxLoad":10.0,"maxLoadR":15.4,"minR":2.5,"pts":[[12.5,10.0],[15.0,10.0],[17.5,8.67],[20.0,7.46],[22.5,6.52],[25.0,5.78],[27.5,5.17],[30.0,4.66],[32.5,4.23],[35.0,3.87],[37.5,3.55],[40.0,3.28],[42.5,3.04],[45.0,2.82]]},{"maxLoad":5.0,"maxLoadR":28.7,"minR":2.5,"pts":[[12.5,5.0],[15.0,5.0],[17.5,5.0],[20.0,5.0],[22.5,5.0],[25.0,5.0],[27.5,5.0],[30.0,4.74],[32.5,4.31],[35.0,3.95],[37.5,3.63],[40.0,3.36],[42.5,3.12],[45.0,2.9]]}],"tip":2.9,"reach":45.0},{"len":40.0,"rows":[{"maxLoad":10.0,"maxLoadR":15.6,"minR":2.5,"pts":[[12.5,10.0],[15.0,10.0],[17.5,8.77],[20.0,7.55],[22.5,6.6],[25.0,5.84],[27.5,5.23],[30.0,4.72],[32.5,4.29],[35.0,3.92],[37.5,3.6],[40.0,3.32]]},{"maxLoad":5.0,"maxLoadR":28.9,"minR":2.5,"pts":[[12.5,5.0],[15.0,5.0],[17.5,5.0],[20.0,5.0],[22.5,5.0],[25.0,5.0],[27.5,5.0],[30.0,4.8],[32.5,4.37],[35.0,4.0],[37.5,3.68],[40.0,3.4]]}],"tip":3.4,"reach":40.0},{"len":35.0,"rows":[{"maxLoad":10.0,"maxLoadR":15.6,"minR":2.5,"pts":[[12.5,10.0],[15.0,10.0],[17.5,8.82],[20.0,7.59],[22.5,6.63],[25.0,5.88],[27.5,5.26],[30.0,4.74],[32.5,4.31],[35.0,3.94]]},{"maxLoad":5.0,"maxLoadR":29.1,"minR":2.5,"pts":[[12.5,5.0],[15.0,5.0],[17.5,5.0],[20.0,5.0],[22.5,5.0],[25.0,5.0],[27.5,5.0],[30.0,4.82],[32.5,4.39],[35.0,4.02]]}],"tip":4.02,"reach":35.0},{"len":30.0,"rows":[{"maxLoad":10.0,"maxLoadR":16.1,"minR":2.5,"pts":[[12.5,10.0],[15.0,10.0],[17.5,9.13],[20.0,7.85],[22.5,6.87],[25.0,6.09],[27.5,5.45],[30.0,4.92]]},{"maxLoad":5.0,"maxLoadR":30.0,"minR":2.5,"pts":[[12.5,5.0],[15.0,5.0],[17.5,5.0],[20.0,5.0],[22.5,5.0],[25.0,5.0],[27.5,5.0],[30.0,5.0]]}],"tip":5.0,"reach":30.0}]},{"code":"WA7015-10","series":"WA","kind":"flat","market":"cn+overseas","docLangs":"CN/EN/DE","tail":17.5,"tailAlt":null,"srcFile":"WA7015-10样本_ 20251201.pdf","srcPage":4,"masts":[{"size":"2.0 m Ⅰ","huh":51.0},{"size":"2.0 m Ⅱ","huh":60.0}],"anchorSteps":null,"powerKw":"57.5 + 2×5.2","hoist":{"model":"H37FC25-530B","kw":37,"rope":530},"luffing":null,"ballast":{"70":16.2,"65":14.9,"60":14.9,"55":14.9,"50":13.6,"45":12.4,"40":11.9,"35":11.1,"30":9.8},"maxLoad":10.0,"jibs":[{"len":70.0,"rows":[{"maxLoad":10.0,"maxLoadR":15.5,"minR":2.5,"pts":[[15.0,10.0],[20.0,7.43],[25.0,5.69],[30.0,4.56],[35.0,3.76],[40.0,3.16],[42.5,2.92],[45.0,2.7],[47.5,2.51],[50.0,2.34],[52.5,2.18],[55.0,2.04],[57.5,1.91],[60.0,1.79],[62.5,1.69],[65.0,1.59],[67.5,1.49],[70.0,1.41]]},{"maxLoad":5.0,"maxLoadR":28.2,"minR":2.5,"pts":[[15.0,5.0],[20.0,5.0],[25.0,5.0],[30.0,4.65],[35.0,3.85],[40.0,3.25],[42.5,3.01],[45.0,2.8],[47.5,2.6],[50.0,2.43],[52.5,2.27],[55.0,2.13],[57.5,2.0],[60.0,1.89],[62.5,1.78],[65.0,1.68],[67.5,1.59],[70.0,1.5]]}],"tip":1.5,"reach":70.0},{"len":65.0,"rows":[{"maxLoad":10.0,"maxLoadR":17.4,"minR":2.5,"pts":[[15.0,10.0],[20.0,8.52],[25.0,6.56],[30.0,5.27],[35.0,4.36],[40.0,3.69],[42.5,3.42],[45.0,3.17],[47.5,2.95],[50.0,2.76],[52.5,2.58],[55.0,2.42],[57.5,2.28],[60.0,2.14],[62.5,2.02],[65.0,1.91]]},{"maxLoad":5.0,"maxLoadR":31.8,"minR":2.5,"pts":[[15.0,5.0],[20.0,5.0],[25.0,5.0],[30.0,5.0],[35.0,4.46],[40.0,3.78],[42.5,3.51],[45.0,3.26],[47.5,3.05],[50.0,2.85],[52.5,2.67],[55.0,2.51],[57.5,2.37],[60.0,2.24],[62.5,2.11],[65.0,2.0]]}],"tip":2.0,"reach":65.0},{"len":60.0,"rows":[{"maxLoad":10.0,"maxLoadR":18.9,"minR":2.5,"pts":[[15.0,10.0],[20.0,9.35],[25.0,7.21],[30.0,5.81],[35.0,4.82],[40.0,4.09],[42.5,3.79],[45.0,3.53],[47.5,3.29],[50.0,3.08],[52.5,2.89],[55.0,2.71],[57.5,2.55],[60.0,2.41]]},{"maxLoad":5.0,"maxLoadR":34.5,"minR":2.5,"pts":[[15.0,5.0],[20.0,5.0],[25.0,5.0],[30.0,5.0],[35.0,4.92],[40.0,4.18],[42.5,3.88],[45.0,3.62],[47.5,3.38],[50.0,3.17],[52.5,2.98],[55.0,2.8],[57.5,2.65],[60.0,2.5]]}],"tip":2.5,"reach":60.0},{"len":55.0,"rows":[{"maxLoad":10.0,"maxLoadR":20.8,"minR":2.5,"pts":[[15.0,10.0],[20.0,10.0],[25.0,8.1],[30.0,6.55],[35.0,5.45],[40.0,4.64],[42.5,4.31],[45.0,4.01],[47.5,3.75],[50.0,3.51],[52.5,3.3],[55.0,3.11]]},{"maxLoad":5.0,"maxLoadR":38.2,"minR":2.5,"pts":[[15.0,5.0],[20.0,5.0],[25.0,5.0],[30.0,5.0],[35.0,5.0],[40.0,4.73],[42.5,4.4],[45.0,4.11],[47.5,3.84],[50.0,3.61],[52.5,3.39],[55.0,3.2]]}],"tip":3.2,"reach":55.0},{"len":50.0,"rows":[{"maxLoad":10.0,"maxLoadR":22.2,"minR":2.5,"pts":[[15.0,10.0],[20.0,10.0],[25.0,8.7],[30.0,7.05],[35.0,5.88],[40.0,5.01],[42.5,4.65],[45.0,4.34],[47.5,4.06],[50.0,3.81]]},{"maxLoad":5.0,"maxLoadR":40.7,"minR":2.5,"pts":[[15.0,5.0],[20.0,5.0],[25.0,5.0],[30.0,5.0],[35.0,5.0],[40.0,5.0],[42.5,4.75],[45.0,4.43],[47.5,4.15],[50.0,3.9]]}],"tip":3.9,"reach":50.0},{"len":45.0,"rows":[{"maxLoad":10.0,"maxLoadR":22.4,"minR":2.5,"pts":[[15.0,10.0],[20.0,10.0],[25.0,8.83],[30.0,7.15],[35.0,5.96],[40.0,5.09],[42.5,4.73],[45.0,4.41]]},{"maxLoad":5.0,"maxLoadR":41.2,"minR":2.5,"pts":[[15.0,5.0],[20.0,5.0],[25.0,5.0],[30.0,5.0],[35.0,5.0],[40.0,5.0],[42.5,4.82],[45.0,4.5]]}],"tip":4.5,"reach":45.0},{"len":40.0,"rows":[{"maxLoad":10.0,"maxLoadR":22.9,"minR":2.5,"pts":[[15.0,10.0],[20.0,10.0],[25.0,9.03],[30.0,7.31],[35.0,6.1],[40.0,5.21]]},{"maxLoad":5.0,"maxLoadR":40.0,"minR":2.5,"pts":[[15.0,5.0],[20.0,5.0],[25.0,5.0],[30.0,5.0],[35.0,5.0],[40.0,5.0]]}],"tip":5.21,"reach":40.0},{"len":35.0,"rows":[{"maxLoad":10.0,"maxLoadR":23.2,"minR":2.5,"pts":[[15.0,10.0],[20.0,10.0],[25.0,9.17],[30.0,7.43],[35.0,6.21]]},{"maxLoad":5.0,"maxLoadR":35.0,"minR":2.5,"pts":[[15.0,5.0],[20.0,5.0],[25.0,5.0],[30.0,5.0],[35.0,5.0]]}],"tip":6.21,"reach":35.0},{"len":30.0,"rows":[{"maxLoad":10.0,"maxLoadR":23.4,"minR":2.5,"pts":[[15.0,10.0],[20.0,10.0],[25.0,9.26],[30.0,7.51]]},{"maxLoad":5.0,"maxLoadR":30.0,"minR":2.5,"pts":[[15.0,5.0],[20.0,5.0],[25.0,5.0],[30.0,5.0]]}],"tip":7.51,"reach":30.0}]},{"code":"R135-8","series":"R","kind":"flat","market":"overseas","docLangs":"EN/DE/FR/ES/NL/PL","tail":12.6,"tailAlt":null,"srcFile":"R135-8 英德法西荷波.pdf","srcPage":4,"masts":[{"size":"2.25 m","huh":73.0,"verify":true},{"size":"1.65 m","huh":56.6,"verify":true}],"anchorSteps":null,"powerKw":"43","hoist":{"model":"H30FC20-440A","kw":30,"rope":440},"luffing":null,"ballast":null,"maxLoad":8.0,"jibs":[{"len":60.0,"rows":[{"maxLoad":8.0,"maxLoadR":16.7,"minR":2.5,"pts":[[17.5,7.56],[20.0,6.49],[22.5,5.66],[25.0,5.01],[27.5,4.47],[30.0,4.03],[32.5,3.66],[35.0,3.34],[37.5,3.06],[40.0,2.82],[42.5,2.61],[45.0,2.42],[47.5,2.26],[50.0,2.11],[52.5,1.97],[55.0,1.85],[57.5,1.73],[60.0,1.63]]},{"maxLoad":4.0,"maxLoadR":30.6,"minR":2.5,"pts":[[17.5,4.0],[20.0,4.0],[22.5,4.0],[25.0,4.0],[27.5,4.0],[30.0,4.0],[32.5,3.73],[35.0,3.41],[37.5,3.13],[40.0,2.89],[42.5,2.68],[45.0,2.49],[47.5,2.33],[50.0,2.17],[52.5,2.04],[55.0,1.92],[57.5,1.8],[60.0,1.7]]}],"tip":1.7,"reach":60.0},{"len":55.0,"rows":[{"maxLoad":8.0,"maxLoadR":17.8,"minR":2.5,"pts":[[17.5,8.0],[20.0,7.01],[22.5,6.12],[25.0,5.42],[27.5,4.85],[30.0,4.37],[32.5,3.97],[35.0,3.63],[37.5,3.34],[40.0,3.08],[42.5,2.85],[45.0,2.65],[47.5,2.47],[50.0,2.31],[52.5,2.16],[55.0,2.03]]},{"maxLoad":4.0,"maxLoadR":32.8,"minR":2.5,"pts":[[17.5,4.0],[20.0,4.0],[22.5,4.0],[25.0,4.0],[27.5,4.0],[30.0,4.0],[32.5,4.0],[35.0,3.7],[37.5,3.4],[40.0,3.15],[42.5,2.92],[45.0,2.72],[47.5,2.54],[50.0,2.38],[52.5,2.23],[55.0,2.1]]}],"tip":2.1,"reach":55.0},{"len":50.0,"rows":[{"maxLoad":8.0,"maxLoadR":18.5,"minR":2.5,"pts":[[17.5,8.0],[20.0,7.32],[22.5,6.4],[25.0,5.67],[27.5,5.07],[30.0,4.58],[32.5,4.16],[35.0,3.81],[37.5,3.5],[40.0,3.23],[42.5,3.0],[45.0,2.79],[47.5,2.6],[50.0,2.43]]},{"maxLoad":4.0,"maxLoadR":34.1,"minR":2.5,"pts":[[17.5,4.0],[20.0,4.0],[22.5,4.0],[25.0,4.0],[27.5,4.0],[30.0,4.0],[32.5,4.0],[35.0,3.87],[37.5,3.57],[40.0,3.3],[42.5,3.06],[45.0,2.85],[47.5,2.67],[50.0,2.5]]}],"tip":2.5,"reach":50.0},{"len":45.0,"rows":[{"maxLoad":8.0,"maxLoadR":18.7,"minR":2.5,"pts":[[17.5,8.0],[20.0,7.43],[22.5,6.49],[25.0,5.75],[27.5,5.15],[30.0,4.65],[32.5,4.22],[35.0,3.86],[37.5,3.55],[40.0,3.28],[42.5,3.04],[45.0,2.83]]},{"maxLoad":4.0,"maxLoadR":34.5,"minR":2.5,"pts":[[17.5,4.0],[20.0,4.0],[22.5,4.0],[25.0,4.0],[27.5,4.0],[30.0,4.0],[32.5,4.0],[35.0,3.93],[37.5,3.62],[40.0,3.35],[42.5,3.11],[45.0,2.9]]}],"tip":2.9,"reach":45.0},{"len":40.0,"rows":[{"maxLoad":8.0,"maxLoadR":19.0,"minR":2.5,"pts":[[17.5,8.0],[20.0,7.53],[22.5,6.58],[25.0,5.83],[27.5,5.22],[30.0,4.71],[32.5,4.29],[35.0,3.92],[37.5,3.61],[40.0,3.33]]},{"maxLoad":4.0,"maxLoadR":34.9,"minR":2.5,"pts":[[17.5,4.0],[20.0,4.0],[22.5,4.0],[25.0,4.0],[27.5,4.0],[30.0,4.0],[32.5,4.0],[35.0,3.99],[37.5,3.67],[40.0,3.4]]}],"tip":3.4,"reach":40.0},{"len":35.0,"rows":[{"maxLoad":8.0,"maxLoadR":19.4,"minR":2.5,"pts":[[17.5,8.0],[20.0,7.72],[22.5,6.75],[25.0,5.99],[27.5,5.36],[30.0,4.84],[32.5,4.4],[35.0,4.03]]},{"maxLoad":4.0,"maxLoadR":35.0,"minR":2.5,"pts":[[17.5,4.0],[20.0,4.0],[22.5,4.0],[25.0,4.0],[27.5,4.0],[30.0,4.0],[32.5,4.0],[35.0,4.0]]}],"tip":4.03,"reach":35.0},{"len":30.0,"rows":[{"maxLoad":8.0,"maxLoadR":19.7,"minR":2.5,"pts":[[17.5,8.0],[20.0,7.86],[22.5,6.88],[25.0,6.09],[27.5,5.46],[30.0,4.93]]},{"maxLoad":4.0,"maxLoadR":30.0,"minR":2.5,"pts":[[17.5,4.0],[20.0,4.0],[22.5,4.0],[25.0,4.0],[27.5,4.0],[30.0,4.0]]}],"tip":4.93,"reach":30.0}]},{"code":"WA6515-8","series":"WA","kind":"flat","market":"cn+overseas","docLangs":"CN/EN/DE","tail":15.3,"tailAlt":null,"srcFile":"WA6515-8样本-20251201.pdf","srcPage":5,"masts":[{"size":"1.8 m A1C","huh":46.0},{"size":"2.0 m L68A","huh":60.0},{"size":"1.6 m L46","huh":42.0}],"anchorSteps":[46.0,71.2,96.4,121.6,146.8,169.2,191.6,214.0,219.6],"powerKw":"45 + 2×5.2","hoist":{"model":"H30FC20-440","kw":30,"rope":440},"luffing":null,"ballast":{"65":16.7,"60":15.4,"55":15.4,"50":14.1,"45":12.9,"40":12.9,"35":11.6,"30":10.3},"maxLoad":8.0,"jibs":[{"len":65.0,"rows":[{"maxLoad":8.0,"maxLoadR":17.2,"minR":2.5,"pts":[[10.0,8.0],[15.0,8.0],[20.0,6.69],[25.0,5.13],[30.0,4.1],[35.0,3.38],[40.0,2.84],[45.0,2.43],[50.0,2.1],[55.0,1.83],[60.0,1.61],[65.0,1.42]]},{"maxLoad":4.0,"maxLoadR":31.1,"minR":2.5,"pts":[[10.0,4.0],[15.0,4.0],[20.0,4.0],[25.0,4.0],[30.0,4.0],[35.0,3.46],[40.0,2.92],[45.0,2.51],[50.0,2.18],[55.0,1.91],[60.0,1.69],[65.0,1.5]]}],"tip":1.5,"reach":65.0},{"len":60.0,"rows":[{"maxLoad":8.0,"maxLoadR":19.3,"minR":2.5,"pts":[[10.0,8.0],[15.0,8.0],[20.0,7.66],[25.0,5.89],[30.0,4.74],[35.0,3.92],[40.0,3.32],[45.0,2.85],[50.0,2.48],[55.0,2.17],[60.0,1.92]]},{"maxLoad":4.0,"maxLoadR":35.0,"minR":2.5,"pts":[[10.0,4.0],[15.0,4.0],[20.0,4.0],[25.0,4.0],[30.0,4.0],[35.0,4.0],[40.0,3.4],[45.0,2.93],[50.0,2.56],[55.0,2.25],[60.0,2.0]]}],"tip":2.0,"reach":60.0},{"len":55.0,"rows":[{"maxLoad":8.0,"maxLoadR":20.8,"minR":2.5,"pts":[[10.0,8.0],[15.0,8.0],[20.0,8.0],[25.0,6.45],[30.0,5.2],[35.0,4.32],[40.0,3.66],[45.0,3.15],[50.0,2.75],[55.0,2.42]]},{"maxLoad":4.0,"maxLoadR":37.9,"minR":2.5,"pts":[[10.0,4.0],[15.0,4.0],[20.0,4.0],[25.0,4.0],[30.0,4.0],[35.0,4.0],[40.0,3.74],[45.0,3.23],[50.0,2.83],[55.0,2.5]]}],"tip":2.5,"reach":55.0},{"len":50.0,"rows":[{"maxLoad":8.0,"maxLoadR":21.2,"minR":2.5,"pts":[[10.0,8.0],[15.0,8.0],[20.0,8.0],[25.0,6.6],[30.0,5.32],[35.0,4.42],[40.0,3.75],[45.0,3.23],[50.0,2.82]]},{"maxLoad":4.0,"maxLoadR":38.6,"minR":2.5,"pts":[[10.0,4.0],[15.0,4.0],[20.0,4.0],[25.0,4.0],[30.0,4.0],[35.0,4.0],[40.0,3.83],[45.0,3.31],[50.0,2.9]]}],"tip":2.9,"reach":50.0},{"len":45.0,"rows":[{"maxLoad":8.0,"maxLoadR":22.6,"minR":2.5,"pts":[[10.0,8.0],[15.0,8.0],[20.0,8.0],[25.0,7.13],[30.0,5.76],[35.0,4.79],[40.0,4.07],[45.0,3.52]]},{"maxLoad":4.0,"maxLoadR":41.3,"minR":2.5,"pts":[[10.0,4.0],[15.0,4.0],[20.0,4.0],[25.0,4.0],[30.0,4.0],[35.0,4.0],[40.0,4.0],[45.0,3.6]]}],"tip":3.6,"reach":45.0},{"len":40.0,"rows":[{"maxLoad":8.0,"maxLoadR":23.3,"minR":2.5,"pts":[[10.0,8.0],[15.0,8.0],[20.0,8.0],[25.0,7.36],[30.0,5.95],[35.0,4.96],[40.0,4.22]]},{"maxLoad":4.0,"maxLoadR":40.0,"minR":2.5,"pts":[[10.0,4.0],[15.0,4.0],[20.0,4.0],[25.0,4.0],[30.0,4.0],[35.0,4.0],[40.0,4.0]]}],"tip":4.22,"reach":40.0},{"len":35.0,"rows":[{"maxLoad":8.0,"maxLoadR":22.7,"minR":2.5,"pts":[[10.0,8.0],[15.0,8.0],[20.0,8.0],[25.0,7.17],[30.0,5.79],[35.0,4.82]]},{"maxLoad":4.0,"maxLoadR":35.0,"minR":2.5,"pts":[[10.0,4.0],[15.0,4.0],[20.0,4.0],[25.0,4.0],[30.0,4.0],[35.0,4.0]]}],"tip":4.82,"reach":35.0},{"len":30.0,"rows":[{"maxLoad":8.0,"maxLoadR":22.5,"minR":2.5,"pts":[[10.0,8.0],[15.0,8.0],[20.0,8.0],[25.0,7.08],[30.0,5.72]]},{"maxLoad":4.0,"maxLoadR":30.0,"minR":2.5,"pts":[[10.0,4.0],[15.0,4.0],[20.0,4.0],[25.0,4.0],[30.0,4.0]]}],"tip":5.72,"reach":30.0}]},{"code":"R70-3","series":"R","kind":"flat","market":"overseas","docLangs":"EN/RU/TR/AR","tail":9.7,"tailAlt":null,"srcFile":"01-R70-3-海外通用.pdf","srcPage":4,"masts":[{"size":"1.15 m","huh":44.8},{"size":"1.2 m","huh":38.5}],"anchorSteps":null,"powerKw":"25","hoist":{"model":"H18FC15-230","kw":18,"rope":230},"luffing":null,"ballast":{"46":10.9,"41":9.6,"36":8.9,"31":7.6,"26":6.8},"maxLoad":3.0,"jibs":[{"len":46.0,"rows":[{"maxLoad":3.0,"maxLoadR":21.1,"minR":2.15,"pts":[[16.0,3.0],[18.0,3.0],[21.0,3.0],[23.0,2.71],[26.0,2.35],[28.0,2.15],[31.0,1.9],[33.0,1.76],[36.0,1.58],[38.0,1.48],[41.0,1.34],[43.0,1.26],[46.0,1.15]]}],"tip":1.15,"reach":46.0},{"len":41.0,"rows":[{"maxLoad":3.0,"maxLoadR":22.5,"minR":2.15,"pts":[[16.0,3.0],[18.0,3.0],[21.0,3.0],[23.0,2.92],[26.0,2.53],[28.0,2.32],[31.0,2.05],[33.0,1.9],[36.0,1.71],[38.0,1.6],[41.0,1.45]]}],"tip":1.45,"reach":41.0},{"len":36.0,"rows":[{"maxLoad":3.0,"maxLoadR":25.0,"minR":2.15,"pts":[[16.0,3.0],[18.0,3.0],[21.0,3.0],[23.0,3.0],[26.0,2.87],[28.0,2.63],[31.0,2.33],[33.0,2.17],[36.0,1.95]]}],"tip":1.95,"reach":36.0},{"len":31.0,"rows":[{"maxLoad":3.0,"maxLoadR":26.1,"minR":2.15,"pts":[[16.0,3.0],[18.0,3.0],[21.0,3.0],[23.0,3.0],[26.0,3.0],[28.0,2.76],[31.0,2.45]]}],"tip":2.45,"reach":31.0},{"len":26.0,"rows":[{"maxLoad":3.0,"maxLoadR":26.0,"minR":2.15,"pts":[[16.0,3.0],[18.0,3.0],[21.0,3.0],[23.0,3.0],[26.0,3.0]]}],"tip":3.0,"reach":26.0}]},{"code":"L275-16","series":"L","kind":"luffing","market":"cn","docLangs":"CN/EN/DE","tail":7.8,"tailAlt":null,"srcFile":"L275-16 标准版-20250930.pdf","srcPage":4,"masts":[{"size":"2.2 m H","huhByJib":{"60":47.3,"55":47.3,"50":47.3,"45":51.05,"40":51.05,"35":51.05,"30":54.8}}],"anchorSteps":[47.3,73.5,99.8,126.0,152.5,170.9,193.4,215.9,238.4,260.9,283.4],"powerKw":"107","hoist":{"model":"H55FC40-880","kw":55,"rope":880},"luffing":{"model":"L37FL55","kw":37,"range":"15°–85°"},"ballast":{"60":28,"55":28,"50":28,"45":28,"40":25,"35":25,"30":25},"maxLoad":16.0,"jibs":[{"len":60.0,"rows":[{"maxLoad":12.0,"maxLoadR":29.0,"minR":6.6,"pts":[[20.0,12.0],[22.5,12.0],[25.0,12.0],[27.5,12.0],[30.0,11.46],[32.5,10.16],[35.0,9.05],[37.5,8.09],[40.0,7.26],[42.5,6.53],[45.0,5.88],[47.5,5.31],[50.0,4.79],[52.5,4.33],[55.0,3.91],[57.5,3.54],[60.0,3.2]]},{"maxLoad":8.0,"maxLoadR":37.5,"minR":6.6,"pts":[[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[32.5,8.0],[35.0,8.0],[37.5,8.0],[40.0,7.26],[42.5,6.52],[45.0,5.87],[47.5,5.29],[50.0,4.78],[52.5,4.32],[55.0,3.9],[57.5,3.53],[60.0,3.2]]}],"tip":3.2,"reach":60.0},{"len":55.0,"rows":[{"maxLoad":16.0,"maxLoadR":23.1,"minR":6.2,"pts":[[20.0,16.0],[22.5,16.0],[25.0,14.54],[27.5,12.65],[30.0,11.09],[32.5,9.79],[35.0,8.68],[37.5,7.72],[40.0,6.9],[42.5,6.18],[45.0,5.54],[47.5,4.98],[50.0,4.49],[52.5,4.06],[55.0,3.68]]},{"maxLoad":12.0,"maxLoadR":28.7,"minR":6.2,"pts":[[20.0,12.0],[22.5,12.0],[25.0,12.0],[27.5,12.0],[30.0,11.26],[32.5,9.95],[35.0,8.84],[37.5,7.88],[40.0,7.05],[42.5,6.32],[45.0,5.69],[47.5,5.12],[50.0,4.62],[52.5,4.18],[55.0,3.79]]},{"maxLoad":8.0,"maxLoadR":37.5,"minR":6.2,"pts":[[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[32.5,8.0],[35.0,8.0],[37.5,8.0],[40.0,7.2],[42.5,6.47],[45.0,5.83],[47.5,5.26],[50.0,4.75],[52.5,4.3],[55.0,3.9]]}],"tip":3.9,"reach":55.0},{"len":50.0,"rows":[{"maxLoad":16.0,"maxLoadR":23.9,"minR":5.7,"pts":[[20.0,16.0],[22.5,16.0],[25.0,15.04],[27.5,13.11],[30.0,11.51],[32.5,10.17],[35.0,9.03],[37.5,8.06],[40.0,7.21],[42.5,6.48],[45.0,5.83],[47.5,5.27],[50.0,4.79]]},{"maxLoad":12.0,"maxLoadR":29.2,"minR":5.7,"pts":[[20.0,12.0],[22.5,12.0],[25.0,12.0],[27.5,12.0],[30.0,11.66],[32.5,10.32],[35.0,9.18],[37.5,8.2],[40.0,7.35],[42.5,6.61],[45.0,5.96],[47.5,5.39],[50.0,4.89]]},{"maxLoad":8.0,"maxLoadR":38.3,"minR":5.7,"pts":[[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[32.5,8.0],[35.0,8.0],[37.5,8.0],[40.0,7.49],[42.5,6.74],[45.0,6.09],[47.5,5.51],[50.0,5.0]]}],"tip":5.0,"reach":50.0},{"len":45.0,"rows":[{"maxLoad":16.0,"maxLoadR":23.6,"minR":5.3,"pts":[[20.0,16.0],[22.5,16.0],[25.0,14.99],[27.5,13.06],[30.0,11.47],[32.5,10.14],[35.0,9.01],[37.5,8.05],[40.0,7.22],[42.5,6.51],[45.0,5.89]]},{"maxLoad":12.0,"maxLoadR":29.2,"minR":5.3,"pts":[[20.0,12.0],[22.5,12.0],[25.0,12.0],[27.5,12.0],[30.0,11.62],[32.5,10.29],[35.0,9.16],[37.5,8.19],[40.0,7.35],[42.5,6.63],[45.0,6.0]]},{"maxLoad":8.0,"maxLoadR":38.2,"minR":5.3,"pts":[[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[32.5,8.0],[35.0,8.0],[37.5,8.0],[40.0,7.48],[42.5,6.75],[45.0,6.11]]}],"tip":6.11,"reach":45.0},{"len":40.0,"rows":[{"maxLoad":16.0,"maxLoadR":24.1,"minR":4.8,"pts":[[20.0,16.0],[22.5,16.0],[25.0,15.25],[27.5,12.93],[30.0,11.43],[32.5,10.18],[35.0,9.13],[37.5,8.24],[40.0,7.49]]},{"maxLoad":12.0,"maxLoadR":29.7,"minR":4.8,"pts":[[20.0,12.0],[22.5,12.0],[25.0,12.0],[27.5,12.0],[30.0,11.85],[32.5,10.51],[35.0,9.38],[37.5,8.42],[40.0,7.59]]},{"maxLoad":8.0,"maxLoadR":39.0,"minR":4.8,"pts":[[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[32.5,8.0],[35.0,8.0],[37.5,8.0],[40.0,7.7]]}],"tip":7.7,"reach":40.0},{"len":35.0,"rows":[{"maxLoad":16.0,"maxLoadR":24.5,"minR":4.4,"pts":[[20.0,16.0],[22.5,16.0],[25.0,15.61],[27.5,13.65],[30.0,12.04],[32.5,10.71],[35.0,9.59]]},{"maxLoad":12.0,"maxLoadR":30.1,"minR":4.4,"pts":[[20.0,12.0],[22.5,12.0],[25.0,12.0],[27.5,12.0],[30.0,12.0],[32.5,10.83],[35.0,9.7]]},{"maxLoad":8.0,"maxLoadR":35.1,"minR":4.4,"pts":[[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0],[32.5,8.0],[35.0,8.0]]}],"tip":9.7,"reach":35.0},{"len":30.0,"rows":[{"maxLoad":16.0,"maxLoadR":24.3,"minR":3.9,"pts":[[20.0,16.0],[22.5,16.0],[25.0,15.48],[27.5,13.57],[30.0,12.04]]},{"maxLoad":12.0,"maxLoadR":30.1,"minR":3.9,"pts":[[20.0,12.0],[22.5,12.0],[25.0,12.0],[27.5,12.0],[30.0,12.0]]},{"maxLoad":8.0,"maxLoadR":30.1,"minR":3.9,"pts":[[20.0,8.0],[22.5,8.0],[25.0,8.0],[27.5,8.0],[30.0,8.0]]}],"tip":12.04,"reach":30.0}]},{"code":"L200-12","series":"L","kind":"luffing","market":"cn+overseas","docLangs":"CN/EN/DE","tail":7.67,"tailAlt":null,"srcFile":"L200-12.pdf","srcPage":5,"masts":[{"size":"2.0 m L68A","huhByJib":{"55":40.65,"50":43.65,"45":43.65,"40":43.65,"35":46.65,"30":46.65}},{"size":"2.3 m","huh":null,"note":"travel"}],"anchorSteps":[40.65,64.65,88.65,109.65,130.65,151.65,172.65,193.65],"powerKw":"107","hoist":{"model":"H55FL30-860","kw":55,"rope":860},"luffing":{"model":"L37FL45","kw":37,"range":"15°–85°"},"ballast":{"55":19.8,"50":19.8,"45":19.8,"40":19.8,"35":19.8,"30":18.3},"maxLoad":12.0,"jibs":[{"len":55.0,"rows":[{"maxLoad":12.0,"maxLoadR":22.1,"minR":5.4,"pts":[[25.0,10.1],[27.5,8.76],[30.0,7.64],[32.5,6.69],[35.0,5.87],[37.5,5.17],[40.0,4.56],[42.5,4.01],[45.0,3.53],[47.5,3.1],[50.0,2.72],[52.5,2.37],[55.0,2.06]]},{"maxLoad":9.0,"maxLoadR":27.1,"minR":5.4,"pts":[[20.0,9.0],[22.5,9.0],[25.0,9.0],[27.5,8.84],[30.0,7.76],[32.5,6.81],[35.0,5.98],[37.5,5.27],[40.0,4.66],[42.5,4.11],[45.0,3.63],[47.5,3.19],[50.0,2.8],[52.5,2.45],[55.0,2.13]]},{"maxLoad":6.0,"maxLoadR":35.2,"minR":5.4,"pts":[[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0],[32.5,6.0],[35.0,6.0],[37.5,5.38],[40.0,4.76],[42.5,4.21],[45.0,3.72],[47.5,3.28],[50.0,2.89],[52.5,2.53],[55.0,2.2]]}],"tip":2.2,"reach":55.0},{"len":50.0,"rows":[{"maxLoad":12.0,"maxLoadR":23.0,"minR":5.0,"pts":[[25.0,10.7],[27.5,9.33],[30.0,8.18],[32.5,7.2],[35.0,6.37],[37.5,5.65],[40.0,5.02],[42.5,4.47],[45.0,3.98],[47.5,3.54],[50.0,3.15]]},{"maxLoad":9.0,"maxLoadR":28.0,"minR":5.0,"pts":[[20.0,9.0],[22.5,9.0],[25.0,9.0],[27.5,9.0],[30.0,8.31],[32.5,7.33],[35.0,6.47],[37.5,5.75],[40.0,5.13],[42.5,4.57],[45.0,4.06],[47.5,3.63],[50.0,3.21]]},{"maxLoad":6.0,"maxLoadR":36.8,"minR":5.0,"pts":[[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0],[32.5,6.0],[35.0,6.0],[37.5,5.85],[40.0,5.22],[42.5,4.66],[45.0,4.16],[47.5,3.71],[50.0,3.3]]}],"tip":3.3,"reach":50.0},{"len":45.0,"rows":[{"maxLoad":12.0,"maxLoadR":23.2,"minR":4.5,"pts":[[25.0,10.9],[27.5,9.57],[30.0,8.42],[32.5,7.46],[35.0,6.64],[37.5,5.92],[40.0,5.29],[42.5,4.74],[45.0,4.25]]},{"maxLoad":9.0,"maxLoadR":28.9,"minR":4.5,"pts":[[20.0,9.0],[22.5,9.0],[25.0,9.0],[27.5,9.0],[30.0,8.53],[32.5,7.56],[35.0,6.73],[37.5,6.01],[40.0,5.38],[42.5,4.82],[45.0,4.33]]},{"maxLoad":6.0,"maxLoadR":37.8,"minR":4.5,"pts":[[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0],[32.5,6.0],[35.0,6.0],[37.5,6.0],[40.0,5.47],[42.5,4.9],[45.0,4.4]]}],"tip":4.4,"reach":45.0},{"len":40.0,"rows":[{"maxLoad":12.0,"maxLoadR":23.2,"minR":4.1,"pts":[[27.5,9.59],[30.0,8.46],[32.5,7.51],[35.0,6.68],[37.5,5.84],[40.0,5.35]]},{"maxLoad":9.0,"maxLoadR":28.9,"minR":4.1,"pts":[[20.0,9.0],[22.5,9.0],[25.0,9.0],[27.5,9.0],[30.0,8.56],[32.5,7.6],[35.0,6.77],[37.5,5.92],[40.0,5.43]]},{"maxLoad":6.0,"maxLoadR":38.0,"minR":4.1,"pts":[[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0],[32.5,6.0],[35.0,6.0],[37.5,6.0],[40.0,5.5]]}],"tip":5.5,"reach":40.0},{"len":35.0,"rows":[{"maxLoad":12.0,"maxLoadR":23.8,"minR":3.6,"pts":[[27.5,9.94],[30.0,8.81],[32.5,7.85],[35.0,7.02]]},{"maxLoad":9.0,"maxLoadR":29.7,"minR":3.6,"pts":[[20.0,9.0],[22.5,9.0],[25.0,9.0],[27.5,9.0],[30.0,8.9],[32.5,7.93],[35.0,7.1]]},{"maxLoad":6.0,"maxLoadR":35.0,"minR":3.6,"pts":[[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0],[32.5,6.0],[35.0,6.0]]}],"tip":7.1,"reach":35.0},{"len":30.0,"rows":[{"maxLoad":12.0,"maxLoadR":23.7,"minR":3.2,"pts":[[25.0,11.3],[27.5,9.95],[30.0,8.82]]},{"maxLoad":9.0,"maxLoadR":29.7,"minR":3.2,"pts":[[20.0,9.0],[22.5,9.0],[25.0,9.0],[27.5,9.0],[30.0,8.9]]},{"maxLoad":6.0,"maxLoadR":30.0,"minR":3.2,"pts":[[20.0,6.0],[22.5,6.0],[25.0,6.0],[27.5,6.0],[30.0,6.0]]}],"tip":8.9,"reach":30.0}]}];
+
+</script>
+<script>
+/* ================= i18n ================= */
+const I18N = {
+zh:{
+ title:"塔机智能选型", sub:"基于产品样本数据 · 销售现场演示",
+ tabMatch:"快速选型", tabCompare:"型号对比", tabData:"数据说明",
+ needs:"客户需求", radius:"幅度（吊点距塔身中心）", load:"吊重", height:"吊钩高度（可选）",
+ allowAnchor:"允许附着（贴建筑加固可超独立高度）",
+ kindAll:"全部", kindFlat:"平头", kindLuffing:"动臂",
+ results:"匹配结果", excluded:"已排除型号（点击展开，向客户说明原因）",
+ nMatch:(n)=>`共 ${n} 个型号满足需求，按富余度排序`,
+ nMatch0:"没有型号满足当前需求 —— 可调整幅度/吊重，或联系技术部评估非标方案",
+ combo:(j,g)=>`推荐 ${j} m 臂 · ≤${g} t 工况挡`,
+ capAt:(c,r)=>`该幅度额定吊重 ${c} t（按样本 ${r} m 列保守取值）`,
+ margin:"富余", tipload:"臂端", freeH:"独立高度", anchorTo:(n,h)=>`${n} 道附着 → ${h} m`,
+ anchorUnknown:"需附着（道数见样本附着页）",
+ heightNA:"高度未校核", heightOK:(h)=>`独立高度 ${h} m ✓`,
+ rsnReach:(r)=>`最大工作幅度 ${r} m，够不到 ${fmt(state.R)} m`,
+ rsnCap:(c)=>`该幅度最多 ${c} t，小于 ${fmt(state.Q)} t`,
+ rsnHeight:(h)=>`独立高度仅 ${h} m（未开附着）`,
+ rsnBeyond:(m)=>`需求高度超样本附着上限 ${m} m —— 咨询技术部`,
+ detail:"型号详情", back:"← 返回结果", addCmp:"加入对比", inCmp:"已在对比", curve:"起重性能曲线",
+ jibLen:"臂长", cfgRow:(g,r)=>`≤${g} t 挡（${r} m 内满载）`,
+ demandPoint:"客户需求点", maxLoad:"最大吊重", reach:"最大幅度", tail:"平衡臂尾半径",
+ power:"总装机功率", hoistM:"起升机构", rope:"容绳量", ballastJib:(j)=>`平衡重（${j} m 臂）`,
+ anchorSeq:"附着后可达高度序列", srcPage:(f,p)=>`数据源：《${f}》第 ${p} 页起重性能表`,
+ consult:"更高需求请咨询技术部", masts:"塔身规格与独立高度", mastVerify:"（对应关系待人工复核）",
+ cmpTitle:"型号对比", cmpEmpty:"从选型结果或详情页把型号加入对比（最多 3 个）",
+ cmpRow_kind:"机型", cmpRow_capAtR:(r)=>`${r} m 处吊重`, cmpRow_max:"最大吊重", cmpRow_tip:"最长臂端部吊重",
+ cmpRow_free:"最大独立高度", cmpRow_anchor:"附着最高", cmpRow_power:"总功率", cmpRow_tail:"尾部回转半径",
+ cmpRow_rope:"容绳量", remove:"移除",
+ flat:"平头", luffing:"动臂", perJib:"随臂长变化",
+ dataTitle:"数据来源与完整性", dataP1:"本工具全部数据自动提取自仓库内 11 本塔机产品样本 PDF，起重性能表 181 行数据已与独立提取源逐行交叉核对（181/181 一致）。以下条目为样本中存在、但当前版本尚未录入或需人工复核的数据：",
+ gap1:"附着序列：仅 WA6515-8、L200-12、L275-16 已录入；其余型号显示“见样本附着页”。",
+ gap2:"平衡重表：R135-8、WA7527-16/20 未录入（WA7527 有两种平衡臂长度、两套配置）。",
+ gap3:"R135-8 塔身规格与独立高度的对应关系需人工复核（样本封面图示较小）。",
+ gap4:"起重性能在两个表格幅度点之间按保守原则取右侧列值，不做插值——演示口径偏安全。",
+ glossary:"术语对照（客户口语 → 标准术语）",
+ g1:["主干子 / 柱子","塔身（由标准节拼装）"], g2:["塔身能自己站多高","独立高度"],
+ g3:["靠墙拉一道","附着 / 附墙"], g4:["大臂","起重臂（臂长）"], g5:["几根绳","倍率 / 工况挡"],
+ disclaimer:"数据自动提取自产品样本，仅供选型参考；正式方案以出厂样本与技术部确认为准。",
+ srcTitle:"样本清单", srcCol:["样本文件","性能表页","臂长档数","数据行"],
+ unit_m:"m", unit_t:"t",
+},
+tr:{
+ title:"Kule Vinç Seçim Aracı", sub:"Katalog verilerine dayalı · saha sunumu için",
+ tabMatch:"Hızlı Seçim", tabCompare:"Karşılaştır", tabData:"Veri Notları",
+ needs:"Müşteri İhtiyacı", radius:"Yarıçap (yük – kule ekseni mesafesi)", load:"Yük", height:"Kanca yüksekliği (opsiyonel)",
+ allowAnchor:"Ankraja izin ver (bina bağlantısı ile serbest yükseklik aşılabilir)",
+ kindAll:"Tümü", kindFlat:"Düz tepe", kindLuffing:"Oynar bomlu",
+ results:"Uygun Modeller", excluded:"Elenen modeller (nedenleriyle)",
+ nMatch:(n)=>`${n} model uygun, kapasite marjına göre sıralı`,
+ nMatch0:"Bu ihtiyaca uygun model yok — değerleri değiştirin veya teknik ekibe danışın",
+ combo:(j,g)=>`Öneri: ${j} m bom · ≤${g} t kademesi`,
+ capAt:(c,r)=>`Bu yarıçapta anma yükü ${c} t (katalog ${r} m sütunu, güvenli taraf)`,
+ margin:"Marj", tipload:"Bom ucu", freeH:"Serbest yükseklik", anchorTo:(n,h)=>`${n} ankraj → ${h} m`,
+ anchorUnknown:"Ankraj gerekli (adet için kataloğa bakın)",
+ heightNA:"Yükseklik kontrolü yok", heightOK:(h)=>`Serbest yükseklik ${h} m ✓`,
+ rsnReach:(r)=>`Maks. yarıçap ${r} m — ${fmt(state.R)} m'ye ulaşmıyor`,
+ rsnCap:(c)=>`Bu yarıçapta en fazla ${c} t < ${fmt(state.Q)} t`,
+ rsnHeight:(h)=>`Serbest yükseklik yalnız ${h} m (ankraj kapalı)`,
+ rsnBeyond:(m)=>`İstenen yükseklik katalog ankraj sınırını (${m} m) aşıyor — teknik ekibe danışın`,
+ detail:"Model Detayı", back:"← Sonuçlara dön", addCmp:"Karşılaştırmaya ekle", inCmp:"Listede", curve:"Yük Eğrisi",
+ jibLen:"Bom boyu", cfgRow:(g,r)=>`≤${g} t kademesi (${r} m içinde tam yük)`,
+ demandPoint:"Müşteri ihtiyaç noktası", maxLoad:"Maks. yük", reach:"Maks. yarıçap", tail:"Kuyruk dönüş yarıçapı",
+ power:"Toplam güç", hoistM:"Kaldırma mekanizması", rope:"Halat kapasitesi", ballastJib:(j)=>`Karşı ağırlık (${j} m bom)`,
+ anchorSeq:"Ankraj ile ulaşılabilir yükseklikler", srcPage:(f,p)=>`Kaynak: "${f}", sayfa ${p} yük tablosu`,
+ consult:"Daha yükseği için teknik ekibe danışın", masts:"Kule kesitleri ve serbest yükseklik", mastVerify:"(eşleşme doğrulanacak)",
+ cmpTitle:"Model Karşılaştırma", cmpEmpty:"Sonuç kartlarından model ekleyin (en çok 3)",
+ cmpRow_kind:"Tip", cmpRow_capAtR:(r)=>`${r} m'de yük`, cmpRow_max:"Maks. yük", cmpRow_tip:"En uzun bom ucu yükü",
+ cmpRow_free:"Maks. serbest yükseklik", cmpRow_anchor:"Ankrajla maks.", cmpRow_power:"Toplam güç", cmpRow_tail:"Kuyruk yarıçapı",
+ cmpRow_rope:"Halat kapasitesi", remove:"Kaldır",
+ flat:"Düz tepe", luffing:"Oynar bomlu", perJib:"boma göre değişir",
+ dataTitle:"Veri Kaynağı ve Bütünlük", dataP1:"Tüm veriler depodaki 11 kule vinç kataloğundan otomatik çıkarıldı; 181 yük tablosu satırı bağımsız bir çıkarımla satır satır doğrulandı (181/181). Henüz girilmemiş / kontrol bekleyen veriler:",
+ gap1:"Ankraj dizileri: yalnız WA6515-8, L200-12, L275-16 girildi; diğerleri için kataloğa bakın.",
+ gap2:"Karşı ağırlık tabloları: R135-8 ve WA7527-16/20 girilmedi.",
+ gap3:"R135-8 kule kesiti ↔ serbest yükseklik eşleşmesi doğrulanacak.",
+ gap4:"Tablo noktaları arasında enterpolasyon yapılmaz; sağdaki sütun değeri alınır (güvenli taraf).",
+ glossary:"Terimler", g1:["Ana gövde","Kule gövdesi (standart seksiyonlar)"], g2:["Kendi başına yükseklik","Serbest yükseklik"],
+ g3:["Binaya bağlama","Ankraj"], g4:["Kol / bom","Bom (bom boyu)"], g5:["Halat sayısı","Halat donanımı / kademe"],
+ disclaimer:"Veriler kataloglardan otomatik çıkarılmıştır; yalnız ön seçim içindir. Nihai teklif fabrika kataloğu ve teknik onayla kesinleşir.",
+ srcTitle:"Katalog listesi", srcCol:["Dosya","Tablo sayfası","Bom sayısı","Satır"],
+ unit_m:"m", unit_t:"t",
+},
+en:{
+ title:"Tower Crane Selector", sub:"Catalog-data driven · for on-site sales demos",
+ tabMatch:"Quick Match", tabCompare:"Compare", tabData:"Data Notes",
+ needs:"Customer Requirement", radius:"Radius (load to tower centre)", load:"Load", height:"Hook height (optional)",
+ allowAnchor:"Allow anchorage (tie to building beyond freestanding height)",
+ kindAll:"All", kindFlat:"Flat-top", kindLuffing:"Luffing",
+ results:"Matching Models", excluded:"Excluded models (with reasons)",
+ nMatch:(n)=>`${n} model(s) match, sorted by capacity margin`,
+ nMatch0:"No model matches — adjust radius/load, or consult engineering",
+ combo:(j,g)=>`Suggest ${j} m jib · ≤${g} t mode`,
+ capAt:(c,r)=>`Rated load at this radius: ${c} t (catalog ${r} m column, conservative)`,
+ margin:"Margin", tipload:"Tip", freeH:"Freestanding", anchorTo:(n,h)=>`${n} tie(s) → ${h} m`,
+ anchorUnknown:"Anchorage needed (count per catalog)",
+ heightNA:"Height not checked", heightOK:(h)=>`Freestanding ${h} m ✓`,
+ rsnReach:(r)=>`Max radius ${r} m — cannot reach ${fmt(state.R)} m`,
+ rsnCap:(c)=>`Only ${c} t at this radius < ${fmt(state.Q)} t`,
+ rsnHeight:(h)=>`Freestanding only ${h} m (anchorage off)`,
+ rsnBeyond:(m)=>`Required height exceeds catalog anchorage limit ${m} m — consult engineering`,
+ detail:"Model Detail", back:"← Back to results", addCmp:"Add to compare", inCmp:"In compare", curve:"Load Curve",
+ jibLen:"Jib", cfgRow:(g,r)=>`≤${g} t mode (full load within ${r} m)`,
+ demandPoint:"Customer demand point", maxLoad:"Max load", reach:"Max radius", tail:"Counter-jib tail radius",
+ power:"Total power", hoistM:"Hoist", rope:"Rope capacity", ballastJib:(j)=>`Counter-jib ballast (${j} m jib)`,
+ anchorSeq:"Heights reachable with anchorages", srcPage:(f,p)=>`Source: "${f}", load table on page ${p}`,
+ consult:"Beyond this — consult engineering", masts:"Mast sizes & freestanding height", mastVerify:"(pairing to be verified)",
+ cmpTitle:"Compare Models", cmpEmpty:"Add models from result cards (max 3)",
+ cmpRow_kind:"Type", cmpRow_capAtR:(r)=>`Load @ ${r} m`, cmpRow_max:"Max load", cmpRow_tip:"Tip load, longest jib",
+ cmpRow_free:"Max freestanding", cmpRow_anchor:"Max with ties", cmpRow_power:"Total power", cmpRow_tail:"Tail radius",
+ cmpRow_rope:"Rope capacity", remove:"Remove",
+ flat:"Flat-top", luffing:"Luffing", perJib:"varies with jib",
+ dataTitle:"Data Source & Completeness", dataP1:"All data is auto-extracted from the 11 tower-crane catalog PDFs in this repository; all 181 load-table rows were cross-verified against an independent extraction (181/181). Items not yet entered / pending review:",
+ gap1:"Anchorage sequences: only WA6515-8, L200-12, L275-16 entered; others say “see catalog”.",
+ gap2:"Ballast tables: R135-8 and WA7527-16/20 not entered (WA7527 has two counter-jib lengths).",
+ gap3:"R135-8 mast-size ↔ freestanding-height pairing needs manual review.",
+ gap4:"No interpolation between table columns — the next column's value is used (conservative).",
+ glossary:"Glossary (customer wording → standard term)",
+ g1:["The main pole","Mast (of standard sections)"], g2:["How tall it stands alone","Freestanding height"],
+ g3:["Tie it to the wall","Anchorage / tie-in"], g4:["The arm","Jib (jib length)"], g5:["How many ropes","Reeving / falls mode"],
+ disclaimer:"Data auto-extracted from catalogs; for preliminary selection only. Final offers subject to factory catalogs and engineering confirmation.",
+ srcTitle:"Catalog list", srcCol:["File","Load-table page","Jib configs","Rows"],
+ unit_m:"m", unit_t:"t",
+}};
+/* ================= state ================= */
+const state = {
+  lang: localStorage.getItem('tcs.lang') || 'zh',
+  tab: 'match', R: 50, Q: 5, H: null, anchor: true, kind: 'all',
+  detail: null, detailJib: null, cmp: [],
+};
+const t = (k, ...a) => { const v = I18N[state.lang][k]; return typeof v === 'function' ? v(...a) : v; };
+function fmt(x){ return (x==null)?'—':(+x).toLocaleString('en-US',{maximumFractionDigits:2}); }
+
+/* ================= engine ================= */
+function capAt(row, R){
+  if (R < row.minR - 1e-9) return null;
+  if (R <= row.maxLoadR + 1e-9) return row.maxLoad;
+  for (const [r,c] of row.pts) if (r >= R - 1e-9) return c;
+  return null;
+}
+function modelReach(m){ return Math.max(...m.jibs.map(j=>j.reach)); }
+function bestCombo(m, R, Q){
+  let best=null, cnt=0, capMax=null;
+  for (const j of m.jibs) for (const row of j.rows){
+    const c = capAt(row, R);
+    if (c==null) continue;
+    if (capMax==null || c>capMax.cap) capMax={cap:c, jib:j, row};
+    if (c >= Q){ cnt++;
+      if (!best || c > best.cap + 1e-9 || (Math.abs(c-best.cap)<1e-9 && j.len < best.jib.len)) best={cap:c, jib:j, row};
+    }
+  }
+  return {best, cnt, capMax};
+}
+function nextCol(row, R){
+  if (R <= row.maxLoadR + 1e-9) return row.maxLoadR;
+  for (const [r] of row.pts) if (r >= R - 1e-9) return r;
+  return null;
+}
+function freestanding(m, jibLen){
+  let fs = 0, list = [];
+  for (const mt of m.masts){
+    let h = mt.huh;
+    if (mt.huhByJib) h = jibLen ? mt.huhByJib[jibLen] : Math.max(...Object.values(mt.huhByJib));
+    if (h){ list.push({size: mt.size, h, verify: mt.verify, perJib: !!mt.huhByJib}); fs = Math.max(fs, h); }
+  }
+  return {fs, list};
+}
+function heightCheck(m, jibLen){
+  const {fs} = freestanding(m, jibLen);
+  const H = state.H;
+  if (!H) return {ok:true, mode:'na', fs};
+  if (H <= fs + 1e-9) return {ok:true, mode:'free', fs};
+  if (state.anchor){
+    if (m.anchorSteps){
+      const i = m.anchorSteps.findIndex(s => s >= H - 1e-9);
+      if (i > 0) return {ok:true, mode:'anchor', ties:i, upto:m.anchorSteps[i], fs};
+      if (i === 0) return {ok:true, mode:'free', fs};
+      return {ok:false, mode:'beyond', max:m.anchorSteps[m.anchorSteps.length-1], fs};
+    }
+    return {ok:true, mode:'anchorUnknown', fs};
+  }
+  return {ok:false, mode:'tooLow', fs};
+}
+function evaluate(m){
+  const {best, cnt, capMax} = bestCombo(m, state.R, state.Q);
+  if (!capMax) return {m, ok:false, reason:'reach', reach: modelReach(m)};
+  if (!best)  return {m, ok:false, reason:'cap', capMax};
+  const h = heightCheck(m, m.kind==='luffing' ? best.jib.len : null);
+  if (!h.ok)  return {m, ok:false, reason: h.mode==='beyond'?'beyond':'height', h, best};
+  return {m, ok:true, best, cnt, h, margin: best.cap/state.Q - 1};
+}
+
+/* ================= render helpers ================= */
+const $ = sel => document.querySelector(sel);
+function el(html){ const d=document.createElement('div'); d.innerHTML=html.trim(); return d.firstChild; }
+function esc(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function render(){
+  document.documentElement.lang = state.lang;
+  $('#b-title').textContent = t('title');
+  $('#b-sub').textContent = t('sub');
+  const L = $('#langs'); L.innerHTML='';
+  for (const lg of ['zh','tr','en']){
+    const b = el(`<button class="${lg===state.lang?'on':''}">${{zh:'中文',tr:'TR',en:'EN'}[lg]}</button>`);
+    b.onclick = ()=>{ state.lang=lg; localStorage.setItem('tcs.lang',lg); render(); };
+    L.appendChild(b);
+  }
+  const tabs = $('#tabs'); tabs.innerHTML='';
+  for (const [id,key] of [['match','tabMatch'],['compare','tabCompare'],['data','tabData']]){
+    const b = el(`<button class="${state.tab===id?'on':''}">${t(key)}${id==='compare'&&state.cmp.length?` (${state.cmp.length})`:''}</button>`);
+    b.onclick = ()=>{ state.tab=id; state.detail=null; render(); };
+    tabs.appendChild(b);
+  }
+  const main = $('#main'); main.innerHTML='';
+  if (state.detail) renderDetail(main);
+  else if (state.tab==='match') renderMatch(main);
+  else if (state.tab==='compare') renderCompare(main);
+  else renderData(main);
+  $('#foot').textContent = '⚠ ' + t('disclaimer');
+}
+
+/* ---------- match tab ---------- */
+function renderMatch(main){
+  const wrap = el(`<div class="grid2"></div>`);
+  const colL = el(`<div class="colL"></div>`);
+  const inputs = el(`<div class="card"><h2>${t('needs')}</h2></div>`);
+
+  inputs.appendChild(field('radius', state.R, 2, 75, 0.5, 'unit_m', v=>{state.R=v;}));
+  inputs.appendChild(field('load', state.Q, 0.5, 20, 0.1, 'unit_t', v=>{state.Q=v;}));
+  const hf = el(`<div class="field"><label><span>${t('height')}</span><output>${state.H?fmt(state.H)+' '+t('unit_m'):'—'}</output></label>
+    <div class="rowline"><input class="num" id="hnum" type="number" min="0" max="300" step="1" placeholder="—" value="${state.H??''}">
+    <label class="switch"><input id="anch" type="checkbox" ${state.anchor?'checked':''}> ${t('allowAnchor')}</label></div></div>`);
+  hf.querySelector('#hnum').onchange = e=>{ state.H = e.target.value===''?null:+e.target.value; render(); };
+  hf.querySelector('#anch').onchange = e=>{ state.anchor = e.target.checked; render(); };
+  inputs.appendChild(hf);
+
+  const seg = el(`<div class="field"><div class="seg"></div></div>`);
+  for (const [id,key] of [['all','kindAll'],['flat','kindFlat'],['luffing','kindLuffing']]){
+    const b = el(`<button class="${state.kind===id?'on':''}">${t(key)}</button>`);
+    b.onclick = ()=>{ state.kind=id; render(); };
+    seg.firstChild.appendChild(b);
+  }
+  inputs.appendChild(seg);
+  colL.appendChild(inputs);
+  wrap.appendChild(colL);
+
+  const colR = el(`<div></div>`);
+  const pool = CRANES.filter(m => state.kind==='all' || m.kind===state.kind);
+  const evals = pool.map(evaluate);
+  const oks = evals.filter(e=>e.ok).sort((a,b)=>b.margin-a.margin);
+  const bads = evals.filter(e=>!e.ok);
+
+  colR.appendChild(el(`<div class="count"><b>${oks.length?t('nMatch',oks.length):t('nMatch0')}</b></div>`));
+  for (const e of oks) colR.appendChild(matchCard(e));
+  if (bads.length){
+    const box = el(`<details class="exclbox"><summary>${t('excluded')} · ${bads.length}</summary><div class="excl"></div></details>`);
+    for (const e of bads) box.querySelector('.excl').appendChild(exclCard(e));
+    colR.appendChild(box);
+  }
+  wrap.appendChild(colR);
+  main.appendChild(wrap);
+}
+function field(labelKey, val, min, max, step, unitKey, set){
+  const f = el(`<div class="field"><label><span>${t(labelKey)}</span><output>${fmt(val)} ${t(unitKey)}</output></label>
+    <div class="rowline"><input type="range" min="${min}" max="${max}" step="${step}" value="${val}" style="flex:1">
+    <input class="num" type="number" min="${min}" max="${max}" step="${step}" value="${val}"></div></div>`);
+  const [rng, num] = f.querySelectorAll('input');
+  const out = f.querySelector('output');
+  rng.oninput = ()=>{ set(+rng.value); num.value=rng.value; out.textContent=fmt(+rng.value)+' '+t(unitKey); scheduleResults(); };
+  num.onchange = ()=>{ set(+num.value); render(); };
+  return f;
+}
+let rTimer=null;
+function scheduleResults(){ clearTimeout(rTimer); rTimer=setTimeout(render, 120); }
+
+function matchCard(e){
+  const {m, best, h} = e;
+  const marginPct = Math.round(e.margin*100);
+  let hLine;
+  if (h.mode==='na') hLine = `<span class="chip gray">${t('heightNA')}</span>`;
+  else if (h.mode==='free') hLine = `<span class="chip">${t('heightOK', fmt(h.fs))}</span>`;
+  else if (h.mode==='anchor') hLine = `<span class="chip blue">${t('anchorTo', h.ties, fmt(h.upto))}</span>`;
+  else hLine = `<span class="chip warn">${t('anchorUnknown')}</span>`;
+  const c = el(`<div class="mcard">
+    <div class="top"><span class="code">${esc(m.code)}</span>
+      <span class="chip ${m.kind==='luffing'?'blue':''}">${t(m.kind)}</span>
+      ${hLine}
+      <span class="margin"><b>+${marginPct}%</b><br><small style="color:var(--muted)">${t('margin')}</small></span></div>
+    <div class="lines">
+      <span>${t('combo', fmt(best.jib.len), fmt(best.row.maxLoad))} — <b>${t('capAt', fmt(best.cap), fmt(nextCol(best.row, state.R)))}</b></span>
+      <span>${t('tipload')} ${fmt(best.jib.tip)} t @ ${fmt(best.jib.reach)} m · ${t('power')} ${esc(m.powerKw)} kW</span>
+    </div></div>`);
+  c.onclick = ()=>{ state.detail=m.code; state.detailJib=best.jib.len; render(); window.scrollTo(0,0); };
+  return c;
+}
+function exclCard(e){
+  const {m} = e;
+  let rsn='';
+  if (e.reason==='reach') rsn = t('rsnReach', fmt(e.reach));
+  else if (e.reason==='cap') rsn = t('rsnCap', fmt(e.capMax.cap));
+  else if (e.reason==='height') rsn = t('rsnHeight', fmt(e.h.fs));
+  else if (e.reason==='beyond') rsn = t('rsnBeyond', fmt(e.h.max));
+  return el(`<div class="mcard"><div class="top"><span class="code">${esc(m.code)}</span>
+    <span class="chip ${m.kind==='luffing'?'blue':''}">${t(m.kind)}</span>
+    <span class="chip bad">✗</span></div>
+    <div class="lines"><span>${rsn}</span></div></div>`);
+}
+
+/* ---------- detail ---------- */
+function renderDetail(main){
+  const m = CRANES.find(x=>x.code===state.detail);
+  if (!m){ state.detail=null; return renderMatch(main); }
+  const jib = m.jibs.find(j=>j.len===state.detailJib) || m.jibs[0];
+  main.appendChild(el(`<button class="btn small backbtn">${t('back')}</button>`)).onclick = ()=>{ state.detail=null; render(); };
+
+  const inCmp = state.cmp.includes(m.code);
+  const head = el(`<div class="card"><div class="detail-head">
+    <span class="code">${esc(m.code)}</span>
+    <span class="chip ${m.kind==='luffing'?'blue':''}">${t(m.kind)}</span>
+    <span class="chip gray">${esc(m.docLangs)}</span>
+    <button class="btn small ${inCmp?'':'primary'}" ${inCmp?'disabled':''} style="margin-left:auto">${inCmp?t('inCmp'):t('addCmp')}</button>
+  </div>
+  <div class="jibchips" id="jibs"></div>
+  <h2>${t('curve')} <span class="hint">${t('jibLen')} ${fmt(jib.len)} m</span></h2>
+  <div class="chartbox" id="chart"></div>
+  <div class="legend" id="legend"></div>
+  <div class="kv" id="kv"></div>
+  <div class="note" id="anchornote"></div>
+  <div class="note">${t('srcPage', esc(m.srcFile), m.srcPage)}</div>
+  </div>`);
+  head.querySelector('.detail-head button').onclick = (ev)=>{ ev.stopPropagation(); addCmp(m.code); render(); };
+  const jc = head.querySelector('#jibs');
+  for (const j of [...m.jibs].sort((a,b)=>a.len-b.len)){
+    const b = el(`<button class="${j.len===jib.len?'on':''}">${fmt(j.len)} m</button>`);
+    b.onclick = ()=>{ state.detailJib=j.len; render(); };
+    jc.appendChild(b);
+  }
+  main.appendChild(head);
+  drawChart(head.querySelector('#chart'), head.querySelector('#legend'), m, jib);
+
+  const kv = head.querySelector('#kv');
+  const fs = freestanding(m, m.kind==='luffing'?jib.len:null);
+  const cells = [
+    [t('maxLoad'), `${fmt(m.maxLoad)} t`],
+    [t('tipload'), `${fmt(jib.tip)} t <small>@ ${fmt(jib.reach)} m</small>`],
+    [t('freeH'), fs.list.map(x=>`${fmt(x.h)} m <small>${esc(x.size)}${x.verify?' '+t('mastVerify'):''}</small>`).join('<br>')],
+    [t('power'), `${esc(m.powerKw)} kW`],
+    [t('hoistM'), `${esc(m.hoist.model)} <small>${m.hoist.kw} kW</small>`],
+    [t('rope'), `${fmt(m.hoist.rope)} m`],
+    [t('tail'), `${fmt(m.tail)} m${m.tailAlt?` <small>/ ${fmt(m.tailAlt)} m</small>`:''}`],
+  ];
+  if (m.ballast && m.ballast[String(Math.round(jib.len))] != null)
+    cells.push([t('ballastJib', fmt(jib.len)), `${fmt(m.ballast[String(Math.round(jib.len))])} t`]);
+  if (m.luffing) cells.push(['Luffing', `${esc(m.luffing.model)} <small>${esc(m.luffing.range)}</small>`]);
+  for (const [k,v] of cells) kv.appendChild(el(`<div class="cell"><div class="k">${k}</div><div class="v">${v}</div></div>`));
+
+  const an = head.querySelector('#anchornote');
+  if (m.anchorSteps){
+    an.innerHTML = `<b>${t('anchorSeq')}</b><div class="anchorsteps">` +
+      m.anchorSteps.map(s=>{
+        const hit = state.H && s>=state.H && (m.anchorSteps.find(x=>x>=state.H)===s);
+        return `<span class="${hit?'hit':''}">${fmt(s)} m</span>`;
+      }).join('') + `</div><div style="margin-top:4px">${t('consult')}</div>`;
+  } else {
+    an.innerHTML = `<b>${t('anchorSeq')}</b> — ${t('anchorUnknown')}`;
+  }
+}
+
+function drawChart(box, legendBox, m, jib){
+  const W=720, H=300, P={l:46,r:16,t:16,b:34};
+  const rows = jib.rows;
+  const maxY = Math.max(...rows.map(r=>r.maxLoad))*1.08;
+  const minX = Math.min(...rows.map(r=>r.minR));
+  const maxX = jib.reach*1.02;
+  const X = x => P.l + (x-0)/(maxX-0)*(W-P.l-P.r);
+  const Y = y => H-P.b - (y-0)/(maxY-0)*(H-P.t-P.b);
+  const colors = ['var(--accent)','var(--s2)'];
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img">`;
+  // grid
+  const yt = niceTicks(maxY, 5), xt = niceTicks(maxX, 8);
+  for (const v of yt) s += `<line x1="${P.l}" y1="${Y(v)}" x2="${W-P.r}" y2="${Y(v)}" stroke="var(--line)" stroke-width="1"/>
+    <text x="${P.l-7}" y="${Y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)" style="font-variant-numeric:tabular-nums">${v}</text>`;
+  for (const v of xt) if (v>0) s += `<text x="${X(v)}" y="${H-P.b+16}" text-anchor="middle" font-size="11" fill="var(--muted)" style="font-variant-numeric:tabular-nums">${v}</text>`;
+  s += `<text x="${W-P.r}" y="${H-6}" text-anchor="end" font-size="11" fill="var(--muted)">m</text>`;
+  s += `<text x="${P.l-30}" y="${P.t-2}" font-size="11" fill="var(--muted)">t</text>`;
+  // series
+  const labelYs = [];
+  rows.forEach((r, i)=>{
+    const pts = [[r.minR, r.maxLoad],[r.maxLoadR, r.maxLoad], ...r.pts.filter(p=>p[0]>r.maxLoadR)];
+    const d = pts.map((p,k)=>`${k?'L':'M'}${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join('');
+    s += `<path d="${d}" fill="none" stroke="${colors[i%2]}" stroke-width="2" stroke-linejoin="round"/>`;
+    for (const p of r.pts) s += `<circle cx="${X(p[0]).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="2.6" fill="${colors[i%2]}" stroke="var(--surface)" stroke-width="1.4"/>`;
+    const last = pts[pts.length-1];
+    let ly = Y(last[1]) - 8;
+    while (labelYs.some(y=>Math.abs(y-ly)<13)) ly += 15;
+    labelYs.push(ly);
+    s += `<circle cx="${(X(last[0])-42).toFixed(1)}" cy="${ly-3.5}" r="3" fill="${colors[i%2]}"/>` +
+         `<text x="${X(last[0])-4}" y="${ly}" text-anchor="end" font-size="11" font-weight="700" fill="var(--ink)" style="font-variant-numeric:tabular-nums">${fmt(last[1])} t</text>`;
+  });
+  // demand point
+  if (state.R <= jib.reach){
+    s += `<line x1="${X(state.R)}" y1="${P.t}" x2="${X(state.R)}" y2="${H-P.b}" stroke="var(--muted)" stroke-dasharray="4 4" stroke-width="1"/>`;
+    const okAny = rows.some(r=>{const c=capAt(r,state.R); return c!=null && c>=state.Q;});
+    s += `<circle cx="${X(state.R)}" cy="${Y(Math.min(state.Q,maxY))}" r="6" fill="${okAny?'var(--accent)':'var(--bad)'}" stroke="var(--surface)" stroke-width="2"/>`;
+  }
+  s += `<rect id="hitzone" x="${P.l}" y="${P.t}" width="${W-P.l-P.r}" height="${H-P.t-P.b}" fill="transparent"/>`;
+  s += `</svg><div class="tooltip"></div>`;
+  box.innerHTML = s;
+  legendBox.innerHTML = rows.map((r,i)=>`<span><i style="background:${['var(--accent)','var(--s2)'][i%2]}"></i>${t('cfgRow', fmt(r.maxLoad), fmt(r.maxLoadR))}</span>`).join('')
+    + `<span><i style="background:var(--muted);height:1px"></i>${t('demandPoint')}: ${fmt(state.R)} m / ${fmt(state.Q)} t</span>`;
+  // hover
+  const svg = box.querySelector('svg'), tip = box.querySelector('.tooltip');
+  const move = ev=>{
+    const rect = svg.getBoundingClientRect();
+    const px = (ev.touches?ev.touches[0].clientX:ev.clientX) - rect.left;
+    const xr = (px/rect.width)*W;
+    const r0 = Math.max(minX, Math.min(jib.reach, (xr-P.l)/(W-P.l-P.r)*maxX));
+    const lines = rows.map((r,i)=>{
+      const c = capAt(r, r0);
+      return c==null?null:`<span style="color:${i%2?'var(--s2)':'var(--accent)'}">●</span> ≤${fmt(r.maxLoad)} t: <b>${fmt(c)} t</b>`;
+    }).filter(Boolean);
+    if (!lines.length){ tip.style.display='none'; return; }
+    tip.innerHTML = `<b>${fmt(Math.round(r0*2)/2)} m</b><br>` + lines.join('<br>');
+    tip.style.display='block';
+    const bw = box.clientWidth;
+    tip.style.left = Math.min(px+14, bw-tip.offsetWidth-8)+'px';
+    tip.style.top = '14px';
+  };
+  svg.addEventListener('mousemove', move);
+  svg.addEventListener('touchstart', move, {passive:true});
+  svg.addEventListener('touchmove', move, {passive:true});
+  svg.addEventListener('mouseleave', ()=>tip.style.display='none');
+}
+function niceTicks(max, n){
+  const raw = max/n, pow = Math.pow(10, Math.floor(Math.log10(raw)));
+  const step = [1,2,2.5,5,10].map(x=>x*pow).find(x=>x>=raw) || pow*10;
+  const out=[]; for (let v=step; v<=max; v+=step) out.push(Math.round(v*100)/100);
+  return out;
+}
+
+/* ---------- compare ---------- */
+function addCmp(code){
+  if (!state.cmp.includes(code)){ state.cmp.push(code); if (state.cmp.length>3) state.cmp.shift(); }
+}
+function renderCompare(main){
+  const card = el(`<div class="card"><h2>${t('cmpTitle')}</h2></div>`);
+  if (!state.cmp.length){ card.appendChild(el(`<div class="empty">${t('cmpEmpty')}</div>`)); main.appendChild(card); return; }
+  const ms = state.cmp.map(c=>CRANES.find(m=>m.code===c)).filter(Boolean);
+  const evals = ms.map(evaluate);
+  const rows = [
+    [t('cmpRow_kind'), ms.map(m=>t(m.kind)), null],
+    [t('cmpRow_capAtR', fmt(state.R)), evals.map(e=> e.best?fmt(e.best.cap)+' t': (e.capMax?fmt(e.capMax.cap)+' t':'—')), 'max'],
+    [t('cmpRow_max'), ms.map(m=>fmt(m.maxLoad)+' t'), 'max'],
+    [t('cmpRow_tip'), ms.map(m=>`${fmt(m.jibs[0].tip)} t @ ${fmt(m.jibs[0].reach)} m`), null],
+    [t('cmpRow_free'), ms.map(m=>fmt(freestanding(m).fs)+' m'), 'max'],
+    [t('cmpRow_anchor'), ms.map(m=>m.anchorSteps?fmt(m.anchorSteps[m.anchorSteps.length-1])+' m':'—'), null],
+    [t('cmpRow_power'), ms.map(m=>esc(m.powerKw)+' kW'), null],
+    [t('cmpRow_tail'), ms.map(m=>fmt(m.tail)+' m'), 'min'],
+    [t('cmpRow_rope'), ms.map(m=>fmt(m.hoist.rope)+' m'), null],
+  ];
+  let html = `<div class="scrollx"><table class="cmp-table"><thead><tr><th></th>`;
+  for (const m of ms) html += `<th style="font-size:14px;color:var(--ink)">${esc(m.code)} <span class="del" data-c="${esc(m.code)}" title="${t('remove')}">✕</span></th>`;
+  html += `</tr></thead><tbody>`;
+  for (const [label, vals, mode] of rows){
+    let bestIdx = -1;
+    if (mode){
+      const nums = vals.map(v=>parseFloat(String(v).replace(/[^\d.]/g,''))||NaN);
+      const target = mode==='max'?Math.max(...nums.filter(x=>!isNaN(x))):Math.min(...nums.filter(x=>!isNaN(x)));
+      bestIdx = nums.findIndex(x=>x===target);
+      if (nums.filter(x=>x===target).length>1) bestIdx=-1;
+    }
+    html += `<tr><th>${label}</th>` + vals.map((v,i)=>`<td class="${i===bestIdx?'best':''}">${v}</td>`).join('') + `</tr>`;
+  }
+  html += `</tbody></table></div>`;
+  card.appendChild(el(html));
+  card.querySelectorAll('.del').forEach(d=> d.onclick = ()=>{ state.cmp = state.cmp.filter(c=>c!==d.dataset.c); render(); });
+  main.appendChild(card);
+}
+
+/* ---------- data tab ---------- */
+function renderData(main){
+  const card = el(`<div class="card"><h2>${t('dataTitle')}</h2>
+    <p style="font-size:13.5px;color:var(--muted);margin:0 0 8px">${t('dataP1')}</p>
+    <ul style="font-size:13px;color:var(--muted);margin:0;padding-left:18px">
+      <li>${t('gap1')}</li><li>${t('gap2')}</li><li>${t('gap3')}</li><li>${t('gap4')}</li></ul></div>`);
+  main.appendChild(card);
+  const g = el(`<div class="card"><h2>${t('glossary')}</h2><div class="kv"></div></div>`);
+  for (const k of ['g1','g2','g3','g4','g5']){
+    const [a,b] = t(k);
+    g.querySelector('.kv').appendChild(el(`<div class="cell"><div class="k">${esc(a)}</div><div class="v" style="font-size:13.5px">${esc(b)}</div></div>`));
+  }
+  main.appendChild(g);
+  let html = `<div class="card"><h2>${t('srcTitle')}</h2><div class="scrollx"><table class="datalist"><thead><tr>`;
+  for (const c of t('srcCol')) html += `<th>${c}</th>`;
+  html += `</tr></thead><tbody>`;
+  for (const m of CRANES){
+    const rows = m.jibs.reduce((a,j)=>a+j.rows.length,0);
+    html += `<tr><td>${esc(m.srcFile)}</td><td>${m.srcPage}</td><td>${m.jibs.length}</td><td>${rows}</td></tr>`;
+  }
+  html += `</tbody></table></div></div>`;
+  main.appendChild(el(html));
+}
+
+render();
+</script>
+</body>
+</html>
